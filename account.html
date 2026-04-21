@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Account — DecodeFXGroup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="auth-modal" id="authModal">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <div class="auth-logo-mark"><img src="Images/logo2.png" alt="website logo"></div>
+      <span class="auth-logo-text">Decode<span>Fx</span>Group</span>
+    </div>
+    <h2>Sign In to Account</h2>
+    <p>Access your subscription management panel.</p>
+    <div class="auth-form-group">
+      <label>Email Address</label>
+      <input type="email" id="loginEmail" placeholder="your@email.com">
+    </div>
+    <div class="auth-form-group">
+      <label>Password</label>
+      <input type="password" id="loginPassword" placeholder="Your password">
+    </div>
+    <button class="auth-submit" onclick="handleLogin()">Sign In →</button>
+    <p class="auth-switch">Need an account? <a href="enquiries.html">Enroll first</a> · <a href="dashboard.html">Dashboard</a></p>
+  </div>
+</div>
+
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-inner">
+      <div class="sidebar-logo-mark">D</div>
+      <span class="sidebar-logo-text">Decode<span>FX</span>Group</span>
+    </div>
+  </div>
+  <div class="sidebar-user">
+    <div class="sidebar-avatar" id="sidebarAvatar">?</div>
+    <div class="sidebar-user-name" id="sidebarName">Loading...</div>
+    <div class="sidebar-user-plan" id="sidebarPlan">—</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-section-label">Main</div>
+    <a class="sidebar-link" href="dashboard.html">
+      <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+      Dashboard
+    </a>
+    <a class="sidebar-link" href="academy.html">
+      <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+      Academy
+    </a>
+    <a class="sidebar-link" href="#">
+      <svg viewBox="0 0 24 24"><path d="M13 2.05V4.05C17.39 4.59 20.5 8.58 19.96 12.97C19.5 16.61 16.64 19.5 13 19.93V21.93C18.5 21.38 22.5 16.5 21.95 11C21.5 6.25 17.73 2.5 13 2.05M11 2.06C9.05 2.25 7.19 3 5.67 4.26L7.1 5.74C8.22 4.84 9.57 4.26 11 4.06V2.06M4.26 5.67C3 7.19 2.25 9.04 2.05 11H4.05C4.24 9.58 4.8 8.23 5.69 7.1L4.26 5.67M2.06 13C2.26 14.96 3.03 16.81 4.27 18.33L5.69 16.9C4.81 15.77 4.24 14.42 4.06 13H2.06M7.1 18.37L5.67 19.74C7.18 21 9.04 21.79 11 22V20C9.58 19.82 8.23 19.25 7.1 18.37M12 7L8 10L12 13L16 10L12 7z"/></svg>
+      Live Signals
+    </a>
+    <div class="sidebar-section-label" style="margin-top:16px">Account</div>
+    <a class="sidebar-link active" href="account.html">
+      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+      Subscription
+    </a>
+    <a class="sidebar-link" href="contact.html">
+      <svg viewBox="0 0 24 24"><path d="M11.5 2C6.81 2 3 5.81 3 10.5S6.81 19 11.5 19h.5v3c4.86-2.34 8-7 8-11.5C20 5.81 16.19 2 11.5 2zm1 14.5h-2v-2h2v2zm0-4h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2h-2c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5z"/></svg>
+      Support
+    </a>
+    <a class="sidebar-link" href="index.html">
+      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      Back to Site
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <a onclick="handleLogout()">
+      <svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+      Sign Out
+    </a>
+  </div>
+</aside>
+
+<main class="main-content">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:12px">
+      <button class="sidebar-toggle" onclick="toggleSidebar()">
+        <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+      </button>
+      <div>
+        <div class="topbar-title">My Account</div>
+        <div class="topbar-sub">Subscription &amp; Payment Management</div>
+      </div>
+    </div>
+    <a href="dashboard.html" class="btn-sm btn-sm-outline">← Dashboard</a>
+  </div>
+
+  <div class="page-body">
+
+    <!-- Subscription status -->
+    <div class="sub-status-card">
+      <div class="sub-status-top">
+        <div>
+          <h2 id="subCardPlan">VIP Elite Signals</h2>
+          <p id="subCardEmail">Loading...</p>
+        </div>
+        <div class="sub-active-badge" id="subBadge">
+          <span class="sub-badge-dot"></span>Active
+        </div>
+      </div>
+      <div class="sub-details-grid">
+        <div class="sub-detail">
+          <div class="label">Plan</div>
+          <div class="value gold" id="subDetailPlan">VIP Elite</div>
+        </div>
+        <div class="sub-detail">
+          <div class="label">Started</div>
+          <div class="value" id="subDetailStart">—</div>
+        </div>
+        <div class="sub-detail">
+          <div class="label">Expires</div>
+          <div class="value" id="subDetailExpiry">—</div>
+        </div>
+      </div>
+      <div class="sub-actions">
+        <a href="enquiries.html" class="btn-sm btn-sm-primary">Renew / Upgrade</a>
+        <a href="https://wa.me/2348173133453?text=I%20need%20help%20with%20my%20DecodeFXGroup%20subscription..." class="btn-sm btn-sm-outline" target="_blank">📱 Contact Support</a>
+        <button class="btn-sm btn-sm-danger" onclick="confirmCancel()">Cancel Subscription</button>
+      </div>
+    </div>
+
+    <!-- Payment methods -->
+    <div class="section-hdr">
+      <h3>Renew Your Plan</h3>
+      <div class="sep"></div>
+    </div>
+    <div class="payment-cards">
+      <div class="pay-card selected" onclick="selectPayMethod(this,'paystack')">
+        <div class="pay-icon-lg">💳</div>
+        <h4>Paystack</h4>
+        <p>Card, USSD, or bank transfer in Naira. Instant activation.</p>
+      </div>
+      <div class="pay-card" onclick="selectPayMethod(this,'crypto')">
+        <div class="pay-icon-lg">₿</div>
+        <h4>USDT (Crypto)</h4>
+        <p>TRC20 wallet or Binance Pay. Send proof to WhatsApp.</p>
+      </div>
+      <div class="pay-card" onclick="selectPayMethod(this,'bank')">
+        <div class="pay-icon-lg">🏦</div>
+        <h4>Access Bank</h4>
+        <p>Direct NGN bank transfer. Send proof to WhatsApp.</p>
+      </div>
+    </div>
+
+    <!-- Paystack panel -->
+    <div class="detail-panel" id="paystackPanel">
+      <h4>Pay via Paystack</h4>
+      <p>Secure card, USSD, and bank transfer. Rate: ₦1,600 / $1 USD</p>
+      <div class="detail-row">
+        <span class="lbl">Standard Signals</span>
+        <button class="btn-sm btn-sm-primary" onclick="paystackPay(50)">Pay $50 (₦80,000)</button>
+      </div>
+      <div class="detail-row">
+        <span class="lbl">VIP Elite Signals</span>
+        <button class="btn-sm btn-sm-primary" onclick="paystackPay(150)">Pay $150 (₦240,000)</button>
+      </div>
+      <div class="detail-row">
+        <span class="lbl">Academy Enrollment</span>
+        <button class="btn-sm btn-sm-primary" onclick="paystackPay(300)">Pay $300 (₦480,000)</button>
+      </div>
+    </div>
+
+    <!-- Crypto panel (hidden by default) -->
+    <div class="detail-panel" id="cryptoPanel" style="display:none">
+      <h4>Pay with USDT (Crypto)</h4>
+      <p>Send the exact USDT amount to one of the addresses below, then confirm via WhatsApp.</p>
+      <div class="detail-row">
+        <span class="lbl">Network</span>
+        <span class="val">TRON (TRC20)</span>
+      </div>
+      <div class="detail-row">
+        <span class="lbl">USDT Wallet (TRC20)</span>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="val" style="font-size:12px;max-width:220px;word-break:break-all"><!-- Add your TRC20 wallet address here --><em style="color:var(--text-muted);font-style:normal">Add wallet in HTML</em></span>
+          <button class="copy-btn" data-copy="YOUR_TRC20_WALLET_HERE">Copy</button>
+        </div>
+      </div>
+      <div class="detail-row">
+        <span class="lbl">Binance Pay ID</span>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="val"><!-- Add Binance Pay ID --><em style="color:var(--text-muted);font-style:normal">Add Pay ID</em></span>
+          <button class="copy-btn" data-copy="YOUR_BINANCE_PAY_ID">Copy</button>
+        </div>
+      </div>
+      <div class="note">After sending, forward your transaction screenshot to WhatsApp: <strong>+234 817 313 3453</strong> for activation within 1 hour.</div>
+      <div style="margin-top:14px">
+        <a href="https://wa.me/2348173133453?text=I%20just%20sent%20USDT%20for%20my%20DecodeFXGroup%20subscription.%20Please%20activate%20my%20account." class="btn-sm btn-sm-primary" target="_blank">Send Payment Proof on WhatsApp</a>
+      </div>
+    </div>
+
+    <!-- Bank panel (hidden by default) -->
+    <div class="detail-panel" id="bankPanel" style="display:none">
+      <h4>Access Bank Transfer</h4>
+      <p>Transfer the exact Naira equivalent to the account below, then confirm via WhatsApp.</p>
+      <div class="detail-row">
+        <span class="lbl">Account Name</span>
+        <span class="val">AYOBAMI PELUMI ODEJIDE</span>
+      </div>
+      <div class="detail-row">
+        <span class="lbl">Account Number</span>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="val">1224074947</span>
+          <button class="copy-btn" data-copy="1224074947">Copy</button>
+        </div>
+      </div>
+      <div class="detail-row">
+        <span class="lbl">Bank</span>
+        <span class="val">Access Bank PLC</span>
+      </div>
+      <div class="detail-row">
+        <span class="lbl">Reference</span>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="val" id="payRef">DFX-<span id="refCode">000000</span></span>
+          <button class="copy-btn" data-copy="" id="copyRef">Copy</button>
+        </div>
+      </div>
+      <div class="note">Use your <strong>email address</strong> or the reference above as your transfer narration. After transferring, send your receipt to WhatsApp.</div>
+      <div style="margin-top:14px">
+        <a href="https://wa.me/2348173133453?text=I%20just%20made%20an%20Access%20Bank%20transfer%20for%20my%20DecodeFXGroup%20subscription.%20Please%20activate%20my%20account." class="btn-sm btn-sm-primary" target="_blank">Confirm Transfer on WhatsApp</a>
+      </div>
+    </div>
+
+    <!-- Plan comparison -->
+    <div class="section-hdr" style="margin-top:8px">
+      <h3>Available Plans</h3>
+      <div class="sep"></div>
+    </div>
+    <div class="plan-grid">
+      <div class="plan-tile">
+        <h4>Academy Enrollment</h4>
+        <div class="price">$300</div>
+        <div class="period">One-time · Lifetime access</div>
+        <ul class="plan-features">
+          <li>12-module LMS curriculum</li>
+          <li>30 days free VIP signals</li>
+          <li>Risk management playbook</li>
+          <li>Certificate of completion</li>
+          <li>Private community access</li>
+        </ul>
+        <button class="btn-sm btn-sm-primary" onclick="paystackPay(300)" style="width:100%;justify-content:center">Enroll — $300</button>
+      </div>
+      <div class="plan-tile">
+        <h4>Standard Signals</h4>
+        <div class="price">$50</div>
+        <div class="period">Per month</div>
+        <ul class="plan-features">
+          <li>3–5 daily trade signals</li>
+          <li>Exact entry, SL &amp; TP</li>
+          <li>Telegram delivery</li>
+          <li>Weekly market analysis</li>
+          <li>Community access</li>
+        </ul>
+        <button class="btn-sm btn-sm-outline" onclick="paystackPay(50)" style="width:100%;justify-content:center">Subscribe — $50/mo</button>
+      </div>
+      <div class="plan-tile current" id="currentPlanTile">
+        <div class="current-tag" id="currentTag">Current Plan</div>
+        <h4>VIP Elite Signals</h4>
+        <div class="price">$150</div>
+        <div class="period">Per month · Priority</div>
+        <ul class="plan-features">
+          <li>Everything in Standard</li>
+          <li>Crypto &amp; gold extended</li>
+          <li>Monthly 1-on-1 session</li>
+          <li>Priority signal delivery</li>
+          <li>VIP-only Telegram group</li>
+        </ul>
+        <button class="btn-sm btn-sm-primary" onclick="paystackPay(150)" style="width:100%;justify-content:center">Renew — $150/mo</button>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script>
+const Auth = {
+  getUser(){ try{ return JSON.parse(localStorage.getItem('dfx_user')); }catch{ return null; } },
+  getSub(){ try{ return JSON.parse(localStorage.getItem('dfx_subscription')); }catch{ return null; } },
+  isSubscribed(){ const sub=this.getSub(); return sub && new Date(sub.expiresAt)>new Date(); },
+  logout(){ localStorage.removeItem('dfx_user'); localStorage.removeItem('dfx_subscription'); window.location.href='index.html'; }
+};
+
+function handleLogin(){
+  const email=document.getElementById('loginEmail').value;
+  const pw=document.getElementById('loginPassword').value;
+  if(!email||!pw){showToast('Please fill in all fields.');return;}
+  const name=email.split('@')[0].replace(/[._]/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+  const user={id:Date.now(),email,name,plan:'VIP Elite',enrolledAt:new Date().toISOString()};
+  const expiry=new Date();expiry.setDate(expiry.getDate()+30);
+  const sub={plan:'VIP Elite',startedAt:new Date().toISOString(),expiresAt:expiry.toISOString()};
+  localStorage.setItem('dfx_user',JSON.stringify(user));
+  localStorage.setItem('dfx_subscription',JSON.stringify(sub));
+  document.getElementById('authModal').classList.add('hidden');
+  initPage();
+}
+function handleLogout(){ Auth.logout(); }
+function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('visible'); }
+function closeSidebar(){ document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('visible'); }
+
+function selectPayMethod(card, method){
+  document.querySelectorAll('.pay-card').forEach(c=>c.classList.remove('selected'));
+  card.classList.add('selected');
+  document.getElementById('paystackPanel').style.display = method==='paystack' ? 'block' : 'none';
+  document.getElementById('cryptoPanel').style.display = method==='crypto' ? 'block' : 'none';
+  document.getElementById('bankPanel').style.display = method==='bank' ? 'block' : 'none';
+}
+
+function paystackPay(amount){
+  const user = Auth.getUser();
+  const email = user ? user.email : prompt('Enter your email:');
+  if(!email) return;
+  try{
+    const handler = PaystackPop.setup({
+      key:'pk_live_YOUR_PAYSTACK_PUBLIC_KEY',
+      email,
+      amount: amount * 1600 * 100,
+      currency:'NGN',
+      ref:'DFX-'+Date.now(),
+      onClose:()=>showToast('Payment cancelled.'),
+      callback:(res)=>{
+        showToast('Payment successful! Redirecting to WhatsApp...');
+        const msg=encodeURIComponent(`Payment successful! Reference: ${res.reference}. Please activate my DecodeFXGroup subscription.`);
+        setTimeout(()=>window.open(`https://wa.me/2348173133453?text=${msg}`,'_blank'),1500);
+      }
+    });
+    handler.openIframe();
+  } catch(e){ showToast('Paystack not loaded. Please try another payment method.'); }
+}
+
+function confirmCancel(){
+  const msg = encodeURIComponent('I would like to cancel my DecodeFXGroup subscription. Please process my cancellation.');
+  window.open(`https://wa.me/2348173133453?text=${msg}`, '_blank');
+}
+
+window.showToast = function(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+};
+
+document.querySelectorAll('.copy-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const val=btn.dataset.copy;
+    if(val) navigator.clipboard.writeText(val).then(()=>showToast('Copied!'));
+  });
+});
+
+function initPage(){
+  const user=Auth.getUser();
+  if(!user){ return; }
+  document.getElementById('authModal').classList.add('hidden');
+
+  const initials=user.name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2);
+  document.getElementById('sidebarAvatar').textContent=initials;
+  document.getElementById('sidebarName').textContent=user.name;
+
+  const sub=Auth.getSub();
+  const isActive=Auth.isSubscribed();
+
+  if(sub){
+    document.getElementById('sidebarPlan').textContent=sub.plan;
+    document.getElementById('subCardPlan').textContent=sub.plan;
+    document.getElementById('subCardEmail').textContent=user.email;
+    document.getElementById('subDetailPlan').textContent=sub.plan;
+    const start=new Date(sub.startedAt);
+    const end=new Date(sub.expiresAt);
+    document.getElementById('subDetailStart').textContent=start.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+    document.getElementById('subDetailExpiry').textContent=end.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+    const badge=document.getElementById('subBadge');
+    if(!isActive){ badge.className='sub-expired-badge'; badge.innerHTML='<span class="sub-badge-dot"></span>Expired'; }
+  }
+
+  // Generate reference code
+  const ref='DFX'+Date.now().toString().slice(-6);
+  document.getElementById('refCode').textContent=ref;
+  document.getElementById('copyRef').dataset.copy='DFX'+ref;
+}
+
+const existingUser=Auth.getUser();
+if(existingUser){ initPage(); }
+else { document.getElementById('authModal').classList.remove('hidden'); }
+</script>
+</body>
+</html>

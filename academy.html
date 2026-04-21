@@ -1,287 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Academy | DecodeFXGroup</title>
-  <link rel="stylesheet" href="css/style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Academy — DecodeFXGroup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
-  <!-- ══ NAVBAR ══════════════════════════════════════════════ -->
-  <nav class="navbar scrolled">
-    <div class="nav-inner">
-      <a href="index.html" class="nav-logo">
-  <img src="images/logo.png" alt="DecodeFXGroup Logo" class="nav-logo-img" />
-  Decode<span>FX</span>Group
-</a>
-      <div style="display:flex;gap:12px;align-items:center">
-        <button id="sidebarToggle" class="hamburger" aria-label="Toggle sidebar">
-          <span></span><span></span><span></span>
-        </button>
-        <a href="dashboard.html" class="btn btn-outline" style="padding:8px 20px">Dashboard</a>
-        <button class="btn btn-primary" style="padding:8px 20px" onclick="Auth.logout()">Logout</button>
+<!-- Auth Modal -->
+<div class="auth-modal" id="authModal">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <div class="auth-logo-mark"><img src="Images/logo2.png" alt="website logo"></div>
+      <span class="auth-logo-text">Decode<span>FX</span>Group</span>
+    </div>
+    <h2>Sign In to Access Academy</h2>
+    <p>Your course modules are protected. Sign in with your enrolled account.</p>
+    <div class="auth-form-group">
+      <label>Email Address</label>
+      <input type="email" id="loginEmail" placeholder="your@email.com">
+    </div>
+    <div class="auth-form-group">
+      <label>Password</label>
+      <input type="password" id="loginPassword" placeholder="Your password">
+    </div>
+    <button class="auth-submit" onclick="handleLogin()">Access Academy →</button>
+    <p class="auth-switch">Need access? <a href="enquiries.html">Enroll first</a> · <a href="dashboard.html">Dashboard</a></p>
+  </div>
+</div>
+
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-inner">
+      <div class="sidebar-logo-mark">D</div>
+      <span class="sidebar-logo-text">Decode<span>FX</span>Group</span>
+    </div>
+  </div>
+  <div class="sidebar-user">
+    <div class="sidebar-avatar" id="sidebarAvatar">?</div>
+    <div class="sidebar-user-name" id="sidebarName">Loading...</div>
+    <div class="sidebar-user-plan" id="sidebarPlan">—</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-section-label">Main</div>
+    <a class="sidebar-link" href="dashboard.html">
+      <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+      Dashboard
+    </a>
+    <a class="sidebar-link active" href="academy.html">
+      <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+      Academy
+    </a>
+    <a class="sidebar-link" href="#">
+      <svg viewBox="0 0 24 24"><path d="M13 2.05V4.05C17.39 4.59 20.5 8.58 19.96 12.97C19.5 16.61 16.64 19.5 13 19.93V21.93C18.5 21.38 22.5 16.5 21.95 11C21.5 6.25 17.73 2.5 13 2.05M11 2.06C9.05 2.25 7.19 3 5.67 4.26L7.1 5.74C8.22 4.84 9.57 4.26 11 4.06V2.06M4.26 5.67C3 7.19 2.25 9.04 2.05 11H4.05C4.24 9.58 4.8 8.23 5.69 7.1L4.26 5.67M2.06 13C2.26 14.96 3.03 16.81 4.27 18.33L5.69 16.9C4.81 15.77 4.24 14.42 4.06 13H2.06M7.1 18.37L5.67 19.74C7.18 21 9.04 21.79 11 22V20C9.58 19.82 8.23 19.25 7.1 18.37M12 7L8 10L12 13L16 10L12 7z"/></svg>
+      Live Signals
+    </a>
+    <div class="sidebar-section-label" style="margin-top:16px">Account</div>
+    <a class="sidebar-link" href="account.html">
+      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+      Subscription
+    </a>
+    <a class="sidebar-link" href="index.html">
+      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      Back to Site
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <a onclick="handleLogout()">
+      <svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+      Sign Out
+    </a>
+  </div>
+</aside>
+
+<main class="main-content">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:12px">
+      <button class="sidebar-toggle" onclick="toggleSidebar()">
+        <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+      </button>
+      <div>
+        <div class="topbar-title">Academy</div>
+        <div class="topbar-sub">12-Module Forex Curriculum</div>
       </div>
     </div>
-  </nav>
-
-  <!-- ══ DASHBOARD LAYOUT ════════════════════════════════════ -->
-  <div class="dashboard-layout">
-
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <nav class="sidebar-nav">
-        <div class="sidebar-section">Main</div>
-        <a href="dashboard.html" class="sidebar-link">
-          <span>📊</span> Overview
-        </a>
-        <a href="academy.html" class="sidebar-link active">
-          <span>🎓</span> Academy / LMS
-        </a>
-        <a href="dashboard.html#signals" class="sidebar-link">
-          <span>⚡</span> VIP Signals
-        </a>
-
-        <div class="sidebar-section">Account</div>
-        <a href="account.html" class="sidebar-link">
-          <span>💳</span> Subscription
-        </a>
-
-        <div class="sidebar-section">Support</div>
-        <a href="https://wa.me/2348173133453" class="sidebar-link" target="_blank">
-          <span>📱</span> WhatsApp Support
-        </a>
-        <a href="https://t.me/decodefxgroup" class="sidebar-link" target="_blank">
-          <span>✈️</span> Telegram Channel
-        </a>
-      </nav>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="main-content">
-
-      <h1 class="page-title">The <span class="gold">Academy</span></h1>
-      <p class="page-subtitle">Work through each module in order. Mastery compounds — don't skip ahead.</p>
-
-      <!-- Overall progress -->
-      <div class="stat-card" style="margin-bottom:36px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-          <div>
-            <div style="font-weight:600;margin-bottom:4px">Your Progress — Forex Mastery Programme</div>
-            <div style="font-size:0.82rem;color:var(--grey)">5 of 12 modules completed</div>
-          </div>
-          <div style="font-family:var(--font-impact);font-size:2rem;color:var(--gold)">40%</div>
-        </div>
-        <div class="progress-bar-wrap">
-          <div class="progress-bar-fill" style="width:40%"></div>
-        </div>
-      </div>
-
-      <!-- Telegram CTA -->
-      <div style="background:linear-gradient(135deg,var(--charcoal),var(--navy-light));border:1px solid rgba(201,168,76,0.15);border-radius:8px;padding:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:36px">
-        <div style="display:flex;align-items:center;gap:16px">
-          <div style="font-size:2rem">✈️</div>
-          <div>
-            <div style="font-weight:600;margin-bottom:4px">Private Telegram — Students Only</div>
-            <div style="font-size:0.85rem;color:var(--grey-light)">Get daily signals, market commentary, and community support.</div>
-          </div>
-        </div>
-        <a href="https://t.me/decodefxgroup" target="_blank" class="btn btn-primary">Join Now →</a>
-      </div>
-
-      <!-- Course Modules -->
-      <h2 style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:24px">Course <span class="gold">Modules</span></h2>
-
-      <!-- Module 1 - Complete -->
-      <div class="module-card">
-        <div class="module-num">01</div>
-        <div class="module-info">
-          <h4>Introduction to Forex — How the Market Works</h4>
-          <p>Currency pairs, pip values, lot sizes, broker selection, MetaTrader setup, and your trading mindset foundation.</p>
-          <div class="module-meta">
-            <span>🎬 8 videos</span>
-            <span>⏱ 2h 15m</span>
-            <span>📝 Quiz included</span>
-          </div>
-        </div>
-        <span class="module-status status-complete">✓ Complete</span>
-      </div>
-
-      <!-- Module 2 - Complete -->
-      <div class="module-card">
-        <div class="module-num">02</div>
-        <div class="module-info">
-          <h4>Reading Price Action & Market Structure</h4>
-          <p>Higher highs/lows, trend identification, break of structure, change of character, and multi-timeframe analysis.</p>
-          <div class="module-meta">
-            <span>🎬 10 videos</span>
-            <span>⏱ 3h 00m</span>
-            <span>📝 Quiz included</span>
-          </div>
-        </div>
-        <span class="module-status status-complete">✓ Complete</span>
-      </div>
-
-      <!-- Module 3 - In Progress -->
-      <div class="module-card" style="border-color:rgba(201,168,76,0.3)">
-        <div class="module-num">03</div>
-        <div class="module-info">
-          <h4>Support, Resistance & Key Levels</h4>
-          <p>Identifying institutional zones, drawing clean levels, confluence areas, and how to avoid false breakouts.</p>
-          <div class="module-meta">
-            <span>🎬 9 videos</span>
-            <span>⏱ 2h 45m</span>
-            <span>📝 Quiz included</span>
-          </div>
-          <div class="progress-bar-wrap" style="margin-top:12px;max-width:300px">
-            <div class="progress-bar-fill" style="width:60%"></div>
-          </div>
-          <div style="font-size:0.75rem;color:var(--grey);margin-top:6px">60% complete</div>
-        </div>
-        <span class="module-status status-progress">In Progress</span>
-      </div>
-
-      <!-- Module 4 -->
-      <div class="module-card">
-        <div class="module-num">04</div>
-        <div class="module-info">
-          <h4>Candlestick Patterns & Entry Signals</h4>
-          <p>Engulfing candles, pin bars, doji, inside bars — how to read confluent rejection signals for precision entries.</p>
-          <div class="module-meta">
-            <span>🎬 11 videos</span>
-            <span>⏱ 3h 20m</span>
-            <span>📝 Quiz included</span>
-          </div>
-        </div>
-        <span class="module-status status-locked">🔒 Locked</span>
-      </div>
-
-      <!-- Module 5 -->
-      <div class="module-card">
-        <div class="module-num">05</div>
-        <div class="module-info">
-          <h4>Smart Money Concepts (SMC) — Order Blocks</h4>
-          <p>Institutional order blocks, breaker blocks, mitigation blocks, and how banks use these zones to accumulate positions.</p>
-          <div class="module-meta">
-            <span>🎬 13 videos</span>
-            <span>⏱ 4h 10m</span>
-            <span>📝 Quiz included</span>
-          </div>
-        </div>
-        <span class="module-status status-locked">🔒 Locked</span>
-      </div>
-
-      <!-- Module 6 -->
-      <div class="module-card">
-        <div class="module-num">06</div>
-        <div class="module-info">
-          <h4>Fair Value Gaps & Imbalance Zones</h4>
-          <p>Identifying FVGs, inefficiency filling, how to use imbalances as magnets for price, and entry refinement.</p>
-          <div class="module-meta">
-            <span>🎬 8 videos</span>
-            <span>⏱ 2h 30m</span>
-            <span>📝 Quiz included</span>
-          </div>
-        </div>
-        <span class="module-status status-locked">🔒 Locked</span>
-      </div>
-
-      <!-- Module 7 -->
-      <div class="module-card">
-        <div class="module-num">07</div>
-        <div class="module-info">
-          <h4>Liquidity Concepts — Stop Hunts & Sweeps</h4>
-          <p>How banks hunt stop losses, equal highs/lows as liquidity pools, and how to avoid being on the wrong side.</p>
-          <div class="module-meta">
-            <span>🎬 9 videos</span>
-            <span>⏱ 2h 50m</span>
-            <span>📝 Quiz included</span>
-          </div>
-        </div>
-        <span class="module-status status-locked">🔒 Locked</span>
-      </div>
-
-      <!-- Module 8 -->
-      <div class="module-card">
-        <div class="module-num">08</div>
-        <div class="module-info">
-          <h4>Risk Management — The Non-Negotiable</h4>
-          <p>Position sizing formulas, risk-per-trade rules, risk-to-reward ratios, scaling in/out, and protecting your capital.</p>
-          <div class="module-meta">
-            <span>🎬 7 videos</span>
-            <span>⏱ 2h 00m</span>
-            <span>📝 Quiz included</span>
-          </div>
-        </div>
-        <span class="module-status status-locked">🔒 Locked</span>
-      </div>
-
-      <!-- Module 9 -->
-      <div class="module-card">
-        <div class="module-num">09</div>
-        <div class="module-info">
-          <h4>Trading Psychology & Discipline</h4>
-          <p>Emotional control, revenge trading, FOMO, building routines, journaling, and developing an elite trader mindset.</p>
-          <div class="module-meta">
-            <span>🎬 6 videos</span>
-            <span>⏱ 1h 45m</span>
-            <span>📝 Quiz included</span>
-          </div>
-        </div>
-        <span class="module-status status-locked">🔒 Locked</span>
-      </div>
-
-      <!-- Module 10 -->
-      <div class="module-card">
-        <div class="module-num">10</div>
-        <div class="module-info">
-          <h4>High-Probability Trade Setup Framework</h4>
-          <p>Building a complete trade setup checklist, top-down analysis, confluence scoring, and entry/exit rules.</p>
-          <div class="module-meta">
-            <span>🎬 12 videos</span>
-            <span>⏱ 3h 45m</span>
-            <span>📝 Quiz included</span>
-          </div>
-        </div>
-        <span class="module-status status-locked">🔒 Locked</span>
-      </div>
-
-      <!-- Module 11 -->
-      <div class="module-card">
-        <div class="module-num">11</div>
-        <div class="module-info">
-          <h4>Reading & Executing VIP Signals</h4>
-          <p>How to interpret signal messages, calculate lot sizes, set correct SL/TP, manage open trades, and keep a trade log.</p>
-          <div class="module-meta">
-            <span>🎬 6 videos</span>
-            <span>⏱ 1h 30m</span>
-            <span>📝 Quiz included</span>
-          </div>
-        </div>
-        <span class="module-status status-locked">🔒 Locked</span>
-      </div>
-
-      <!-- Module 12 -->
-      <div class="module-card">
-        <div class="module-num">12</div>
-        <div class="module-info">
-          <h4>Live Market Analysis & Graduation</h4>
-          <p>Real-time trade breakdowns, back-testing methodology, building your trading plan, and your graduation checklist.</p>
-          <div class="module-meta">
-            <span>🎬 10 videos</span>
-            <span>⏱ 4h 00m</span>
-            <span>🏆 Certificate</span>
-          </div>
-        </div>
-        <span class="module-status status-locked">🔒 Locked</span>
-      </div>
-
-    </main>
+    <a href="dashboard.html" class="btn-sm btn-sm-outline">← Dashboard</a>
   </div>
 
-  <!-- ══ WHATSAPP FLOAT ══════════════════════════════════════ -->
-  <a href="https://wa.me/2348173133453" class="whatsapp-float" target="_blank" aria-label="WhatsApp">📱</a>
+  <div class="page-body">
 
-  <script src="js/script.js"></script>
+    <!-- Overall progress -->
+    <div class="overall-progress">
+      <div class="overall-progress-text">
+        <h3>Your Course Progress</h3>
+        <p>3 of 12 modules completed · Continue where you left off</p>
+      </div>
+      <div class="overall-progress-bar-wrap">
+        <div class="overall-progress-bar-label"><span>Completion</span><span id="progressPct">25%</span></div>
+        <div class="overall-progress-bar"><div class="overall-progress-fill" id="progressFill"></div></div>
+      </div>
+      <div class="overall-progress-pct" id="progressNum">25%</div>
+    </div>
+
+    <!-- Telegram CTA -->
+    <div class="tg-cta">
+      <p>📡 <strong>Signals are delivered on Telegram.</strong> Make sure you've joined the channel to receive live signals alongside your course.</p>
+      <a href="https://t.me/decodefxgroup" class="btn-sm btn-sm-primary" target="_blank">Join Telegram Channel</a>
+    </div>
+
+    <!-- Modules -->
+    <div class="modules-header">
+      <h2>Course Modules</h2>
+      <span style="font-size:13px;color:var(--text-muted)">12 modules · 50+ video lessons</span>
+    </div>
+
+    <div class="modules-grid" id="modulesGrid"></div>
+
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const MODULES = [
+  { num:'01', title:'Forex Fundamentals & Market Structure', desc:'Currency pairs, pip values, session times, spread, lot sizes, and how the global forex market actually operates.', lessons:6, status:'complete', progress:100 },
+  { num:'02', title:'Technical Analysis Mastery', desc:'Chart reading, timeframe confluences, support & resistance, trend identification, and chart patterns professionals actually trade.', lessons:8, status:'complete', progress:100 },
+  { num:'03', title:'Smart Money Concepts (SMC)', desc:'Order blocks, fair value gaps, liquidity sweeps, break of structure, change of character — the institutional framework.', lessons:10, status:'in-progress', progress:45 },
+  { num:'04', title:'Risk Management & Psychology', desc:'Position sizing models, drawdown management, the 1% rule, trading psychology, and building a professional mindset.', lessons:7, status:'locked', progress:0 },
+  { num:'05', title:'Live Trading & Signal Reading', desc:'Real-time trade execution, interpreting live signals, managing open trades, and journaling for continuous improvement.', lessons:8, status:'locked', progress:0 },
+  { num:'06', title:'Advanced Order Flow Analysis', desc:'Depth of market, volume profiling, institutional order flow interpretation, and reading the tape at a professional level.', lessons:6, status:'locked', progress:0 },
+  { num:'07', title:'Multi-Timeframe Analysis', desc:'Top-down analysis methodology: how to align HTF bias with LTF entries for maximum probability confluences.', lessons:5, status:'locked', progress:0 },
+  { num:'08', title:'News Trading & Fundamentals', desc:'High-impact news events, central bank policy, economic calendars, and integrating macro fundamentals with technical setups.', lessons:5, status:'locked', progress:0 },
+  { num:'09', title:'Gold (XAUUSD) Specialisation', desc:'Gold-specific market dynamics, correlations, seasonal patterns, and why gold is the most signal-friendly instrument.', lessons:6, status:'locked', progress:0 },
+  { num:'10', title:'Prop Firm Challenge Strategy', desc:'How to structure your trading to pass funded account challenges: FTMO, My Forex Funds, The5ers — systematically.', lessons:7, status:'locked', progress:0 },
+  { num:'11', title:'Portfolio & Account Management', desc:'Managing multiple positions, correlation risk, compounding strategy, and building your trading business professionally.', lessons:5, status:'locked', progress:0 },
+  { num:'12', title:'Building Your Trading Plan', desc:'Constructing a complete, personal trading plan covering rules, routine, risk parameters, review process, and long-term goals.', lessons:4, status:'locked', progress:0 },
+];
+
+function renderModules(){
+  const grid = document.getElementById('modulesGrid');
+  grid.innerHTML = '';
+  MODULES.forEach(mod => {
+    const btnText = mod.status==='complete' ? 'Review' : mod.status==='in-progress' ? 'Continue' : '🔒 Locked';
+    const btnClass = mod.status==='complete' ? 'review' : mod.status==='in-progress' ? 'continue' : 'locked';
+    const badgeText = mod.status==='complete' ? 'Complete' : mod.status==='in-progress' ? 'In Progress' : 'Locked';
+    const card = document.createElement('div');
+    card.className = `module-card ${mod.status}`;
+    card.innerHTML = `
+      <div class="module-progress-bar"><div class="module-progress-fill" style="width:${mod.progress}%"></div></div>
+      <div class="module-card-top">
+        <div class="module-num">Module ${mod.num}</div>
+        <div class="module-status-badge ${mod.status==='in-progress'?'active':mod.status}">${badgeText}</div>
+        <h3>${mod.title}</h3>
+        <p>${mod.desc}</p>
+      </div>
+      <div class="module-card-bottom">
+        <span class="lesson-count">${mod.lessons} lessons</span>
+        <button class="module-card-btn ${btnClass}" onclick="openModule('${mod.num}','${mod.status}')">${btnText}</button>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function openModule(num, status){
+  if(status==='locked'){ showToast('🔒 Complete the previous module to unlock this one.'); return; }
+  showToast(`Opening Module ${num}... Redirecting to lesson player.`);
+}
+
+// Auth
+const Auth = {
+  getUser(){ try{ return JSON.parse(localStorage.getItem('dfx_user')); }catch{ return null; } },
+  logout(){ localStorage.removeItem('dfx_user'); localStorage.removeItem('dfx_subscription'); window.location.href='index.html'; }
+};
+
+function handleLogin(){
+  const email=document.getElementById('loginEmail').value;
+  const pw=document.getElementById('loginPassword').value;
+  if(!email||!pw){showToast('Please fill in all fields.');return;}
+  const name=email.split('@')[0].replace(/[._]/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+  const user={id:Date.now(),email,name,plan:'Academy',enrolledAt:new Date().toISOString()};
+  const expiry=new Date();expiry.setDate(expiry.getDate()+30);
+  const sub={plan:'Academy',startedAt:new Date().toISOString(),expiresAt:expiry.toISOString()};
+  localStorage.setItem('dfx_user',JSON.stringify(user));
+  localStorage.setItem('dfx_subscription',JSON.stringify(sub));
+  document.getElementById('authModal').classList.add('hidden');
+  initPage();
+}
+function handleLogout(){ Auth.logout(); }
+function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('visible'); }
+function closeSidebar(){ document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('visible'); }
+window.showToast=function(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),3000); };
+
+function initPage(){
+  const user=Auth.getUser();
+  if(!user){ document.getElementById('authModal').classList.remove('hidden'); return; }
+  document.getElementById('authModal').classList.add('hidden');
+  const initials=user.name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2);
+  document.getElementById('sidebarAvatar').textContent=initials;
+  document.getElementById('sidebarName').textContent=user.name;
+  try{ const sub=JSON.parse(localStorage.getItem('dfx_subscription')); document.getElementById('sidebarPlan').textContent=sub?sub.plan:'Academy'; }catch{}
+  renderModules();
+}
+
+initPage();
+</script>
 </body>
 </html>

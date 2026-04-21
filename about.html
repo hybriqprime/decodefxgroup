@@ -1,274 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About the Founder | DecodeFXGroup</title>
-  <link rel="stylesheet" href="css/style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Nathan Pips — DecodeFXGroup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
-  <!-- ══ NAVBAR ══════════════════════════════════════════════ -->
-  <nav class="navbar" id="navbar">
-    <div class="nav-inner">
-      <a href="index.html" class="nav-logo">
-        <img src="images/logo.png" alt="Logo" class="nav-logo-img" />
-        Decode<span>FX</span>Group
-      </a>
-      <div class="nav-desktop">
-        <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="index.html#benefits">Benefits</a></li>
-          <li><a href="index.html#services">Services</a></li>
-          <li><a href="index.html#pricing">Pricing</a></li>
-          <li><a href="index.html#partners">Partners</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">FAQ</a></li>
-          <li><a href="enquiries.html">Enquiries</a></li>
-        </ul>
-        <div class="nav-cta nav-auth-area">
-          <button class="btn btn-outline" style="padding:10px 22px" data-modal="login">Sign In</button>
-          <button class="btn btn-primary" style="padding:10px 22px" data-action="enroll">Enroll Now</button>
-        </div>
-      </div>
-      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+<!-- ── NAVBAR ── -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <div class="nav-logo-mark">D</div>
+      <a href="index.html"><span class="nav-logo-text">Decode<span>FX</span>Group</span></a>
     </div>
-  </nav>
-
-  <!-- ══ FULLSCREEN MOBILE MENU ══════════════════════════════ -->
-  <div class="mobile-menu-overlay" id="mobileOverlay" aria-hidden="true">
-    <button class="mobile-menu-close" id="mobileClose" aria-label="Close menu">✕</button>
-    <div class="mobile-menu-logo">Decode<span>FX</span>Group</div>
-    <nav class="mobile-nav">
-      <ul class="mobile-nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="index.html#benefits">Benefits</a></li>
-        <li><a href="index.html#services">Services</a></li>
-        <li><a href="index.html#pricing">Pricing</a></li>
-        <li><a href="index.html#partners">Partners</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">FAQ</a></li>
-        <li><a href="enquiries.html">Enquiries</a></li>
-      </ul>
-    </nav>
-    <div class="mobile-menu-cta">
-      <button class="btn btn-outline" style="width:100%;justify-content:center;padding:16px" data-modal="login" onclick="closeMobileMenu()">Sign In</button>
-      <button class="btn btn-primary" style="width:100%;justify-content:center;padding:16px" data-action="enroll" onclick="closeMobileMenu()">🎓 Enroll Now</button>
+    <ul class="nav-links">
+      <li><a href="index.html#benefits">Benefits</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="index.html#partners">Partners</a></li>
+      <li><a href="about.html" style="color:var(--gold)">About</a></li>
+      <li><a href="contact.html">FAQ</a></li>
+      <li><a href="enquiries.html">Enquiries</a></li>
+    </ul>
+    <div class="nav-btn-group">
+      <a href="dashboard.html" class="btn btn-outline-light">Sign In</a>
+      <a href="enquiries.html" class="btn btn-primary">Enroll Now</a>
     </div>
-    <div class="mobile-menu-footer">
-      <a href="https://wa.me/2348173133453" target="_blank">📱 +234 817 313 3453</a>
-      <span>|</span>
-      <a href="https://t.me/decodefxgroup" target="_blank">✈️ @decodefxgroup</a>
-    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
+</nav>
 
-  <!-- ══ PAGE BANNER ════════════════════════════════════════ -->
-  <div class="page-banner">
-    <span class="badge">The Man Behind the Method</span>
-    <h1>About the <span class="gold">Founder</span></h1>
-    <p>The discipline, the losses, the breakthroughs — and why he built DecodeFXGroup.</p>
+<!-- ── MOBILE MENU ── -->
+<div class="mobile-menu-overlay" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="index.html">Home</a>
+  <a href="index.html#services">Services</a>
+  <a href="index.html#pricing">Pricing</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">FAQ</a>
+  <a href="enquiries.html">Enquiries</a>
+  <div class="mobile-menu-btns">
+    <a href="dashboard.html" class="btn btn-outline-light">Sign In</a>
+    <a href="enquiries.html" class="btn btn-primary">🎓 Enroll Now — $300</a>
   </div>
+</div>
 
-  <!-- ══ FOUNDER FULL BIO ════════════════════════════════════ -->
-  <section class="section" style="background:var(--navy)">
-    <div class="container">
-      <div class="founder-grid">
-
-        <!-- Photo column -->
-        <div class="founder-photo reveal">
-          <div class="founder-img-box" style="aspect-ratio:1/1">
-            <!-- Replace with founder's actual photo -->
-            <div class="placeholder-icon">👤</div>
-          </div>
-          <div class="founder-accent"></div>
-
-          <!-- Credentials box -->
-          <div style="background:var(--charcoal);border:1px solid rgba(201,168,76,0.15);border-radius:8px;padding:24px;margin-top:32px">
-            <h4 style="font-size:0.78rem;color:var(--gold);font-weight:700;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px">Credentials</h4>
-            <ul style="font-size:0.88rem;color:var(--grey-light)">
-              <li style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)">✦ 5+ Years Active Trading</li>
-              <li style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)">✦ SMC & ICT Methodology Expert</li>
-              <li style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)">✦ 500+ Students Mentored</li>
-              <li style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)">✦ Prop Firm Consultant</li>
-              <li style="padding:8px 0">✦ Lead Analyst, DecodeFXGroup</li>
-            </ul>
-          </div>
+<!-- ── PAGE BANNER ── -->
+<div class="page-banner">
+  <div class="container">
+    <div class="banner-inner">
+      <div class="banner-text">
+        <span class="badge">The Founder</span>
+        <h1>About Nathan Pips</h1>
+        <p>Nathan O Ayobami , also known Nathan Pips or Sovereign, is a financial trader, educator, and philanthropist recognized for his disciplined approach to the global markets and his commitment to financial education. He is the founder of the Nathan Pips Charity Foundation and the educational platform Decode Foreign Exchange Academy, where he mentors aspiring traders across the world.
+</p>
+<p>With over seven years of experience in the financial markets, Nathan has developed a reputation for combining structured trading methodologies with a strong emphasis on market psychology, risk management, and long-term consistency. His work focuses on helping traders move beyond speculation into a more professional and sustainable approach to trading.</p>
+ <p>He is the author of several trading-focused works, including The Roadmap I.O., and Psychology of the Market Wizards, which reflect his perspective on market behavior, discipline, and strategic execution. These materials have been widely shared within trading communities as part of his broader educational mission.
+</p>     
+<p>Born and raised in Sub-Saharan Africa, Nathan’s journey through diverse environments and exposure to global markets has shaped his understanding of international finance and economic behavior. This global perspective continues to influence both his trading philosophy and his teaching style.</p>
+<p>Today, the Nathan PiPs brand and Decode Fx Group represent a growing educational ecosystem dedicated to developing skilled, disciplined, and independent traders across the world.</p>
+</div>
+      <div class="banner-stats">
+        <div class="banner-stat">
+          <span class="num">5+</span>
+          <span class="lbl">Years Live Trading</span>
         </div>
-
-        <!-- Bio column -->
-        <div class="founder-content reveal">
-          <span class="badge">Founder & Lead Analyst</span>
-
-          <!-- Replace "Your Name" with the founder's actual name -->
-          <h3>[Founder's Name]</h3>
-          <p class="founder-title">🏛 Head Educator · Lead Signal Analyst · Market Structure Specialist</p>
-
-          <p>
-            <!-- ✏️ EDIT THIS: Replace with the founder's real story -->
-            My journey into forex began not in a trading room, but in frustration.
-            After years of consuming free content, blowing two accounts, and questioning whether
-            consistent profitability was even real — I committed to understanding the market the
-            way institutional players do.
-          </p>
-          <p>
-            The turning point came when I discovered that retail traders are systematically being
-            used as liquidity by the banks. Understanding Smart Money Concepts changed everything.
-            For the first time, price action made sense. Not because of indicators or signals I was
-            copying — but because I understood <em>why</em> price moved.
-          </p>
-          <p>
-            Over the next three years, I refined my edge across dozens of currency pairs,
-            commodities, and market conditions. I documented everything. Built systems.
-            Developed a risk framework that has kept me in profit through volatile markets,
-            news events, and sideways conditions.
-          </p>
-          <p>
-            DecodeFXGroup was born from a simple belief: <strong style="color:var(--gold)">the knowledge that transforms traders
-            should not be gatekept.</strong> Every student who joins gets the same framework that
-            took me years to build — structured, tested, and taught with brutal honesty.
-          </p>
-          <p>
-            This is not a get-rich-quick academy. This is a professional school for serious traders.
-            If you're ready to treat trading as a business, I'm ready to teach you how.
-          </p>
-
-          <!-- Achievements -->
-          <div class="founder-achievements">
-            <div class="achievement">
-              <span class="num">5+</span>
-              <span class="label">Years Trading</span>
-            </div>
-            <div class="achievement">
-              <span class="num">500+</span>
-              <span class="label">Students</span>
-            </div>
-            <div class="achievement">
-              <span class="num">92%</span>
-              <span class="label">Signal Accuracy</span>
-            </div>
-            <div class="achievement">
-              <span class="num">12</span>
-              <span class="label">Course Modules</span>
-            </div>
-          </div>
-
-          <br>
-
-          <!-- CTA -->
-          <div style="display:flex;gap:16px;flex-wrap:wrap">
-            <button class="btn btn-primary" data-action="enroll">🎓 Join the Academy</button>
-            <a href="https://wa.me/2348173133453" target="_blank" class="btn btn-outline">📱 WhatsApp Me</a>
-          </div>
+        <div class="banner-stat">
+          <span class="num">500+</span>
+          <span class="lbl">Students Mentored</span>
+        </div>
+        <div class="banner-stat">
+          <span class="num">92%</span>
+          <span class="lbl">Signal Accuracy</span>
+        </div>
+        <div class="banner-stat">
+          <span class="num">12</span>
+          <span class="lbl">Course Modules</span>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- ══ PHILOSOPHY SECTION ══════════════════════════════════ -->
-  <section class="section" style="background:var(--navy-mid)">
-    <div class="container">
-      <div class="section-heading text-center reveal">
-        <span class="badge">Our Philosophy</span>
-        <h2>We Believe in <span class="gold">Honest Trading</span></h2>
-        <div class="divider"></div>
-        <p>No smoke and mirrors. No lifestyle bait. Just professional knowledge, consistently applied.</p>
+<!-- ── BIO SECTION ── -->
+<section class="bio-section section">
+  <div class="container">
+    <div class="bio-inner">
+
+      <!-- Photo column -->
+      <div class="bio-photo-col reveal">
+        <div class="bio-photo-wrap">
+          <!--
+            TO USE YOUR PHOTO: Replace the placeholder div below with:
+            <img src="images/founder.jpg" alt="Nathan Pips" class="bio-photo">
+          -->
+          <div class="bio-photo-placeholder">
+            <span><img src="Images/founder2.png" alt="founder image"></span>
+          </div>
+          <div class="bio-deco"></div>
+        </div>
+        <div class="bio-social">
+          <a href="https://instagram.com/thenathanpips" class="bio-social-btn" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            @nathan_pips
+          </a>
+          <a href="https://t.me/Nathanpips_bot" class="bio-social-btn" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-1.97 9.282c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.939z"/></svg>
+            Telegram
+          </a>
+        </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;margin-top:60px">
+      <!-- Bio content column -->
+      <div class="bio-content reveal reveal-delay-1">
+        <span class="badge">Meet the Founder</span>
+        <h2>Nathan Pips</h2>
+        <p class="bio-title">Forex Trader &amp; Academy Founder · DecodeFXGroup</p>
 
-        <div class="feature-card reveal reveal-delay-1">
-          <div class="feature-icon">📐</div>
-          <h3>Discipline Over Emotion</h3>
-          <p>Every trade is a calculated decision. We teach traders to follow process, not feelings — because the market does not reward impulse.</p>
+        <p>My journey into forex began not in a trading room, but in frustration. After years of consuming free content, blowing multiple accounts, and questioning whether consistent profitability was even real. I committed to understanding the market the way institutional players do.</p>
+
+        <p>The turning point came when I discovered that retail traders are systematically being used as liquidity by the banks. Understanding liquidity changed everything. For the first time, price action made sense.</p>
+
+        <p>Over the next three years, I refined my edge across dozens of currency pairs, commodities, and market conditions. I documented everything. Built systems. Developed a risk framework that has kept me in profit through volatile markets, news events, and sideways conditions.</p>
+
+        <p>DecodeFXGroup was born from a simple belief: the knowledge that transforms traders should not be gatekept. Every student who joins gets the same framework that took me years to build, structured, tested, and taught with brutal honesty.</p>
+        <pThis is not a get-rich-quick academy. This is a professional school for serious traders. If you're ready to treat trading as a business, A group of proffesional traders and certified risk managers at Decode fx academy alongside myself are ready to hold your hands and lead you to profitability.></p>
+        <div class="credentials-card">
+          <h4>Credentials &amp; Background</h4>
+          <ul class="credentials-list">
+            <li><span class="cred-icon">★</span>  7+ Years Active Trading</li>
+            <li><span class="cred-icon">★</span> 2000+ Students Mentored</li>
+            <li><span class="cred-icon">★</span> Prop Firm Consultant</li>
+            <li><span class="cred-icon">★</span>  Lead Analyst, DecodeFXGroup</li>
+             
+          </ul>
         </div>
 
-        <div class="feature-card reveal reveal-delay-2">
-          <div class="feature-icon">🔭</div>
-          <h3>Institutional Thinking</h3>
-          <p>We teach you to see the market the way banks and hedge funds see it. Understanding where the money is going, not following where retail goes.</p>
+        <div class="bio-actions">
+          <a href="enquiries.html" class="btn btn-primary">🎓 JOIN THE ACADEMY</a>
+          <a href="https://wa.me/2348173133453?text=Hello%20Nathan%2C%20I%20want%20to%20learn%20more%20about%20DecodeFXGroup..." class="btn btn-outline" target="_blank"><img src="Images/whatsapp2.png"
+            alt="whatsapp logo" height="40px" width="40px">  WhatsApp Me</a>
         </div>
-
-        <div class="feature-card reveal reveal-delay-3">
-          <div class="feature-icon">🔒</div>
-          <h3>Capital Preservation First</h3>
-          <p>You cannot make money you do not have. Protecting your trading account is the #1 priority — profit is a byproduct of discipline.</p>
-        </div>
-
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ══ CTA ════════════════════════════════════════════════ -->
-  <section class="urgency-banner">
-    <div class="container" style="position:relative;z-index:1">
-      <span class="badge">Ready?</span>
-      <h2>Start Your <span class="gold">Professional Journey</span></h2>
-      <p>One enrolment. Lifetime access to the course. 30 days of live signals. A community of serious traders.</p>
-      <br>
-      <button class="btn btn-primary" style="font-size:1rem;padding:18px 48px" data-action="enroll">
-        🎓 Enroll in DecodeFXGroup — $300
-      </button>
+<!-- ── PHILOSOPHY ── -->
+<section class="philosophy section">
+  <div class="container">
+    <div class="section-heading reveal">
+      <h2>Trading Philosophy</h2>
+      <p>Three principles that underpin everything taught at DecodeFXGroup.</p>
+      <div class="section-divider"></div>
     </div>
-  </section>
-
-  <!-- ══ FOOTER ══════════════════════════════════════════════ -->
-  <footer style="background:var(--navy);border-top:1px solid rgba(201,168,76,0.1);padding:32px 24px;text-align:center">
-    <p style="font-size:0.82rem;color:var(--grey)">
-      © 2025 DecodeFXGroup. All rights reserved. Trading involves significant risk.
-    </p>
-  </footer>
-
-  <!-- ══ WHATSAPP FLOAT ══════════════════════════════════════ -->
-  <a href="https://wa.me/2348173133453" class="whatsapp-float" target="_blank" aria-label="WhatsApp">📱</a>
-
-  <!-- ══ LOGIN MODAL ═════════════════════════════════════════ -->
-  <div class="modal-overlay" id="loginModal">
-    <div class="modal">
-      <button class="modal-close">✕</button>
-      <h2>Welcome <span class="gold">Back</span></h2>
-      <p>Sign in to access your academy and signals dashboard.</p>
-      <form id="loginForm">
-        <div class="form-group">
-          <label>Email Address</label>
-          <input type="email" name="email" placeholder="trader@example.com" required />
+    <div class="philosophy-grid">
+      <div class="philosophy-card reveal">
+        <div class="phil-num">01</div>
+        <h3>Discipline Over Emotion</h3>
+        <p>Markets are designed to trigger emotional responses,  fear at the lows, greed at the highs. Professional trading is the systematic rejection of those impulses. Every DecodeFX module is built around developing this discipline before building strategy.</p>
+        <div class="phil-quote">
+          <em>"The market will always give you a reason to exit early or hold too long. Your job is to ignore both."</em>
         </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" name="password" placeholder="••••••••" required />
+      </div>
+      <div class="philosophy-card reveal reveal-delay-1">
+        <div class="phil-num">02</div>
+        <h3>Institutional Thinking</h3>
+        <p>Retail traders lose because they trade against institutional order flow without knowing it. Understanding how smart money accumulates, manipulates, and distributes positions is the single greatest edge available in modern forex markets.</p>
+        <div class="phil-quote">
+          <em>"Stop thinking like a retail trader. The liquidity they're hunting is yours unless you understand the game."</em>
         </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px">Sign In</button>
-      </form>
-      <p class="form-switch">Don't have an account? <a href="#" data-switch-modal="registerModal">Create one →</a></p>
+      </div>
+      <div class="philosophy-card reveal reveal-delay-2">
+        <div class="phil-num">03</div>
+        <h3>Capital Preservation First</h3>
+        <p>You cannot trade profitably from a blown account. Risk management is not the boring part of trading, it is the foundation that makes everything else possible. Every strategy taught here is built on protecting capital before chasing returns.</p>
+        <div class="phil-quote">
+          <em>"You want growth? Then you must learn to proceed without certainty."</em>
+        </div>
+      </div>
     </div>
   </div>
+</section>
 
-  <!-- ══ REGISTER MODAL ══════════════════════════════════════ -->
-  <div class="modal-overlay" id="registerModal">
-    <div class="modal">
-      <button class="modal-close">✕</button>
-      <h2>Start Your <span class="gold">Journey</span></h2>
-      <p>Create your account and enrol in the academy today.</p>
-      <form id="registerForm">
-        <div class="form-group">
-          <label>Full Name</label>
-          <input type="text" name="name" placeholder="Your full name" required />
-        </div>
-        <div class="form-group">
-          <label>Email Address</label>
-          <input type="email" name="email" placeholder="trader@example.com" required />
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" name="password" placeholder="Min. 8 characters" required />
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px">Create Account</button>
-      </form>
-      <p class="form-switch">Already enrolled? <a href="#" data-switch-modal="loginModal">Sign in →</a></p>
+<!-- ── CTA BANNER ── -->
+<section class="cta-banner">
+  <div class="container">
+    <div class="cta-banner-inner">
+      <span class="badge" style="margin-bottom:16px;display:inline-flex">Ready to Trade With Conviction?</span>
+      <h2>Join DecodeFXGroup Academy Today</h2>
+      <p>One-time enrollment. Lifetime curriculum.  No recurring fee on the course — ever.</p>
+      <div class="cta-banner-actions">
+        <a href="enquiries.html" class="btn btn-primary" style="font-size:14px;padding:18px 44px">🎓 Enroll Now — $300</a>
+        <a href="https://t.me/decodefxgroup" class="btn btn-outline-light" style="font-size:14px;padding:18px 44px" target="_blank">Join Free Telegram First</a>
+      </div>
     </div>
   </div>
+</section>
 
-  <script src="js/script.js"></script>
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <div class="footer-simple">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="width:32px;height:32px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--navy)">
+          <img src="Images/logo2.png" alt="website logo">
+        </div>
+        <span style="font-size:16px;font-weight:600;color:#fff">Decode<span style="color:var(--gold)">FX</span>Group</span>
+      </div>
+      <p>© 2026 DecodeFXGroup. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Risk Disclaimer</a>
+      </div>
+    </div>
+    <p class="risk-disclaimer">Risk Disclaimer: Forex trading involves significant risk of loss and is not suitable for all investors. Past performance is not indicative of future results. DecodeFXGroup provides education and signal services for informational purposes only.</p>
+  </div>
+</footer>
+
+<!-- ── WHATSAPP FLOAT ── -->
+<a href="https://wa.me/2348173133453?text=Hello%20DecodeFXGroup..." class="wa-float" target="_blank" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+(function(){
+  const nav=document.getElementById('navbar');
+  window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60));
+  const hamburger=document.getElementById('hamburger'),mobileMenu=document.getElementById('mobileMenu');
+  function openMenu(){mobileMenu.classList.add('open');hamburger.classList.add('open');document.body.style.overflow='hidden'}
+  function closeMenu(){mobileMenu.classList.remove('open');hamburger.classList.remove('open');document.body.style.overflow=''}
+  hamburger.addEventListener('click',openMenu);
+  document.getElementById('mobileClose').addEventListener('click',closeMenu);
+  document.querySelectorAll('.mobile-menu-overlay a').forEach(a=>a.addEventListener('click',closeMenu));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
+  const obs=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('revealed');obs.unobserve(en.target)}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+})();
+</script>
 </body>
 </html>

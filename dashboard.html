@@ -1,241 +1,542 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard | DecodeFXGroup</title>
-  <link rel="stylesheet" href="css/style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — DecodeFXGroup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
-  <!-- ══ NAVBAR ══════════════════════════════════════════════ -->
-  <nav class="navbar scrolled">
-    <div class="nav-inner">
-      <a href="index.html" class="nav-logo">
-  <img src="images/logo.png" alt="DecodeFXGroup Logo" class="nav-logo-img" />
-  Decode<span>FX</span>Group
-</a>
-      <div style="display:flex;gap:12px;align-items:center">
-        <button id="sidebarToggle" class="hamburger" aria-label="Toggle sidebar">
-          <span></span><span></span><span></span>
-        </button>
-        <button class="btn btn-outline" style="padding:8px 20px" onclick="Auth.logout()">Logout</button>
+<!-- ── AUTH MODAL ── -->
+<div class="auth-modal" id="authModal">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <div class="auth-logo-mark"><img src="Images/logo2.png" alt="website logo"></div>
+      <span class="auth-logo-text">Decode<span>FX</span>Group</span>
+    </div>
+    <div id="loginView">
+      <h2>Welcome Back</h2>
+      <p>Sign in to access your dashboard and signals.</p>
+      <div class="auth-error" id="loginError">Invalid email or password.</div>
+      <div class="auth-form-group">
+        <label>Email Address</label>
+        <input type="email" id="loginEmail" placeholder="your@email.com">
+      </div>
+      <div class="auth-form-group">
+        <label>Password</label>
+        <input type="password" id="loginPassword" placeholder="Your password">
+      </div>
+      <button class="auth-submit" onclick="handleLogin()">Sign In →</button>
+      <div class="auth-divider"><span>or</span></div>
+      <a href="https://wa.me/2348173133453?text=Please%20activate%20my%20DecodeFXGroup%20dashboard%20account..." class="wa-login-btn" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Request Access via WhatsApp
+      </a>
+      <p class="auth-switch">Don't have an account? <a onclick="switchToRegister()">Create one</a></p>
+    </div>
+    <div id="registerView" style="display:none">
+      <h2>Create Account</h2>
+      <p>Register after completing your enrollment payment.</p>
+      <div class="auth-error" id="registerError"></div>
+      <div class="auth-form-group">
+        <label>Full Name</label>
+        <input type="text" id="regName" placeholder="Your full name">
+      </div>
+      <div class="auth-form-group">
+        <label>Email Address</label>
+        <input type="email" id="regEmail" placeholder="your@email.com">
+      </div>
+      <div class="auth-form-group">
+        <label>Password</label>
+        <input type="password" id="regPassword" placeholder="Create a password">
+      </div>
+      <button class="auth-submit" onclick="handleRegister()">Create Account →</button>
+      <p class="auth-switch">Already have an account? <a onclick="switchToLogin()">Sign in</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ── SIDEBAR ── -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-inner">
+      <div class="sidebar-logo-mark">D</div>
+      <span class="sidebar-logo-text">Decode<span>FX</span>Group</span>
+    </div>
+  </div>
+  <div class="sidebar-user">
+    <div class="sidebar-avatar" id="sidebarAvatar">?</div>
+    <div class="sidebar-user-name" id="sidebarName">Loading...</div>
+    <div class="sidebar-user-plan" id="sidebarPlan">VIP Elite</div>
+    <div class="sidebar-sub-status">
+      <span class="sub-dot" id="subDot"></span>
+      <span id="subStatusText">Checking...</span>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-section-label">Main</div>
+    <a class="sidebar-link active" href="dashboard.html">
+      <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+      Dashboard
+    </a>
+    <a class="sidebar-link" href="academy.html">
+      <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+      Academy
+      <span class="badge-count">3</span>
+    </a>
+    <a class="sidebar-link" href="#">
+      <svg viewBox="0 0 24 24"><path d="M13 2.05V4.05C17.39 4.59 20.5 8.58 19.96 12.97C19.5 16.61 16.64 19.5 13 19.93V21.93C18.5 21.38 22.5 16.5 21.95 11C21.5 6.25 17.73 2.5 13 2.05M11 2.06C9.05 2.25 7.19 3 5.67 4.26L7.1 5.74C8.22 4.84 9.57 4.26 11 4.06V2.06M4.26 5.67C3 7.19 2.25 9.04 2.05 11H4.05C4.24 9.58 4.8 8.23 5.69 7.1L4.26 5.67M2.06 13C2.26 14.96 3.03 16.81 4.27 18.33L5.69 16.9C4.81 15.77 4.24 14.42 4.06 13H2.06M7.1 18.37L5.67 19.74C7.18 21 9.04 21.79 11 22V20C9.58 19.82 8.23 19.25 7.1 18.37M12 7L8 10L12 13L16 10L12 7z"/></svg>
+      Live Signals
+    </a>
+    <div class="sidebar-section-label" style="margin-top:16px">Account</div>
+    <a class="sidebar-link" href="account.html">
+      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+      Subscription
+    </a>
+    <a class="sidebar-link" href="contact.html">
+      <svg viewBox="0 0 24 24"><path d="M11.5 2C6.81 2 3 5.81 3 10.5S6.81 19 11.5 19h.5v3c4.86-2.34 8-7 8-11.5C20 5.81 16.19 2 11.5 2zm1 14.5h-2v-2h2v2zm0-4h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2h-2c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5z"/></svg>
+      Support
+    </a>
+    <a class="sidebar-link" href="index.html">
+      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      Back to Site
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <a onclick="handleLogout()">
+      <svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+      Sign Out
+    </a>
+  </div>
+</aside>
+
+<!-- ── MAIN CONTENT ── -->
+<main class="main-content">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:12px">
+      <button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="Toggle sidebar">
+        <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+      </button>
+      <div class="topbar-left">
+        <h2>Student Dashboard</h2>
+        <p id="topbarDate">Loading...</p>
       </div>
     </div>
-  </nav>
-
-  <!-- ══ DASHBOARD LAYOUT ════════════════════════════════════ -->
-  <div class="dashboard-layout">
-
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <nav class="sidebar-nav">
-        <div class="sidebar-section">Main</div>
-        <a href="dashboard.html" class="sidebar-link active">
-          <span>📊</span> Overview
-        </a>
-        <a href="academy.html" class="sidebar-link">
-          <span>🎓</span> Academy / LMS
-        </a>
-        <a href="dashboard.html#signals" class="sidebar-link">
-          <span>⚡</span> VIP Signals
-        </a>
-
-        <div class="sidebar-section">Account</div>
-        <a href="account.html" class="sidebar-link">
-          <span>💳</span> Subscription
-        </a>
-        <a href="account.html" class="sidebar-link">
-          <span>⚙️</span> Settings
-        </a>
-
-        <div class="sidebar-section">Support</div>
-        <a href="https://wa.me/2348173133453" class="sidebar-link" target="_blank">
-          <span>📱</span> WhatsApp Support
-        </a>
-        <a href="https://t.me/decodefxgroup" class="sidebar-link" target="_blank">
-          <span>✈️</span> Telegram Channel
-        </a>
-        <a href="contact.html" class="sidebar-link">
-          <span>❓</span> FAQ
-        </a>
-      </nav>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="main-content">
-
-      <!-- Page header -->
-      <div id="dashGreeting">
-        <h1 class="page-title">Welcome back, <span class="gold" id="userName">Trader</span></h1>
-        <p class="page-subtitle">Here's your trading command centre. Stay focused, stay disciplined.</p>
-      </div>
-
-      <!-- Subscription status -->
-      <div id="subStatusDisplay"></div>
-
-      <!-- Stats Row -->
-      <div class="stats-row">
-        <div class="stat-card">
-          <div class="stat-card-icon">⚡</div>
-          <div class="stat-card-label">Signals This Week</div>
-          <div class="stat-card-value">18</div>
-          <div class="stat-card-sub">↑ 6 more than last week</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card-icon">🎯</div>
-          <div class="stat-card-label">Win Rate</div>
-          <div class="stat-card-value">91%</div>
-          <div class="stat-card-sub">Based on last 30 signals</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card-icon">📚</div>
-          <div class="stat-card-label">Course Progress</div>
-          <div class="stat-card-value">40%</div>
-          <div class="stat-card-sub">5 of 12 modules done</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card-icon">💰</div>
-          <div class="stat-card-label">Total Pips (Signal)</div>
-          <div class="stat-card-value">+1,248</div>
-          <div class="stat-card-sub">This month</div>
-        </div>
-      </div>
-
-      <!-- Course Progress Bar -->
-      <div class="stat-card" style="margin-bottom:32px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-          <div>
-            <div class="stat-card-label">Overall Course Progress</div>
-            <div style="font-size:1rem;font-weight:600;margin-top:4px">Forex Mastery Programme</div>
-          </div>
-          <a href="academy.html" class="btn btn-outline" style="padding:8px 20px;font-size:0.78rem">Continue Learning →</a>
-        </div>
-        <div class="progress-bar-wrap">
-          <div class="progress-bar-fill" style="width:40%"></div>
-        </div>
-        <div style="font-size:0.78rem;color:var(--grey);margin-top:8px">5 / 12 modules completed</div>
-      </div>
-
-      <!-- VIP Signals Section -->
-      <div id="signals">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
-          <h2 style="font-family:var(--font-display);font-size:1.6rem">Latest <span class="gold">Signals</span></h2>
-          <span class="badge" style="margin:0">🔴 Live</span>
-        </div>
-
-        <!-- Signal cards -->
-        <div class="signal-card">
-          <div class="signal-info">
-            <div class="pair">EUR/USD</div>
-            <div class="time">Today, 09:14 AM · London Session</div>
-          </div>
-          <div class="signal-details">
-            <div class="price">
-              <div class="entry">Entry</div>
-              <div class="value">1.08420</div>
-            </div>
-            <div class="price">
-              <div class="entry">Stop Loss</div>
-              <div class="value" style="color:var(--danger)">1.08180</div>
-            </div>
-            <div class="price">
-              <div class="entry">Take Profit</div>
-              <div class="value" style="color:var(--success)">1.09100</div>
-            </div>
-            <span class="sig-badge sig-buy">BUY</span>
-          </div>
-        </div>
-
-        <div class="signal-card">
-          <div class="signal-info">
-            <div class="pair">GBP/JPY</div>
-            <div class="time">Today, 07:45 AM · Asian Close</div>
-          </div>
-          <div class="signal-details">
-            <div class="price">
-              <div class="entry">Entry</div>
-              <div class="value">193.450</div>
-            </div>
-            <div class="price">
-              <div class="entry">Stop Loss</div>
-              <div class="value" style="color:var(--danger)">194.100</div>
-            </div>
-            <div class="price">
-              <div class="entry">Take Profit</div>
-              <div class="value" style="color:var(--success)">191.800</div>
-            </div>
-            <span class="sig-badge sig-sell">SELL</span>
-          </div>
-        </div>
-
-        <div class="signal-card">
-          <div class="signal-info">
-            <div class="pair">XAU/USD (Gold)</div>
-            <div class="time">Yesterday, 03:22 PM · New York Session</div>
-          </div>
-          <div class="signal-details">
-            <div class="price">
-              <div class="entry">Entry</div>
-              <div class="value">2,318.50</div>
-            </div>
-            <div class="price">
-              <div class="entry">Stop Loss</div>
-              <div class="value" style="color:var(--danger)">2,305.00</div>
-            </div>
-            <div class="price">
-              <div class="entry">Take Profit</div>
-              <div class="value" style="color:var(--success)">2,348.00</div>
-            </div>
-            <span class="sig-badge sig-buy" style="background:rgba(201,168,76,0.15);color:var(--gold)">HIT TP ✓</span>
-          </div>
-        </div>
-
-        <div class="signal-card">
-          <div class="signal-info">
-            <div class="pair">USD/CHF</div>
-            <div class="time">Yesterday, 11:05 AM · London Session</div>
-          </div>
-          <div class="signal-details">
-            <div class="price">
-              <div class="entry">Entry</div>
-              <div class="value">0.90340</div>
-            </div>
-            <div class="price">
-              <div class="entry">Stop Loss</div>
-              <div class="value" style="color:var(--danger)">0.90680</div>
-            </div>
-            <div class="price">
-              <div class="entry">Take Profit</div>
-              <div class="value" style="color:var(--success)">0.89600</div>
-            </div>
-            <span class="sig-badge sig-sell">SELL</span>
-          </div>
-        </div>
-
-        <!-- Upgrade prompt for standard users -->
-        <div style="background:linear-gradient(135deg,var(--charcoal),var(--navy-light));border:1px solid rgba(201,168,76,0.2);border-radius:8px;padding:32px;text-align:center;margin-top:16px">
-          <div style="font-size:2rem;margin-bottom:12px">👑</div>
-          <h3 style="font-family:var(--font-display);margin-bottom:8px">Upgrade to VIP Elite</h3>
-          <p style="color:var(--grey-light);font-size:0.9rem;margin-bottom:20px">Get 3× more signals, crypto pairs, commodities, and a monthly 1-on-1 review session.</p>
-          <a href="account.html" class="btn btn-primary">Upgrade to VIP — $150/mo</a>
-        </div>
-      </div>
-
-    </main>
+    <div class="topbar-right">
+      <a href="enquiries.html" class="topbar-btn topbar-btn-primary">⚡ Upgrade Plan</a>
+    </div>
   </div>
 
-  <!-- ══ WHATSAPP FLOAT ══════════════════════════════════════ -->
-  <a href="https://wa.me/2348173133453" class="whatsapp-float" target="_blank" aria-label="WhatsApp"><img src="Images/whatsapp2.png" alt="whatsapp logo"></a>
+  <div class="page-body">
 
-  <script src="js/script.js"></script>
-  <script>
-    // Personalise greeting
-    const user = Auth.getUser();
-    if (user) {
-      const nameEl = document.getElementById('userName');
-      if (nameEl) nameEl.textContent = user.name || 'Trader';
-    }
-  </script>
+    <!-- Greeting -->
+    <div class="greeting-bar">
+      <h1>Welcome back, <span id="greetName">Trader</span> 👋</h1>
+      <p id="greetSub">Here's your trading overview for today.</p>
+    </div>
+
+    <!-- Subscription status -->
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-icon">⚡</div>
+        <div>
+          <h3 id="subCardPlan">VIP Elite Signals</h3>
+          <p id="subCardExpiry">Active · Expires 20 May 2025</p>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+        <div class="sub-active-badge" id="subBadge">
+          <span class="sub-badge-dot"></span>Active
+        </div>
+        <div class="sub-card-actions">
+          <a href="account.html" class="btn-sm btn-sm-outline">Manage</a>
+          <a href="enquiries.html" class="btn-sm btn-sm-primary">Renew</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stat cards -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-card-label">
+          <svg viewBox="0 0 24 24"><path d="M13 2.05V4.05C17.39 4.59 20.5 8.58 19.96 12.97C19.5 16.61 16.64 19.5 13 19.93V21.93C18.5 21.38 22.5 16.5 21.95 11C21.5 6.25 17.73 2.5 13 2.05M11 2.06C9.05 2.25 7.19 3 5.67 4.26L7.1 5.74C8.22 4.84 9.57 4.26 11 4.06V2.06M4.26 5.67C3 7.19 2.25 9.04 2.05 11H4.05C4.24 9.58 4.8 8.23 5.69 7.1L4.26 5.67M2.06 13C2.26 14.96 3.03 16.81 4.27 18.33L5.69 16.9C4.81 15.77 4.24 14.42 4.06 13H2.06M7.1 18.37L5.67 19.74C7.18 21 9.04 21.79 11 22V20C9.58 19.82 8.23 19.25 7.1 18.37M12 7L8 10L12 13L16 10L12 7z"/></svg>
+          Signals This Week
+        </div>
+        <div class="stat-card-value">18</div>
+        <div class="stat-card-sub">Delivered to Telegram</div>
+        <div class="stat-card-change up">↑ +4 vs last week</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+          Win Rate
+        </div>
+        <div class="stat-card-value">91<span style="font-size:22px;font-family:'DM Sans',sans-serif;font-weight:400;color:var(--text-muted)">%</span></div>
+        <div class="stat-card-sub">Last 30 days</div>
+        <div class="stat-card-change up">↑ +3% vs prev month</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">
+          <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+          Course Progress
+        </div>
+        <div class="stat-card-value">25<span style="font-size:22px;font-family:'DM Sans',sans-serif;font-weight:400;color:var(--text-muted)">%</span></div>
+        <div class="stat-card-sub">3 of 12 modules</div>
+        <div class="stat-card-change neutral">Module 3 in progress</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">
+          <svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+          Pips This Month
+        </div>
+        <div class="stat-card-value">847</div>
+        <div class="stat-card-sub">Accumulated pips</div>
+        <div class="stat-card-change up">↑ +182 vs last month</div>
+      </div>
+    </div>
+
+    <!-- Course + Modules -->
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Course Progress</span>
+          <a class="card-link" href="academy.html">View All →</a>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>Overall completion</span><span>25%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:25%"></div></div>
+        </div>
+        <div class="module-list">
+          <div class="module-row">
+            <div class="module-status complete">✓</div>
+            <span class="module-name complete">Forex Fundamentals &amp; Market Structure</span>
+            <span class="module-badge complete">Done</span>
+          </div>
+          <div class="module-row">
+            <div class="module-status complete">✓</div>
+            <span class="module-name complete">Technical Analysis Mastery</span>
+            <span class="module-badge complete">Done</span>
+          </div>
+          <div class="module-row">
+            <div class="module-status in-progress">▶</div>
+            <div style="flex:1">
+              <div class="module-name">Smart Money Concepts (SMC)</div>
+              <div class="module-progress-mini"><div class="module-progress-mini-fill"></div></div>
+            </div>
+            <span class="module-badge active">45%</span>
+          </div>
+          <div class="module-row">
+            <div class="module-status locked">🔒</div>
+            <span class="module-name locked">Risk Management &amp; Psychology</span>
+            <span class="module-badge locked">Locked</span>
+          </div>
+          <div class="module-row">
+            <div class="module-status locked">🔒</div>
+            <span class="module-name locked">Live Trading &amp; Signal Reading</span>
+            <span class="module-badge locked">Locked</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Signal History</span>
+          <a class="card-link" href="https://t.me/decodefxgroup" target="_blank">View on Telegram →</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:0">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(201,168,76,0.07)">
+            <div style="display:flex;align-items:center;gap:10px">
+              <span style="font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:.08em;min-width:64px">XAUUSD</span>
+              <span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:2px;background:rgba(76,175,138,0.1);color:var(--success)">BUY</span>
+            </div>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--gold-dark)">+187</span>
+            <span style="font-size:11px;background:rgba(76,175,138,0.1);color:var(--success);padding:3px 8px;border-radius:3px;font-weight:600">TP3 ✓</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(201,168,76,0.07)">
+            <div style="display:flex;align-items:center;gap:10px">
+              <span style="font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:.08em;min-width:64px">EURUSD</span>
+              <span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:2px;background:rgba(224,82,82,0.1);color:var(--danger)">SELL</span>
+            </div>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--gold-dark)">+94</span>
+            <span style="font-size:11px;background:rgba(76,175,138,0.1);color:var(--success);padding:3px 8px;border-radius:3px;font-weight:600">TP2 ✓</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(201,168,76,0.07)">
+            <div style="display:flex;align-items:center;gap:10px">
+              <span style="font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:.08em;min-width:64px">GBPJPY</span>
+              <span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:2px;background:rgba(76,175,138,0.1);color:var(--success)">BUY</span>
+            </div>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--gold-dark)">+122</span>
+            <span style="font-size:11px;background:rgba(76,175,138,0.1);color:var(--success);padding:3px 8px;border-radius:3px;font-weight:600">TP3 ✓</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(201,168,76,0.07)">
+            <div style="display:flex;align-items:center;gap:10px">
+              <span style="font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:.08em;min-width:64px">USDJPY</span>
+              <span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:2px;background:rgba(224,82,82,0.1);color:var(--danger)">SELL</span>
+            </div>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--gold-dark)">+68</span>
+            <span style="font-size:11px;background:rgba(76,175,138,0.1);color:var(--success);padding:3px 8px;border-radius:3px;font-weight:600">TP2 ✓</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 0">
+            <div style="display:flex;align-items:center;gap:10px">
+              <span style="font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:.08em;min-width:64px">NZDUSD</span>
+              <span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:2px;background:rgba(76,175,138,0.1);color:var(--success)">BUY</span>
+            </div>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--danger)">−12</span>
+            <span style="font-size:11px;background:rgba(224,82,82,0.1);color:var(--danger);padding:3px 8px;border-radius:3px;font-weight:600">SL Hit</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live signals -->
+    <div class="signals-section">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600">Live Signal Feed</h3>
+        <a href="https://t.me/decodefxgroup" target="_blank" style="font-size:12px;color:var(--gold-dark);font-weight:600;letter-spacing:.06em;text-decoration:none">Open Telegram →</a>
+      </div>
+      <div class="signals-grid">
+        <div class="signal-card buy">
+          <div class="signal-top">
+            <span class="signal-pair-name">XAUUSD</span>
+            <span class="signal-type-badge buy">BUY</span>
+          </div>
+          <div class="signal-levels">
+            <div class="signal-level">
+              <div class="level-label">Entry</div>
+              <div class="level-value">2341.50</div>
+            </div>
+            <div class="signal-level">
+              <div class="level-label">SL</div>
+              <div class="level-value" style="color:var(--danger)">2336.00</div>
+            </div>
+            <div class="signal-level">
+              <div class="level-label">TP</div>
+              <div class="level-value" style="color:var(--success)">2362.00</div>
+            </div>
+          </div>
+          <div class="signal-pips-display">
+            <span class="signal-time">📡 Today 09:42</span>
+            <span><span class="signal-pips-num">+187</span> pips</span>
+          </div>
+          <div class="signal-status-bar"><div class="signal-status-fill buy" style="width:78%"></div></div>
+        </div>
+        <div class="signal-card sell">
+          <div class="signal-top">
+            <span class="signal-pair-name">EURUSD</span>
+            <span class="signal-type-badge sell">SELL</span>
+          </div>
+          <div class="signal-levels">
+            <div class="signal-level">
+              <div class="level-label">Entry</div>
+              <div class="level-value">1.0842</div>
+            </div>
+            <div class="signal-level">
+              <div class="level-label">SL</div>
+              <div class="level-value" style="color:var(--danger)">1.0875</div>
+            </div>
+            <div class="signal-level">
+              <div class="level-label">TP</div>
+              <div class="level-value" style="color:var(--success)">1.0780</div>
+            </div>
+          </div>
+          <div class="signal-pips-display">
+            <span class="signal-time">📡 Today 11:15</span>
+            <span><span class="signal-pips-num">+94</span> pips</span>
+          </div>
+          <div class="signal-status-bar"><div class="signal-status-fill sell" style="width:60%"></div></div>
+        </div>
+        <div class="signal-card buy">
+          <div class="signal-top">
+            <span class="signal-pair-name">GBPJPY</span>
+            <span class="signal-type-badge buy">BUY</span>
+          </div>
+          <div class="signal-levels">
+            <div class="signal-level">
+              <div class="level-label">Entry</div>
+              <div class="level-value">193.74</div>
+            </div>
+            <div class="signal-level">
+              <div class="level-label">SL</div>
+              <div class="level-value" style="color:var(--danger)">193.10</div>
+            </div>
+            <div class="signal-level">
+              <div class="level-label">TP</div>
+              <div class="level-value" style="color:var(--success)">195.50</div>
+            </div>
+          </div>
+          <div class="signal-pips-display">
+            <span class="signal-time">📡 Today 13:30</span>
+            <span><span class="signal-pips-num">+122</span> pips</span>
+          </div>
+          <div class="signal-status-bar"><div class="signal-status-fill buy" style="width:90%"></div></div>
+        </div>
+        <div class="signal-card sell">
+          <div class="signal-top">
+            <span class="signal-pair-name">USDJPY</span>
+            <span class="signal-type-badge sell">SELL</span>
+          </div>
+          <div class="signal-levels">
+            <div class="signal-level">
+              <div class="level-label">Entry</div>
+              <div class="level-value">154.32</div>
+            </div>
+            <div class="signal-level">
+              <div class="level-label">SL</div>
+              <div class="level-value" style="color:var(--danger)">154.90</div>
+            </div>
+            <div class="signal-level">
+              <div class="level-label">TP</div>
+              <div class="level-value" style="color:var(--success)">153.40</div>
+            </div>
+          </div>
+          <div class="signal-pips-display">
+            <span class="signal-time">📡 Today 14:05</span>
+            <span><span class="signal-pips-num">+68</span> pips</span>
+          </div>
+          <div class="signal-status-bar"><div class="signal-status-fill sell" style="width:45%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIP upgrade prompt -->
+    <div class="upgrade-card" id="upgradeCard">
+      <div class="upgrade-text">
+        <h3>⚡ Unlock VIP Elite Signals</h3>
+        <p>Get crypto &amp; extended gold coverage, a monthly 1-on-1 review session with Nathan, and priority signal delivery before Standard members. Upgrade to VIP Elite for $150/month.</p>
+      </div>
+      <div class="upgrade-actions">
+        <a href="enquiries.html" class="btn-sm btn-sm-primary">Go VIP — $150/mo</a>
+        <button class="btn-sm btn-sm-outline" onclick="document.getElementById('upgradeCard').style.display='none'">Dismiss</button>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── AUTH SYSTEM ──
+const Auth = {
+  getUser(){ try{ return JSON.parse(localStorage.getItem('dfx_user')); }catch{ return null; } },
+  getSub(){ try{ return JSON.parse(localStorage.getItem('dfx_subscription')); }catch{ return null; } },
+  isSubscribed(){
+    const sub = this.getSub();
+    if(!sub) return false;
+    return new Date(sub.expiresAt) > new Date();
+  },
+  login(email, password){
+    // Demo login — in production, validate against backend
+    if(!email || !password) return false;
+    const name = email.split('@')[0].replace(/[._]/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+    const user = { id: Date.now(), email, name, plan:'VIP Elite', enrolledAt: new Date().toISOString() };
+    const expiry = new Date(); expiry.setDate(expiry.getDate()+30);
+    const sub = { plan:'VIP Elite', startedAt: new Date().toISOString(), expiresAt: expiry.toISOString() };
+    localStorage.setItem('dfx_user', JSON.stringify(user));
+    localStorage.setItem('dfx_subscription', JSON.stringify(sub));
+    return true;
+  },
+  register(name, email, password){
+    if(!name||!email||!password) return false;
+    const user = { id: Date.now(), email, name, plan:'Academy', enrolledAt: new Date().toISOString() };
+    const expiry = new Date(); expiry.setDate(expiry.getDate()+30);
+    const sub = { plan:'Academy (30-day trial)', startedAt: new Date().toISOString(), expiresAt: expiry.toISOString() };
+    localStorage.setItem('dfx_user', JSON.stringify(user));
+    localStorage.setItem('dfx_subscription', JSON.stringify(sub));
+    return true;
+  },
+  logout(){ localStorage.removeItem('dfx_user'); localStorage.removeItem('dfx_subscription'); window.location.href='index.html'; }
+};
+
+function handleLogin(){
+  const email = document.getElementById('loginEmail').value;
+  const pw = document.getElementById('loginPassword').value;
+  if(!email||!pw){ showAuthError('loginError','Please fill in all fields.'); return; }
+  if(Auth.login(email,pw)){ hideAuthModal(); initDashboard(); showToast('Welcome back!'); }
+  else { showAuthError('loginError','Invalid credentials. Try any email/password for demo.'); }
+}
+function handleRegister(){
+  const name = document.getElementById('regName').value;
+  const email = document.getElementById('regEmail').value;
+  const pw = document.getElementById('regPassword').value;
+  if(!name||!email||!pw){ showAuthError('registerError','Please fill in all fields.'); return; }
+  if(Auth.register(name,email,pw)){ hideAuthModal(); initDashboard(); showToast('Account created!'); }
+}
+function handleLogout(){ Auth.logout(); }
+function switchToRegister(){ document.getElementById('loginView').style.display='none'; document.getElementById('registerView').style.display='block'; }
+function switchToLogin(){ document.getElementById('registerView').style.display='none'; document.getElementById('loginView').style.display='block'; }
+function showAuthError(id, msg){ const el=document.getElementById(id); el.textContent=msg; el.classList.add('show'); }
+function hideAuthModal(){ document.getElementById('authModal').classList.add('hidden'); document.body.style.overflow=''; }
+function showAuthModal(){ document.getElementById('authModal').classList.remove('hidden'); }
+
+// Allow Enter key to submit
+document.getElementById('loginPassword').addEventListener('keydown', e=>{ if(e.key==='Enter') handleLogin(); });
+document.getElementById('loginEmail').addEventListener('keydown', e=>{ if(e.key==='Enter') handleLogin(); });
+
+function initDashboard(){
+  const user = Auth.getUser();
+  if(!user){ showAuthModal(); return; }
+
+  const sub = Auth.getSub();
+  const isActive = Auth.isSubscribed();
+
+  // Sidebar user info
+  const initials = user.name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2);
+  document.getElementById('sidebarAvatar').textContent = initials;
+  document.getElementById('sidebarName').textContent = user.name;
+  document.getElementById('sidebarPlan').textContent = sub ? sub.plan : 'No plan';
+  const dot = document.getElementById('subDot');
+  dot.className = 'sub-dot' + (isActive ? '' : ' inactive');
+  document.getElementById('subStatusText').textContent = isActive ? 'Subscription active' : 'Subscription expired';
+
+  // Greeting
+  document.getElementById('greetName').textContent = user.name.split(' ')[0];
+  const hour = new Date().getHours();
+  const greet = hour<12?'Good morning':'hour<17?Good afternoon':'Good evening';
+  document.getElementById('greetSub').textContent = `Here's your trading overview for today.`;
+
+  // Topbar date
+  document.getElementById('topbarDate').textContent = new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+
+  // Sub card
+  if(sub){
+    document.getElementById('subCardPlan').textContent = sub.plan;
+    const exp = new Date(sub.expiresAt);
+    document.getElementById('subCardExpiry').textContent = isActive
+      ? `Active · Expires ${exp.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}`
+      : `Expired ${exp.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}`;
+    const badge = document.getElementById('subBadge');
+    if(!isActive){ badge.className='sub-expired-badge'; badge.innerHTML='<span class="sub-badge-dot"></span>Expired'; }
+  }
+
+  // Show/hide upgrade card based on plan
+  if(sub && sub.plan.includes('VIP')) document.getElementById('upgradeCard').style.display='none';
+}
+
+// Sidebar toggle
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('visible');
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('visible');
+}
+
+window.showToast = function(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+};
+
+// Init
+const existingUser = Auth.getUser();
+if(existingUser){ hideAuthModal(); initDashboard(); }
+else { showAuthModal(); }
+</script>
 </body>
 </html>
