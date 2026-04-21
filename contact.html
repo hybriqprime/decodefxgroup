@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact & FAQ | DecodeFXGroup</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ══ NAVBAR ══════════════════════════════════════════════ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+
+    <!-- Logo -->
+    <a href="index.html" class="nav-logo">
+      <img src="Images/logo2.png" alt="Logo" class="nav-logo-img" />
+      Decode<span>FX</span>Group
+    </a>
+
+    <!-- Desktop menu -->
+    <div class="nav-desktop">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#benefits">Benefits</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+        <li><a href="index.html#partners">Partners</a></li>
+        <li><a href="contact.html">FAQ</a></li>
+        <li><a href="enquiries.html">Enquiries</a></li>
+      </ul>
+      <div class="nav-cta nav-auth-area">
+        <button class="btn btn-outline"
+                style="padding:10px 22px"
+                data-modal="login">Sign In</button>
+        <button class="btn btn-primary"
+                style="padding:10px 22px"
+                data-action="enroll">Enroll Now</button>
+      </div>
+    </div>
+
+    <!-- Hamburger button — mobile only -->
+    <button class="hamburger"
+            id="hamburger"
+            aria-label="Open menu"
+            aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+</nav>
+
+<!-- ══ FULLSCREEN MOBILE MENU ══════════════════════════════ -->
+<!-- This lives OUTSIDE the navbar so it can cover everything -->
+<div class="mobile-menu-overlay" id="mobileOverlay" aria-hidden="true">
+
+  <!-- Close button -->
+  <button class="mobile-menu-close" id="mobileClose" aria-label="Close menu">
+    ✕
+  </button>
+
+  <!-- Logo inside menu -->
+  <div class="mobile-menu-logo">
+    Decode<span>FX</span>Group
+  </div>
+
+  <!-- Nav links -->
+  <nav class="mobile-nav">
+    <ul class="mobile-nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#benefits">Benefits</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="index.html#partners">Partners</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">FAQ</a></li>
+      <li><a href="enquiries.html">Enquiries</a></li>
+    </ul>
+  </nav>
+
+  <!-- CTA buttons — always at bottom -->
+  <div class="mobile-menu-cta">
+    <button class="btn btn-outline"
+            style="width:100%;justify-content:center;padding:16px"
+            data-modal="login"
+            onclick="closeMobileMenu()">
+      Sign In
+    </button>
+    <button class="btn btn-primary"
+            style="width:100%;justify-content:center;padding:16px"
+            data-action="enroll"
+            onclick="closeMobileMenu()">
+      🎓 Enroll Now
+    </button>
+  </div>
+
+  <!-- Bottom contact strip -->
+  <div class="mobile-menu-footer">
+    <a href="https://wa.me/2348173133453" target="_blank">
+      📱 +234 817 313 3453
+    </a>
+    <span>|</span>
+    <a href="https://t.me/Nathanpips_bot" target="_blank">
+      <img src="Images/telegram2.png" alt="telegram logo"> @decodefxgroup
+    </a>
+  </div>
+
+  <!-- ══ PAGE BANNER ════════════════════════════════════════ -->
+  <div class="page-banner">
+    <span class="badge">Get in Touch</span>
+    <h1>Contact & <span class="gold">FAQ</span></h1>
+    <p>We respond fast. Reach us on WhatsApp for the quickest reply.</p>
+  </div>
+
+  <!-- ══ CONTACT SECTION ════════════════════════════════════ -->
+  <section class="section" style="background:var(--navy)" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Contact info -->
+        <div class="reveal">
+          <div class="section-heading">
+            <span class="badge">Direct Contact</span>
+            <h2>Talk to <span class="gold">Us</span></h2>
+            <div class="divider"></div>
+            <p>We are a team of real traders, not a bot. Expect human responses.</p>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="contact-icon"><img src="Images/whatsapp2.png" alt="whatsapp logo" height="40px" width="40px"></div>
+            <div>
+              <h4>WhatsApp (Fastest)</h4>
+              <p>
+                <a href="https://wa.me/2348173133453" target="_blank" style="color:var(--gold)">
+                  +234 817 313 3453
+                </a>
+              </p>
+              <p style="font-size:0.8rem;margin-top:4px">Response time: Usually within 1 hour</p>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="contact-icon"><img src="Images/telegram2.png" alt="telegram logo" height="40px" width="40px"></div>
+            <div>
+              <h4>Telegram</h4>
+              <p>
+                <a href="https://t.me/decodefxgroup" target="_blank" style="color:var(--gold)">
+                  @Nathanpips_bot
+                </a>
+              
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <h4>Email Support</h4>
+              <p>
+                <a href="mailto:support@decodefxgroup.com" style="color:var(--gold)">
+                  support@decodefxgroup.com
+                </a>
+              </p>
+              <p style="font-size:0.8rem;margin-top:4px">For billing and account issues</p>
+            </div>
+          </div>
+
+          <!-- WhatsApp CTA button -->
+          <div style="margin-top:32px">
+            <a href="https://wa.me/2348173133453?text=Hello%20DecodeFXGroup%2C%20I%20have%20a%20question%20about%20enrolling."
+               target="_blank" class="btn btn-primary" style="font-size:0.9rem">
+              <img src="Images/whatsapp2.png" alt="whatsapp logo" height="40px" width="40px"> WhatsApp Chat
+            </a>
+          </div>
+        </div>
+
+        <!-- Contact form -->
+        <div class="reveal">
+          <div style="background:var(--charcoal);border:1px solid rgba(201,168,76,0.1);border-radius:8px;padding:40px">
+            <h3 style="font-family:var(--font-display);font-size:1.6rem;margin-bottom:8px">Send a <span class="gold">Message</span></h3>
+            <p style="color:var(--grey-light);font-size:0.88rem;margin-bottom:28px">Fill in the form and we'll reply via email within 24 hours.</p>
+
+            <form id="contactForm">
+              <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" name="name" placeholder="Your full name" required />
+              </div>
+              <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="trader@example.com" required />
+              </div>
+              <div class="form-group">
+                <label>Subject</label>
+                <select name="subject">
+                  <option value="">Select a topic...</option>
+                  <option value="enrollment">Enrollment enquiry</option>
+                  <option value="payment">Payment issue</option>
+                  <option value="signals">Signals question</option>
+                  <option value="account">Account access</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Message</label>
+                <textarea name="message" placeholder="Type your message here..." required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">
+                Send Message →
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FAQ SECTION ════════════════════════════════════════ -->
+  <section class="section" style="background:var(--navy-mid)" id="faq">
+    <div class="container">
+      <div class="section-heading text-center reveal" style="max-width:640px;margin:0 auto 60px">
+        <span class="badge">FAQ</span>
+        <h2>Common <span class="gold">Questions</span></h2>
+        <div class="divider"></div>
+        <p>Everything you need to know before joining. If you still have questions, WhatsApp us.</p>
+      </div>
+
+      <div style="max-width:800px;margin:0 auto" class="reveal">
+        <div class="faq-list">
+
+          <div class="faq-item">
+            <div class="faq-question">
+              What do I get for the $300 enrollment fee?
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              You get  access to the full DecodeFXGroup LMS (12 in-depth modules), immediate access to the private Telegram channel, and 30 days of VIP live signals with entry, stop-loss, and take-profit levels. No recurring fee for the course.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              What happens after the 30 free signal days end?
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              After your complimentary 30 days, you can continue receiving live signals by subscribing to either our Standard plan ($50/month) or our VIP Elite plan ($150/month). Your course access remains completely unaffected, you keep that for life.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              Do I need trading experience to join?
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              No. The curriculum starts from absolute zero. What forex is, how currency pairs work, and how to set up a trading platform. Whether you're a complete beginner or an intermediate trader wanting to upgrade your edge, the programme covers you.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              How are signals delivered?
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              All signals are sent directly to our private Telegram channel in real-time, formatted with the currency pair, direction (BUY/SELL), entry price, stop-loss, and take-profit levels. Modules 11 and 12 in the LMS teach you exactly how to read and execute them correctly.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              What payment methods are accepted?
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              We accept payments via Paystack (card, bank transfer, USSD-Naira) and Binance/USDT (crypto). After payment, send your receipt to our WhatsApp (+234 817 313 3453) or Telegram (@Nathanpips_bot) for manual account activation within 30 minutes.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              Is there a refund policy?
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              Due to the digital nature of the course and immediate access to signal intelligence, all sales are final. We strongly recommend reviewing all public content, the about page, curriculum overview, and testimonials before enrolling. If you have any questions before purchasing, WhatsApp us first.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              Do I need a funded trading account to benefit?
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              No. You can practice on a demo account while learning. Many students use the first 2–3 months on demo to master execution and risk management before funding a live account. We teach you to be consistently profitable on demo first funding comes after the skill is proven.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              What is the difference between Standard and VIP signals?
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              Standard signals ($50/month) cover major forex pairs with daily entries, SL, and TP. VIP Elite ($150/month) adds cryptocurrency pairs, commodities (gold, oil), priority delivery, trade management updates, and a monthly one-on-one trade review session with the lead analyst.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              Can I cancel my signals subscription anytime?
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              Yes. Signal subscriptions are month-to-month. Simply do not renew when your billing period ends, and your signal access will stop at the end of that month. Your course access (the $300 enrollment) is never affected.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══════════════════════════════════════════════ -->
+  <footer style="background:var(--navy);border-top:1px solid rgba(201,168,76,0.1);padding:40px 24px;text-align:center">
+    <div class="nav-logo" style="margin-bottom:16px">Decode<span style="color:var(--gold)">FX</span>Group</div>
+    <p style="font-size:0.82rem;color:var(--grey)">
+      © 2026 DecodeFXGroup. All rights reserved. Trading involves significant risk of loss.
+    </p>
+  </footer>
+
+  <!-- ══ WHATSAPP FLOAT ══════════════════════════════════════ -->
+  <a href="https://wa.me/2348173133453" class="whatsapp-float" target="_blank" aria-label="WhatsApp"><img src="Images/whatsapp2.png" alt="whatsapp logo"></a>
+
+  <!-- ══ LOGIN MODAL ═════════════════════════════════════════ -->
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal">
+      <button class="modal-close">✕</button>
+      <h2>Welcome <span class="gold">Back</span></h2>
+      <p>Sign in to access your account.</p>
+      <form id="loginForm">
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" name="email" placeholder="trader@example.com" required />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" name="password" placeholder="••••••••" required />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px">Sign In</button>
+      </form>
+      <p class="form-switch">Don't have an account? <a href="#" data-switch-modal="registerModal">Create one →</a></p>
+    </div>
+  </div>
+
+  <!-- ══ REGISTER MODAL ══════════════════════════════════════ -->
+  <div class="modal-overlay" id="registerModal">
+    <div class="modal">
+      <button class="modal-close">✕</button>
+      <h2>Start Your <span class="gold">Journey</span></h2>
+      <p>Create your account and enrol today.</p>
+      <form id="registerForm">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" name="name" placeholder="Your full name" required />
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" name="email" placeholder="trader@example.com" required />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" name="password" placeholder="Min. 8 characters" required />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px">Create Account</button>
+      </form>
+      <p class="form-switch">Already enrolled? <a href="#" data-switch-modal="loginModal">Sign in →</a></p>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+  <script>
+    // Contact form handler
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const btn = contactForm.querySelector('button[type="submit"]');
+        btn.textContent = 'Sending...';
+        btn.disabled = true;
+
+        // Simulate submission — replace with real fetch('/api/contact', {...})
+        setTimeout(() => {
+          showToast('Message sent! We\'ll reply within 24 hours.', 'success');
+          contactForm.reset();
+          btn.textContent = 'Send Message →';
+          btn.disabled = false;
+        }, 1500);
+      });
+    }
+  </script>
+</body>
+</html>

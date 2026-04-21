@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="DecodeFXGroup – Elite Forex Academy. Master currency trading with professional mentorship, live signals, and a world-class curriculum." />
+  <title>DecodeFXGroup | Elite Forex Academy</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+ <!-- ══ NAVBAR ══════════════════════════════════════════════ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+
+    <!-- Logo -->
+    <a href="index.html" class="nav-logo">
+      <img src="Images/logo2.png" alt="Logo" class="nav-logo-img" />
+      Decode<span>FX</span>Group
+    </a>
+
+    <!-- Desktop menu -->
+    <div class="nav-desktop">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#benefits">Benefits</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+        <li><a href="index.html#partners">Partners</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">FAQ</a></li>
+        <li><a href="enquiries.html">Enquiries</a></li>
+      </ul>
+      <div class="nav-cta nav-auth-area">
+        <button class="btn btn-outline"
+                style="padding:10px 22px"
+                data-modal="login">Sign In</button>
+        <button class="btn btn-primary"
+                style="padding:10px 22px"
+                data-action="enroll">Enroll Now</button>
+      </div>
+    </div>
+
+    <!-- Hamburger button — mobile only -->
+    <button class="hamburger"
+            id="hamburger"
+            aria-label="Open menu"
+            aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+</nav>
+
+<!-- ══ FULLSCREEN MOBILE MENU ══════════════════════════════ -->
+<!-- This lives OUTSIDE the navbar so it can cover everything -->
+<div class="mobile-menu-overlay" id="mobileOverlay" aria-hidden="true">
+
+  <!-- Close button -->
+  <button class="mobile-menu-close" id="mobileClose" aria-label="Close menu">
+    ✕
+  </button>
+
+  <!-- Logo inside menu -->
+  <div class="mobile-menu-logo">
+    Decode<span>FX</span>Group
+  </div>
+
+  <!-- Nav links -->
+  <nav class="mobile-nav">
+    <ul class="mobile-nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#benefits">Benefits</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="index.html#partners">Partners</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">FAQ</a></li>
+      <li><a href="enquiries.html">Enquiries</a></li>
+    </ul>
+  </nav>
+
+  <!-- CTA buttons — always at bottom -->
+  <div class="mobile-menu-cta">
+    <button class="btn btn-outline"
+            style="width:100%;justify-content:center;padding:16px"
+            data-modal="login"
+            onclick="closeMobileMenu()">
+      Sign In
+    </button>
+    <button class="btn btn-primary"
+            style="width:100%;justify-content:center;padding:16px"
+            data-action="enroll"
+            onclick="closeMobileMenu()">
+      🎓 Enroll Now
+    </button>
+  </div>
+
+  <!-- Bottom contact strip -->
+  <div class="mobile-menu-footer">
+    <a href="https://wa.me/2348173133453" target="_blank">
+      📱 +234 817 313 3453
+    </a>
+    <span>|</span>
+    <a href="https://t.me/Nathanpips_bot" target="_blank">
+      <img src="Images/telegram2.png" alt="telegram logo"> @decodefxgroup
+    </a>
+  </div>
+
+</div>
+  <!-- ══ HERO ════════════════════════════════════════════════ -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-grid-overlay"></div>
+
+    <div class="hero-content">
+      <!-- Left: Text -->
+      <div class="hero-text">
+        <span class="badge">⚡ Elite Forex Academy — Now Open</span>
+        <h1>Decode The Market <em>Execute with Precision</em></h1>
+        <p>
+         Learn Proffesional Trading and Join a Global Community of High Performing Traders.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" data-action="enroll">
+            🎓 Enroll Now — $300
+          </button>
+          <a href="#benefits" class="btn btn-outline">
+            Explore Benefits
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-num">2000+</div>
+            <div class="stat-label">Active Students</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">90%</div>
+            <div class="stat-label">Satisfaction Rate</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">7 Yrs</div>
+            <div class="stat-label">Market Experience</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Live Signal Preview Card -->
+      <div class="hero-visual">
+        <div class="hero-card">
+          <span class="floating-badge">🔴 Live Signals</span>
+
+          <!-- Mini chart -->
+          <div class="chart-placeholder" id="heroChart">
+            <div class="chart-bar"></div>
+            <div class="chart-bar"></div>
+            <div class="chart-bar"></div>
+            <div class="chart-bar"></div>
+            <div class="chart-bar"></div>
+            <div class="chart-bar"></div>
+            <div class="chart-bar"></div>
+            <div class="chart-bar"></div>
+            <div class="chart-bar"></div>
+            <div class="chart-bar"></div>
+          </div>
+
+          <!-- Sample signals -->
+          <div class="signal-row">
+            <span class="sig-pair">EUR/USD</span>
+            <span class="sig-badge sig-buy">BUY</span>
+            <span class="sig-pip">+82 pips</span>
+          </div>
+          <div class="signal-row">
+            <span class="sig-pair">GBP/JPY</span>
+            <span class="sig-badge sig-sell">SELL</span>
+            <span class="sig-pip">+145 pips</span>
+          </div>
+          <div class="signal-row">
+            <span class="sig-pair">XAU/USD</span>
+            <span class="sig-badge sig-buy">BUY</span>
+            <span class="sig-pip">+210 pips</span>
+          </div>
+          <div class="signal-row">
+            <span class="sig-pair">USD/CHF</span>
+            <span class="sig-badge sig-sell">SELL</span>
+            <span class="sig-pip">+63 pips</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ══ SERVICES ═══════════════════════════════════════════ -->
+<section class="section" id="services" style="background:var(--navy)">
+  <div class="container">
+    <div class="section-heading text-center reveal">
+      <span class="badge">What We Offer</span>
+      <h2>Our <span class="gold">Services</span></h2>
+      <div class="divider"></div>
+      <p>Everything under one roof education, live signals, mentorship, and community.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;margin-top:60px">
+
+      <!-- Service 1 -->
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&q=80" alt="Curriculum" />
+
+          <div class="service-tag">🎓 Education</div>
+        </div>
+        <div class="service-body">
+          <h3>Forex Academy (LMS)</h3>
+          <p>A fully structured online academy with 12 professional modules covering everything from market basics to institutional liquidity Concepts. Learn at your own pace, forever.</p>
+          <ul class="service-list">
+            <li>✦ 12 in-depth video modules</li>
+            <li>✦ Quizzes and trade exercises</li>
+            <li>✦ Lifetime course access</li>
+            <li>✦ Certificate of completion</li>
+          </ul>
+          <button class="btn btn-primary" data-action="enroll" style="margin-top:20px;width:100%;justify-content:center">
+            Enroll — $300
+          </button>
+        </div>
+      </div>
+
+      <!-- Service 2 -->
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=800&q=80" 
+     alt="VIP Signals" />
+
+          <div class="service-tag">⚡ Signals</div>
+        </div>
+        <div class="service-body">
+          <h3>VIP Live Trading Signals</h3>
+          <p>Professional buy/sell signals delivered directly to your Telegram in real time. Each signal includes entry price, stop-loss, and take-profit levels, no guesswork required.</p>
+          <ul class="service-list">
+            <li>✦ 2–4 signals / week (realistic expectations)</li>
+            <li>✦ Forex, gold & crypto pairs</li>
+            <li>✦ Full SL & TP included</li>
+            <li>✦ 90% historical accuracy</li>
+          </ul>
+          <div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap">
+            <a href="#pricing" class="btn btn-outline" style="flex:1;justify-content:center">Standard — $50/mo</a>
+            <a href="#pricing" class="btn btn-primary" style="flex:1;justify-content:center">VIP — $150/mo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-img-wrap">
+          <img src="Images/social.jpg" alt="social">
+          <div class="service-tag">🏆 Mentorship</div>
+        </div>
+        <div class="service-body">
+          <h3>1-on-1 Mentorship & Review</h3>
+          <p>VIP Elite members receive a private monthly session with the lead analyst. Review your trades, fix your mistakes, and get a personalised growth plan built around your trading style.</p>
+          <ul class="service-list">
+            <li>✦ Monthly private session</li>
+            <li>✦ Personal trade review</li>
+            <li>✦ Custom improvement plan</li>
+            <li>✦ Direct analyst access</li>
+          </ul>
+          <a href="#pricing" class="btn btn-primary" style="margin-top:20px;width:100%;justify-content:center;display:flex">
+            Get VIP Access — $150/mo
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 4 -->
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80" 
+     alt="Community" />
+          
+          <div class="service-tag">👥 Community</div>
+        </div>
+        <div class="service-body">
+          <h3>Private Trader Community</h3>
+          <p>Join a serious, distraction-free community of disciplined traders. Share ideas, get feedback, stay accountable, and access exclusive market commentary every week.</p>
+          <ul class="service-list">
+            <li>✦ Private Telegram group</li>
+            <li>✦ Weekly market analysis</li>
+            <li>✦ Peer accountability</li>
+            <li>✦ Exclusive trade breakdowns</li>
+          </ul>
+          <a href="https://t.me/Nathanpips_bot target="_blank" class="btn btn-outline" style="margin-top:20px;width:100%;justify-content:center;display:flex">
+            Join Telegram Channel
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 5 -->
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-img-wrap">
+          <img src="Images/weeklymarket.PNG" alt="market analysis">
+          <div class="service-tag">📊 Analysis</div>
+        </div>
+        <div class="service-body">
+          <h3>Weekly Market Analysis</h3>
+          <p>Every week, our lead analyst publishes a full top-down breakdown of the major pairs bias, key levels, potential setups, and risk events to watch. Know the plan before the week starts.</p>
+          <ul class="service-list">
+            <li>✦ Published every Sunday</li>
+            <li>✦ Major & minor pairs</li>
+            <li>✦ News event calendar</li>
+            <li>✦ Bias + setup mapping</li>
+          </ul>
+          <button class="btn btn-primary" data-action="enroll" style="margin-top:20px;width:100%;justify-content:center">
+            Access Analysis — Enroll
+          </button>
+        </div>
+      </div>
+
+      <!-- Service 6 -->
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1434626881859-194d67b2b86f?w=800&q=80" 
+     alt="Risk Management" />
+          <div class="service-tag">🔐 Risk</div>
+        </div>
+        <div class="service-body">
+          <h3>Risk Management Coaching</h3>
+          <p>Most traders lose not because of bad analysis, but because of poor risk management. We dedicate an entire module and ongoing coaching to position sizing, drawdown control, and capital preservation.</p>
+          <ul class="service-list">
+            <li>✦ Position sizing formulas</li>
+            <li>✦ Drawdown recovery plans</li>
+            <li>✦ Prop firm preparation</li>
+            <li>✦ Trade journaling system</li>
+          </ul>
+          <button class="btn btn-outline" data-action="enroll" style="margin-top:20px;width:100%;justify-content:center">
+            Learn More — Enroll
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- ══ TERMS & CONDITIONS ══════════════════════════════════ -->
+<section class="section" id="terms">
+  <div class="terms-bg">
+
+    <!-- Background decorative elements matching flyer -->
+    <div class="terms-gold-stripe-1"></div>
+    <div class="terms-gold-stripe-2"></div>
+    <div class="terms-cream-overlay"></div>
+
+    <div class="container" style="position:relative;z-index:2">
+
+      <!-- Top branding row -->
+      <div class="terms-brand-row reveal">
+        <div class="terms-brand-left">
+          <span class="badge" style="background:rgba(201,168,76,0.2);color:var(--gold-dark)">
+            ⚖️ Please Read Before Enrolling
+          </span>
+          <h2 class="terms-headline">
+            Earn Seamlessly From<br>
+            Forex with <span style="color:var(--gold-dark)">DecodeFXGroup</span>
+          </h2>
+          <p class="terms-sub">Facilitated by DecodeFXGroup — Managed Trading Division</p>
+        </div>
+
+        <!-- Logo badge top right — matching flyer -->
+        <div class="terms-logo-badge">
+          <div class="terms-logo-circle">
+            <span style="font-size:52rem"><img src="Images/logo2.png" </span>
+            
+          </div>
+          <div class="terms-logo-text">
+            <strong>DECODEFXGROUP</strong>
+            <span>elevate your portfolio &<br>unlock financial opulence</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main content grid -->
+      <div class="terms-main-grid">
+
+        <!-- Left — Terms list -->
+        <div class="terms-left reveal">
+          <h3 class="terms-section-title">TERMS &amp; CONDITIONS</h3>
+
+          <ul class="terms-list">
+           
+            <li class="terms-list-item">
+              <span class="terms-bullet">●</span>
+              <div>
+                <strong>TRADING DURATION IS TWO WEEKS</strong> (MINIMUM)
+              </div>
+            </li>
+            <li class="terms-list-item">
+              <span class="terms-bullet">●</span>
+              <div>
+                <strong>ONLY 25% CAPITAL</strong> WILL BE MADE WEEKLY
+              </div>
+            </li>
+            <li class="terms-list-item">
+              <span class="terms-bullet">●</span>
+              <div>
+                <strong>PROFIT IS SHARED 50/50</strong> AFTER EVERY SESSION
+              </div>
+            </li>
+            <li class="terms-list-item">
+              <span class="terms-bullet">●</span>
+              <div>
+                <strong>ONLY MT5 LOGIN</strong> WILL BE NEEDED FOR TRADING
+              </div>
+            </li>
+          </ul>
+
+          <!-- Contact info — matching flyer -->
+          <div class="terms-contact-block">
+            <h4 class="terms-contact-title">For more info contact;</h4>
+            <div class="terms-contact-items">
+              <div class="terms-contact-item">
+                <span class="terms-contact-icon">📞</span>
+                <a href="tel:+2348173133453" style="color:var(--navy);font-weight:600">
+                  +234 817 313 3453
+                </a>
+              </div>
+              <div class="terms-contact-item">
+                <span class="terms-contact-icon"><img src="Images/instagram2.png" alt="instagram logo"n height="40px"
+                width="40px"></span>
+                <span style="color:var(--navy)">@thenathanpips , @decodefxgroup</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTA buttons -->
+          <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:28px">
+            <button class="btn btn-primary" data-action="enroll">
+              🎓 I Agree — Get started
+            </button>
+            <a href="https://wa.me/2348173133453?text=Hello%2C%20I%20want%20to%20know%20more%20about%20managed%20trading."
+               target="_blank" class="btn" 
+               style="background:var(--navy);color:var(--white);padding:15px 28px;border-radius:3px;font-weight:600;font-size:0.88rem;letter-spacing:0.1em;text-transform:uppercase">
+               <img src="Images/whatsapp2.png" alt="whatsapp logo" height="40px" width="40px" > WhatsApp Us
+            </a>
+          </div>
+        </div>
+
+        <!-- Right — Founder image + money visual matching flyer -->
+        <div class="terms-right reveal">
+
+          <!-- Founder circle image — matching flyer style -->
+          <div class="terms-person-wrap">
+            <div class="terms-person-circle">
+              <!-- 
+                Replace this with the fou/* ══ Terms & Conditions — Flyer Style ════════════════════════ */
+
+/* Main section wrapper */
+.terms-bg {
+  position: relative;
+  background: #f5f0e8;          /* Cream background matching flyer */
+  overflow: hidden;
+  padding: 80px 0 0;
+}
+
+/* Gold diagonal stripes at bottom — matching flyer */
+.terms-gold-stripe-1 {
+  position: absolute;
+  bottom: 0; left: -10%;
+  width: 120%;
+  height: 90px;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  transform: skewY(-2deg);
+  transform-origin: bottom left;
+  z-index: 1;
+}
+.terms-gold-stripe-2 {
+  position: absolute;
+  bottom: 0; left: -10%;
+  width: 120%;
+  height: 60px;
+  background: var(--navy);
+  transform: skewY(-2deg);
+  transform-origin: bottom left;
+  z-index: 1;
+}
+
+/* Subtle cream overlay texture */
+.terms-cream-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 20% 80%, rgba(201,168,76,0.05) 0%, transparent 50%);
+  z-index: 1;
+}
+
+/* Top branding row */
+.terms-brand-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+  gap: 24px;
+  position: relative;
+  z-index: 2;
+}
+.terms-headline {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.2;
+  margin: 12px 0 8px;
+}
+.terms-sub {
+  font-size: 0.9rem;
+  color: #666;
+  font-style: italic;
+}
+
+/* Logo badge top right */
+.terms-logo-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+.terms-logo-circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--gold);
+  overflow: hidden;
+}
+.terms-logo-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.terms-logo-text strong {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--navy);
+  font-weight: 800;
+}
+.terms-logo-text span {
+  font-size: 0.65rem;
+  color: #888;
+  line-height: 1.4;
+}
+
+/* Main two-column grid */
+.terms-main-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  padding-bottom: 100px;       /* Space above gold stripe */
+}
+
+/* Section title — gold uppercase like flyer */
+.terms-section-title {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--gold-dark);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  position: relative;
+  padding-bottom: 12px;
+}
+.terms-section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 48px; height: 2px;
+  background: var(--gold);
+}
+
+/* Terms bullet list */
+.terms-list {
+  list-style: none;
+  margin-bottom: 36px;
+}
+.terms-list-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  font-size: 0.88rem;
+  color: var(--navy);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.terms-list-item:last-child {
+  border-bottom: none;
+}
+.terms-bullet {
+  color: var(--gold-dark);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.terms-list-item strong {
+  color: var(--navy);
+  font-weight: 800;
+}
+
+/* Contact block */
+.terms-contact-block {
+  background: rgba(201,168,76,0.08);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 6px 6px 0;
+  padding: 20px 24px;
+  margin-top: 8px;
+}
+.terms-contact-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--gold-dark);
+  font-weight: 700;
+  margin-bottom: 14px;
+  font-style: italic;
+}
+.terms-contact-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.terms-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+.terms-contact-icon {
+  font-size: 1.1rem;
+}
+
+/* Right side — person circle */
+.terms-person-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.terms-person-circle {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid var(--gold);
+  box-shadow: 0 20px 60px rgba(201,168,76,0.2);
+  position: relative;
+}
+.terms-person-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* Overlay text on circle */
+.terms-circle-overlay {
+  background: rgba(10,15,30,0.88);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 8px;
+  padding: 16px 20px;
+  text-align: center;
+  max-width: 280px;
+}
+.terms-circle-brand {
+  font-family: var(--font-impact);
+  font-size: 1rem;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  margin-bottom: 8px;
+}
+.terms-circle-overlay p {
+  font-size: 0.78rem;
+  color: #ccc;
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+.terms-circle-name {
+  font-size: 0.75rem;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* Money bar at bottom of right column */
+.terms-money-bar {
+  background: white;
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 8px;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 320px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+}
+.terms-money-text {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .terms-main-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding-bottom: 120px;
+  }
+  .terms-brand-row {
+    flex-direction: column;
+  }
+  .terms-person-circle {
+    width: 220px;
+    height: 220px;
+  }
+  .terms-logo-badge {
+    flex-direction: row;
+    text-align: left;
+  }
+}nder's actual photo.
+                The image from your flyer shows a Black man with glasses
+                working at a computer — use that same photo here.
+                Example: <img src="images/founder.jpg" alt="Founder" />
+              -->
+              <img 
+                src="Images/nathan.jpg"
+                alt="DecodeFXGroup Analyst" 
+              />
+            </div>
+
+            <!-- Overlay text on circle — matching flyer -->
+            <div class="terms-circle-overlay">
+              <div class="terms-circle-brand">DECODE FX GROUP</div>
+              <p>You want growth?<br>Then you must learn to proceed<br>without certainty.</p>
+              <span class="terms-circle-name">— Nathan Pips</span>
+            </div>
+          </div>
+
+          <!-- Dollar bills decoration — matching flyer bottom -->
+          <div class="terms-money-bar">
+            <div class="terms-money-text">
+              <span style="font-size:1.8rem">💵</span>
+              <div>
+                <div style="font-weight:700;color:var(--navy);font-size:0.95rem">Managed Trading</div>
+                <div style="font-size:0.78rem;color:#666">Profit shared every session</div>
+              </div>
+            </div>
+            <div class="terms-money-stat">
+              <span style="font-family:var(--font-impact);font-size:2rem;color:var(--gold-dark)">50/50</span>
+              <span style="font-size:0.72rem;color:#888;display:block">PROFIT SPLIT</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- ══ TRUSTED PARTNERS ════════════════════════════════════ -->
+<section class="section" id="partners" style="background:var(--navy)">
+  <div class="container">
+    <div class="section-heading text-center reveal">
+      <span class="badge">Our Trusted Partners</span>
+      <h2>Regulated Brokers We <span class="gold">Partner With</span></h2>
+      <div class="divider"></div>
+      <p>We only work with globally regulated, tier-1 brokers — giving our students and managed trading clients maximum security and confidence.</p>
+    </div>
+
+    <!-- Logos side by side -->
+    <div class="brokers-row reveal">
+
+      <!-- Exness -->
+      <div class="broker-item">
+        <div class="broker-img-wrap">
+          <img src="Images/exness.png" alt="Exness" height="90px" width="200px" >
+        </div>
+        <p class="broker-name">Exness</p>
+      </div>
+
+      <!-- Divider line -->
+      <div class="broker-divider"></div>
+
+      <!-- Deriv -->
+      <div class="broker-item">
+        <div class="broker-img-wrap">
+          <img src="Images/deriv.png" alt="Deriv" height="90px" width="200px">
+        </div>
+        <p class="broker-name">Deriv</p>
+      </div>
+
+      <!-- Divider line -->
+      <div class="broker-divider"></div>
+
+      <!-- Hantec -->
+      <div class="broker-item">
+        <div class="broker-img-wrap">
+          <img src="Images/hantec.png" alt="Hantec Markets" height="90px" width="200px" >
+        </div>
+        <p class="broker-name">Hantec Markets</p>
+      </div>
+
+    </div>
+
+    <!-- Trust bar below logos -->
+    <div class="trust-bar reveal">
+      <div class="trust-item">
+        <span class="trust-icon">🛡️</span>
+        <div>
+          <div class="trust-label">Regulated Brokers Only</div>
+          <div class="trust-sub">All partners are tier-1 regulated</div>
+        </div>
+      </div>
+      <div class="trust-divider"></div>
+      <div class="trust-item">
+        <span class="trust-icon">🔒</span>
+        <div>
+          <div class="trust-label">Segregated Funds</div>
+          <div class="trust-sub">Your capital is always protected</div>
+        </div>
+      </div>
+      <div class="trust-divider"></div>
+      <div class="trust-item">
+        <span class="trust-icon">⚡</span>
+        <div>
+          <div class="trust-label">Instant Execution</div>
+          <div class="trust-sub">No dealing desk interference</div>
+        </div>
+      </div>
+      <div class="trust-divider"></div>
+      <div class="trust-item">
+        <span class="trust-icon">🌍</span>
+        <div>
+          <div class="trust-label">Global Access</div>
+          <div class="trust-sub">Trade from anywhere in the world</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+  <!-- ══ BENEFITS ════════════════════════════════════════════ -->
+  <section class="features section" id="benefits">`
+    <div class="container">
+      <div class="section-heading text-center reveal">
+        <span class="badge">Why Choose Us</span>
+        <h2>Everything You Need to <span class="gold">Win in the Market</span></h2>
+        <div class="divider"></div>
+        <p>We combine institutional knowledge, live mentorship, and real-time Analysis to give you an unfair advantage.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card has-image reveal reveal-delay-1">
+    <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&q=80" alt="Curriculum" />
+    <div class="feature-card-body">
+      <h3>Professional Curriculum</h3>
+      <p>Structured modules covering everything from market basics to advanced institutional order flow.</p>
+    </div>
+  </div>
+       <div class="feature-card has-image reveal reveal-delay-2">
+  <div class="feature-img-wrap">
+    <img src="Images/viplivesignal.jpg" height="270pxpx" width="360px"
+         alt="VIP Live Signals" />
+  </div>
+  <div class="feature-card-body">
+    <h3>VIP Live Signals</h3>
+    <p>Receive real-time buy/sell signals would be given on our telegram channel with entry, stop-loss, and take-profit levels. Precision, not guesswork.</p>
+  </div>
+</div>
+         <div class="feature-card has-image reveal reveal-delay-3">
+  <div class="feature-img-wrap">
+    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80" 
+         alt="Elite Community" />
+  </div>
+  <div class="feature-card-body">
+    <h3>Elite Community</h3>
+    <p>Join a private channel of disciplined traders. No noise, no hype — just serious professionals sharing ideas and accountability.</p>
+  </div>
+</div>
+<div class="feature-card has-image reveal reveal-delay-1">
+  <div class="feature-img-wrap">
+    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80" 
+         alt="Risk Management" />
+  </div>
+  <div class="feature-card-body">
+    <h3>Risk Management Mastery</h3>
+    <p>Learn the only skill that separates funded professionals from blown accounts. Preserve capital first. Grow consistently second.</p>
+  </div>
+</div>
+        <div class="feature-card has-image reveal reveal-delay-2">
+  <div class="feature-img-wrap">
+    <img src="Images/tradeanywhere.jpg"  height="270pxpx" width="360px"
+         alt="Trade Anywhere" />
+  </div>
+  <div class="feature-card-body">
+    <h3>Trade Anywhere</h3>
+    <p>Access your academy content and signals from any device. Mobile-optimised learning that fits into your lifestyle.</p>
+  </div>
+</div>
+       <div class="feature-card has-image reveal reveal-delay-3">
+  <img src="Images/unlimitedaccess.PNG" alt="Lifetime" />
+    <div class="feature-card-body">
+      <h3>Unlimited Access (While Active)</h3>
+      <p>Your ongoing access plan gives you exclusive entry to learn forever. Your course content never expires, re-watch modules anytime as the market evolves.</p>
+    </div>
+  </div>
+
+
+    </div>
+  </section>
+  
+
+  <!-- ══ CURRICULUM ══════════════════════════════════════════ -->
+  <section class="curriculum section" id="curriculum">
+    <div class="container">
+      <div class="curriculum-grid">
+        <!-- Modules list -->
+        <div>
+          <div class="section-heading reveal">
+            <span class="badge">The Curriculum</span>
+            <h2>What You'll <span class="gold">Learn</span></h2>
+            <div class="divider"></div>
+            <p>A battle-tested roadmap from zero to consistent profitability.</p>
+          </div>
+
+          <div class="curriculum-list">
+            <div class="curriculum-item reveal reveal-delay-1">
+              <div class="ci-num">01</div>
+              <div class="ci-text">
+                <h4>Forex Fundamentals & Market Structure</h4>
+                <p>Currency pairs, pip values, sessions, how the global market moves and why.</p>
+              </div>
+            </div>
+            <div class="curriculum-item reveal reveal-delay-2">
+              <div class="ci-num">02</div>
+              <div class="ci-text">
+                <h4>Technical Analysis Mastery</h4>
+                <p>Support & resistance, trend lines, candlestick patterns, chart reading at a professional level.</p>
+              </div>
+            </div>
+            <div class="curriculum-item reveal reveal-delay-3">
+              <div class="ci-num">03</div>
+              <div class="ci-text">
+                <h4>Liquidity Flux Trading(LFT)</h4>
+                <p>Institutional order flow, liquidity grabs, order blocks, fair value gaps, and market maker patterns.</p>
+              </div>
+            </div>
+            <div class="curriculum-item reveal reveal-delay-1">
+              <div class="ci-num">04</div>
+              <div class="ci-text">
+                <h4>Risk Management & Psychology</h4>
+                <p>Position sizing, drawdown control, win-rate vs R:R ratio, and mastering trading discipline.</p>
+              </div>
+            </div>
+            <div class="curriculum-item reveal reveal-delay-2">
+              <div class="ci-num">05</div>
+              <div class="ci-text">
+                <h4>Live Trading & Signal Reading</h4>
+                <p>How to interpret and execute VIP signals, journaling, back-testing, and live session analysis.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+       
+          <!-- Telegram CTA -->
+          <div style="margin-top:24px;background:var(--charcoal);border:1px solid rgba(201,168,76,0.1);border-radius:8px;padding:24px;text-align:center">
+            <div style="font-size:2rem;margin-bottom:12px"><img src="Images/telegram2.png" alt="telegram logo" width="50" height="50"></div>
+            <h4 style="margin-bottom:8px">Private Telegram Channel</h4>
+            <p style="font-size:0.85rem;color:var(--grey-light);margin-bottom:16px">All enrolled students get access to our private Telegram for daily signals and community support.</p>
+            <a href="https://t.me/Nathanpips_bot" target="_blank" class="btn btn-outline" style="width:100%;justify-content:center">Join Channel</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ TESTIMONIALS ════════════════════════════════════════ -->
+<section class="testimonials section" id="testimonials">
+  <div class="container">
+    <div class="section-heading text-center reveal">
+      <span class="badge">Student Results</span>
+      <h2>What Our <span class="gold">Students Say</span></h2>
+      <div class="divider"></div>
+      <p>Real feedback from real traders who invested in themselves.</p>
+    </div>
+
+    <!-- Carousel wrapper -->
+    <div class="testimonial-carousel-wrap reveal">
+
+      <!-- Slide track -->
+      <div class="testimonial-track" id="testimonialTrack">
+
+        <!-- Testimonial 1 — Adebayo Okonkwo -->
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="testimonial-img-wrap">
+              <img src="Images/Img4.jpg"
+                   alt="Adebayo Okonkwo" class="testimonial-img" />
+            </div>
+            <div class="star-rating">★★★★★</div>
+            <p>"I spent two years watching YouTube videos with zero results. DecodeFXGroup gave me a structured path and within 3 months I passed my first prop firm challenge. The Liquidity Flux Trading (LFT) modules alone are worth 10x the price."</p>
+            <div class="testimonial-author">
+              <div class="author-info">
+                <div class="name">Adaeze Okafor</div>
+                <div class="title">Prop Trader — Lagos, Nigeria</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 — Emmanuel Ihejirika -->
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="testimonial-img-wrap">
+              <img src="https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=200&h=200&fit=crop&crop=face&q=80"
+                   alt="Emmanuel Ihejirika" class="testimonial-img" />
+            </div>
+            <div class="star-rating">★★★★★</div>
+            <p>"The VIP signals are incredibly precise. My account has grown 40% this quarter just by following the signals with the risk management rules taught in the academy. This changed my financial life."</p>
+            <div class="testimonial-author">
+              <div class="author-info">
+                <div class="name">Emmanuel Ihejirika</div>
+                <div class="title">Full-time Trader — Abuja, Nigeria</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 — Kwame Asante -->
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="testimonial-img-wrap">
+              <img src="Images/Img3.jpg"
+                   alt="Kwame Asante" class="testimonial-img" />
+            </div>
+            <div class="star-rating">★★★★★</div>
+            <p>"As a finance professional I was skeptical at first. But the institutional approach here is completely legitimate. Understanding liquidity and order flow transformed how I read every chart. Highly recommended."</p>
+            <div class="testimonial-author">
+              <div class="author-info">
+                <div class="name">Kwame Asante</div>
+                <div class="title">Finance Analyst — Accra, Ghana</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 4 — Chijioke Obi -->
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="testimonial-img-wrap">
+              <img src="Images/Img1.jpg"
+                   alt="Chijioke Obi" class="testimonial-img" />
+            </div>
+            <div class="star-rating">★★★★★</div>
+            <p>"I joined as a complete beginner. Six months later I am consistently profitable and trading a funded account. The step-by-step curriculum made everything click. Best investment I have made in myself."</p>
+            <div class="testimonial-author">
+              <div class="author-info">
+                <div class="name">Chijioke Obi</div>
+                <div class="title">Funded Trader — Enugu, Nigeria</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 5 — Segun Adeleke -->
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="testimonial-img-wrap">
+              <img src="Images/Img6.jpg"
+                   alt="Segun Adeleke" class="testimonial-img" />
+            </div>
+            <div class="star-rating">★★★★★</div>
+            <p>"The managed trading service is transparent and professional. I provided my MT5 investor login, they traded for two weeks and my profits were split fairly. No stress, no risk to my capital control."</p>
+            <div class="testimonial-author">
+              <div class="author-info">
+                <div class="name">Segun Adeleke</div>
+                <div class="title">Business Owner — Ibadan, Nigeria</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 6 — Kofi Mensah -->
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="testimonial-img-wrap">
+              <img src="Images/Img5.jpg"
+                   alt="Kofi Mensah" class="testimonial-img" />
+            </div>
+            <div class="star-rating">★★★★★</div>
+            <p>"What separates DecodeFXGroup from other courses is the community. The private Telegram is active, disciplined, and full of serious traders. The weekly market analysis alone saves me hours of research every Sunday."</p>
+            <div class="testimonial-author">
+              <div class="author-info">
+                <div class="name">Afia Mensah</div>
+                <div class="title">Forex Educator — Kumasi, Ghana</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 7 — Tunde Fashola -->
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="testimonial-img-wrap">
+              <img src="Images/Img2.jpg"
+                   alt="Tunde Fashola" class="testimonial-img" />
+            </div>
+            <div class="star-rating">★★★★★</div>
+            <p>"I have tried three other forex courses before this one. None of them taught risk management the way DecodeFXGroup does. I stopped blowing accounts the moment I applied their position sizing formula. Life-changing."</p>
+            <div class="testimonial-author">
+              <div class="author-info">
+                <div class="name">Tunde Fashola</div>
+                <div class="title">Part-time Trader — Port Harcourt, Nigeria</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end track -->
+
+      <!-- Navigation arrows -->
+      <button class="carousel-btn carousel-prev" id="carouselPrev" aria-label="Previous">
+        &#8592;
+      </button>
+      <button class="carousel-btn carousel-next" id="carouselNext" aria-label="Next">
+        &#8594;
+      </button>
+
+      <!-- Dot indicators -->
+      <div class="carousel-dots" id="carouselDots"></div>
+
+    </div><!-- end carousel wrap -->
+  </div>
+</section>
+
+  <!-- ══ PRICING ═════════════════════════════════════════════ -->
+  <section class="pricing section" id="pricing">
+    <div class="container">
+      <div class="section-heading text-center reveal">
+        <span class="badge">Transparent Pricing</span>
+        <h2><span class="gold"> Pricing</span></h2>
+        <div class="divider"></div>
+        <p>One-time enrollment gives you lifetime course access plus 30 days of live signals.</p>
+      </div>
+
+      <div class="pricing-grid">
+
+        <!-- Enrollment Card -->
+        <div class="pricing-card reveal reveal-delay-1">
+          <div class="plan-name">Academy Enrollment</div>
+          <div class="plan-price">
+            <span class="price-dollar">$</span>
+            <span class="price-amount">300</span>
+            <span class="price-period">one-time</span>
+          </div>
+          <p class="plan-desc">Everything you need to start your professional trading journey.</p>
+          <ul class="plan-features">
+            <li><span class="check">✦</span> Full LMS course access (lifetime)</li>
+            <li><span class="check">✦</span> 30 days VIP signals included</li>
+            <li><span class="check">✦</span> Private Telegram community</li>
+            <li><span class="check">✦</span> 12 structured course modules</li>
+            <li><span class="check">✦</span> Risk management playbook</li>
+            <li><span class="check">✦</span> Certificate of completion</li>
+          </ul>
+          <button class="btn btn-outline" style="width:100%;justify-content:center" data-action="enroll">Enroll Now</button>
+        </div>
+
+        <!-- Standard Signals -->
+        <div class="pricing-card featured reveal reveal-delay-2">
+          <span class="popular-tag">Most Popular</span>
+          <div class="plan-name">Standard Signals</div>
+          <div class="plan-price">
+            <span class="price-dollar">$</span>
+            <span class="price-amount">50</span>
+            <span class="price-period">/month</span>
+          </div>
+          <p class="plan-desc">Continue receiving premium signals after your free 30-day trial ends.</p>
+          <ul class="plan-features">
+            <li><span class="check">✦</span> Daily forex signals (3–5/day)</li>
+            <li><span class="check">✦</span> Entry, SL & TP levels</li>
+            <li><span class="check">✦</span> Telegram signal delivery</li>
+            <li><span class="check">✦</span> Weekly market analysis</li>
+            <li><span class="check">✦</span> Community access</li>
+          </ul>
+          <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="window.location.href='account.html'">Subscribe — $50/mo</button>
+        </div>
+
+        <!-- VIP Signals -->
+        <div class="pricing-card reveal reveal-delay-3">
+          <div class="plan-name">VIP Elite Signals</div>
+          <div class="plan-price">
+            <span class="price-dollar">$</span>
+            <span class="price-amount">150</span>
+            <span class="price-period">/month</span>
+          </div>
+          <p class="plan-desc">Maximum alpha. For serious traders who want every edge available.</p>
+          <ul class="plan-features">
+            <li><span class="check">✦</span> Everything in Standard</li>
+            <li><span class="check">✦</span> Priority signal delivery</li>
+            <li><span class="check">✦</span> Crypto + commodities signals</li>
+            <li><span class="check">✦</span> 1-on-1 monthly review session</li>
+            <li><span class="check">✦</span> Exclusive VIP Telegram group</li>
+            <li><span class="check">✦</span> Trade management alerts</li>
+          </ul>
+          <button class="btn btn-outline" style="width:100%;justify-content:center" onclick="window.location.href='account.html'">Go VIP — $150/mo</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ URGENCY / CTA ═══════════════════════════════════════ -->
+  <section class="urgency-banner" id="urgency">
+    <div class="container" style="position:relative;z-index:1">
+      <span class="badge">⏳ Limited Enrolment Window</span>
+      <h2>Spots Are Closing in</h2>
+      <p>We cap each intake to maintain signal quality and mentorship standards. Don't miss your window.</p>
+
+      <!-- Countdown Timer -->
+      <div class="countdown" id="countdown">
+        <div class="countdown-unit">
+          <span class="countdown-num" data-unit="hours">48</span>
+          <div class="countdown-label">Hours</div>
+        </div>
+        <div class="countdown-unit">
+          <span class="countdown-num" data-unit="minutes">00</span>
+          <div class="countdown-label">Minutes</div>
+        </div>
+        <div class="countdown-unit">
+          <span class="countdown-num" data-unit="seconds">00</span>
+          <div class="countdown-label">Seconds</div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" style="font-size:1rem;padding:18px 48px" data-action="enroll">
+        🎓 Secure My Spot Now
+      </button>
+    </div>
+  </section>
+
+  <!-- ══ FOUNDER PREVIEW ════════════════════════════════════ -->
+  <section class="founder section">
+    <div class="container">
+      <div class="founder-grid">
+        <div class="founder-photo reveal">
+          <div class="founder-img-box">
+            <!-- Replace src with real photo -->
+            <img src="Images/founder.jpg.JPG" alt="founder image">
+          </div>
+          <div class="founder-accent"></div>
+        </div>
+        <div class="founder-content reveal">
+          <span class="badge">The Founder</span>
+          <h3>Nathan Pips is a seasoned</h3>
+          <p class="founder-title">🏛  Chattered  Financial Analyst CFA & a GARP certified Financial Risk Manager</p>
+          <p>A seasoned forex professional with years of live market experience across major and exotic currency pairs. What started as a personal obsession with understanding institutional order flow became a mission to teach others the truth about how professional money moves.</p>
+          <p>After mentoring hundreds of individual traders and seeing consistent, repeatable results, DecodeFXGroup was built to systematise that knowledge into a premium, accessible learning experience.</p>
+          <div class="founder-achievements">
+            <div class="achievement">
+              <span class="num">7+</span>
+              <span class="label">Years Trading</span>
+            </div>
+            <div class="achievement">
+              <span class="num">2000+</span>
+              <span class="label">Students Taught</span>
+            </div>
+            <div class="achievement">
+              <span class="num">90%</span>
+              <span class="label">Signal Accuracy</span>
+            </div>
+          </div>
+          <br>
+          <a href="about.html" class="btn btn-outline">Read Full Bio →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">Decode<span>FX</span>Group</div>
+        <p>Elite forex education and professional signal services for the serious trader. We exist to elevate your trading from amateur to institutional.</p>
+        <div class="footer-social">
+          <a href="https://t.me/Nathanpips_bot" class="social-link" target="_blank" title="Telegram"><img src="Images/telegram2.png" alt="telegram logo"></a>
+          <a href="https://wa.me/2348173133453" class="social-link" target="_blank" title="WhatsApp"><img src="Images/whatsapp2.png" alt="WhatsApp logo"></a>
+          <a href="#" class="social-link" title="Instagram"><img src="Images/instagram2.png" alt="Instagram logo"></a>
+          <a href="#" class="social-link" title="Twitter/X"><img src="Images/twitter.png" alt="Twitter logo"></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Academy</h4>
+        <ul>
+          <li><a href="#curriculum">Curriculum</a></li>
+          <li><a href="academy.html">Login to LMS</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Founder</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="contact.html#faq">FAQ</a></li>
+          <li><a href="#">Refund Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="https://wa.me/2348173133453">WhatsApp Us</a></li>
+          <li><a href="mailto:support@decodefxgroup.com">Email Support</a></li>
+          <li><a href="https://t.me/Nathanpips_bot">Telegram</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 DecodeFXGroup. All rights reserved. Trading involves risk.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Risk Disclaimer</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══ WHATSAPP FLOAT ══════════════════════════════════════ -->
+  <a href="https://wa.me/2348173133453" class="whatsapp-float" target="_blank" title="Chat on WhatsApp" aria-label="WhatsApp">
+    <img src="Images/whatsapp2.png" alt="whatsapp logo">
+
+  </a>
+
+  <!-- ══ LOGIN MODAL ═════════════════════════════════════════ -->
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal">
+      <button class="modal-close" aria-label="Close">✕</button>
+      <h2>Welcome <span class="gold">Back</span></h2>
+      <p>Sign in to access your academy and signals dashboard.</p>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" name="email" placeholder="trader@example.com" required />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" name="password" placeholder="••••••••" required />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px">Sign In</button>
+      </form>
+
+      <p class="form-switch">
+        Don't have an account?
+        <a href="#" data-switch-modal="registerModal">Create one →</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ══ REGISTER MODAL ══════════════════════════════════════ -->
+  <div class="modal-overlay" id="registerModal">
+    <div class="modal">
+      <button class="modal-close" aria-label="Close">✕</button>
+      <h2>Start Your <span class="gold">Journey</span></h2>
+      <p>Create your account and enrol in the academy today.</p>
+
+      <form id="registerForm">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" name="name" placeholder="Your full name" required />
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" name="email" placeholder="trader@example.com" required />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" name="password" placeholder="Min. 8 characters" required />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px">Create Account & Proceed to Payment</button>
+      </form>
+
+      <p class="form-switch">
+        Already enrolled?
+        <a href="#" data-switch-modal="loginModal">Sign in →</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

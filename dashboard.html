@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | DecodeFXGroup</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ══ NAVBAR ══════════════════════════════════════════════ -->
+  <nav class="navbar scrolled">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+  <img src="images/logo.png" alt="DecodeFXGroup Logo" class="nav-logo-img" />
+  Decode<span>FX</span>Group
+</a>
+      <div style="display:flex;gap:12px;align-items:center">
+        <button id="sidebarToggle" class="hamburger" aria-label="Toggle sidebar">
+          <span></span><span></span><span></span>
+        </button>
+        <button class="btn btn-outline" style="padding:8px 20px" onclick="Auth.logout()">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══ DASHBOARD LAYOUT ════════════════════════════════════ -->
+  <div class="dashboard-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav class="sidebar-nav">
+        <div class="sidebar-section">Main</div>
+        <a href="dashboard.html" class="sidebar-link active">
+          <span>📊</span> Overview
+        </a>
+        <a href="academy.html" class="sidebar-link">
+          <span>🎓</span> Academy / LMS
+        </a>
+        <a href="dashboard.html#signals" class="sidebar-link">
+          <span>⚡</span> VIP Signals
+        </a>
+
+        <div class="sidebar-section">Account</div>
+        <a href="account.html" class="sidebar-link">
+          <span>💳</span> Subscription
+        </a>
+        <a href="account.html" class="sidebar-link">
+          <span>⚙️</span> Settings
+        </a>
+
+        <div class="sidebar-section">Support</div>
+        <a href="https://wa.me/2348173133453" class="sidebar-link" target="_blank">
+          <span>📱</span> WhatsApp Support
+        </a>
+        <a href="https://t.me/decodefxgroup" class="sidebar-link" target="_blank">
+          <span>✈️</span> Telegram Channel
+        </a>
+        <a href="contact.html" class="sidebar-link">
+          <span>❓</span> FAQ
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+      <!-- Page header -->
+      <div id="dashGreeting">
+        <h1 class="page-title">Welcome back, <span class="gold" id="userName">Trader</span></h1>
+        <p class="page-subtitle">Here's your trading command centre. Stay focused, stay disciplined.</p>
+      </div>
+
+      <!-- Subscription status -->
+      <div id="subStatusDisplay"></div>
+
+      <!-- Stats Row -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-card-icon">⚡</div>
+          <div class="stat-card-label">Signals This Week</div>
+          <div class="stat-card-value">18</div>
+          <div class="stat-card-sub">↑ 6 more than last week</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon">🎯</div>
+          <div class="stat-card-label">Win Rate</div>
+          <div class="stat-card-value">91%</div>
+          <div class="stat-card-sub">Based on last 30 signals</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon">📚</div>
+          <div class="stat-card-label">Course Progress</div>
+          <div class="stat-card-value">40%</div>
+          <div class="stat-card-sub">5 of 12 modules done</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon">💰</div>
+          <div class="stat-card-label">Total Pips (Signal)</div>
+          <div class="stat-card-value">+1,248</div>
+          <div class="stat-card-sub">This month</div>
+        </div>
+      </div>
+
+      <!-- Course Progress Bar -->
+      <div class="stat-card" style="margin-bottom:32px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <div>
+            <div class="stat-card-label">Overall Course Progress</div>
+            <div style="font-size:1rem;font-weight:600;margin-top:4px">Forex Mastery Programme</div>
+          </div>
+          <a href="academy.html" class="btn btn-outline" style="padding:8px 20px;font-size:0.78rem">Continue Learning →</a>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" style="width:40%"></div>
+        </div>
+        <div style="font-size:0.78rem;color:var(--grey);margin-top:8px">5 / 12 modules completed</div>
+      </div>
+
+      <!-- VIP Signals Section -->
+      <div id="signals">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+          <h2 style="font-family:var(--font-display);font-size:1.6rem">Latest <span class="gold">Signals</span></h2>
+          <span class="badge" style="margin:0">🔴 Live</span>
+        </div>
+
+        <!-- Signal cards -->
+        <div class="signal-card">
+          <div class="signal-info">
+            <div class="pair">EUR/USD</div>
+            <div class="time">Today, 09:14 AM · London Session</div>
+          </div>
+          <div class="signal-details">
+            <div class="price">
+              <div class="entry">Entry</div>
+              <div class="value">1.08420</div>
+            </div>
+            <div class="price">
+              <div class="entry">Stop Loss</div>
+              <div class="value" style="color:var(--danger)">1.08180</div>
+            </div>
+            <div class="price">
+              <div class="entry">Take Profit</div>
+              <div class="value" style="color:var(--success)">1.09100</div>
+            </div>
+            <span class="sig-badge sig-buy">BUY</span>
+          </div>
+        </div>
+
+        <div class="signal-card">
+          <div class="signal-info">
+            <div class="pair">GBP/JPY</div>
+            <div class="time">Today, 07:45 AM · Asian Close</div>
+          </div>
+          <div class="signal-details">
+            <div class="price">
+              <div class="entry">Entry</div>
+              <div class="value">193.450</div>
+            </div>
+            <div class="price">
+              <div class="entry">Stop Loss</div>
+              <div class="value" style="color:var(--danger)">194.100</div>
+            </div>
+            <div class="price">
+              <div class="entry">Take Profit</div>
+              <div class="value" style="color:var(--success)">191.800</div>
+            </div>
+            <span class="sig-badge sig-sell">SELL</span>
+          </div>
+        </div>
+
+        <div class="signal-card">
+          <div class="signal-info">
+            <div class="pair">XAU/USD (Gold)</div>
+            <div class="time">Yesterday, 03:22 PM · New York Session</div>
+          </div>
+          <div class="signal-details">
+            <div class="price">
+              <div class="entry">Entry</div>
+              <div class="value">2,318.50</div>
+            </div>
+            <div class="price">
+              <div class="entry">Stop Loss</div>
+              <div class="value" style="color:var(--danger)">2,305.00</div>
+            </div>
+            <div class="price">
+              <div class="entry">Take Profit</div>
+              <div class="value" style="color:var(--success)">2,348.00</div>
+            </div>
+            <span class="sig-badge sig-buy" style="background:rgba(201,168,76,0.15);color:var(--gold)">HIT TP ✓</span>
+          </div>
+        </div>
+
+        <div class="signal-card">
+          <div class="signal-info">
+            <div class="pair">USD/CHF</div>
+            <div class="time">Yesterday, 11:05 AM · London Session</div>
+          </div>
+          <div class="signal-details">
+            <div class="price">
+              <div class="entry">Entry</div>
+              <div class="value">0.90340</div>
+            </div>
+            <div class="price">
+              <div class="entry">Stop Loss</div>
+              <div class="value" style="color:var(--danger)">0.90680</div>
+            </div>
+            <div class="price">
+              <div class="entry">Take Profit</div>
+              <div class="value" style="color:var(--success)">0.89600</div>
+            </div>
+            <span class="sig-badge sig-sell">SELL</span>
+          </div>
+        </div>
+
+        <!-- Upgrade prompt for standard users -->
+        <div style="background:linear-gradient(135deg,var(--charcoal),var(--navy-light));border:1px solid rgba(201,168,76,0.2);border-radius:8px;padding:32px;text-align:center;margin-top:16px">
+          <div style="font-size:2rem;margin-bottom:12px">👑</div>
+          <h3 style="font-family:var(--font-display);margin-bottom:8px">Upgrade to VIP Elite</h3>
+          <p style="color:var(--grey-light);font-size:0.9rem;margin-bottom:20px">Get 3× more signals, crypto pairs, commodities, and a monthly 1-on-1 review session.</p>
+          <a href="account.html" class="btn btn-primary">Upgrade to VIP — $150/mo</a>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ══ WHATSAPP FLOAT ══════════════════════════════════════ -->
+  <a href="https://wa.me/2348173133453" class="whatsapp-float" target="_blank" aria-label="WhatsApp"><img src="Images/whatsapp2.png" alt="whatsapp logo"></a>
+
+  <script src="js/script.js"></script>
+  <script>
+    // Personalise greeting
+    const user = Auth.getUser();
+    if (user) {
+      const nameEl = document.getElementById('userName');
+      if (nameEl) nameEl.textContent = user.name || 'Trader';
+    }
+  </script>
+</body>
+</html>

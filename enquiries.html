@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enquiries & Payment | DecodeFXGroup</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+
+    /* ── Full page background image ───────────────────────── */
+    .enquiry-page {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 24px 80px;
+      overflow: hidden;
+    }
+
+    /* Background image layer */
+    .enquiry-page::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("../Images/Executive.jpg");
+      background-size: cover;
+      background-position: center;
+      background-attachment: scroll;
+      z-index: 0;
+    }
+
+    /* Dark overlay on top of background */
+    .enquiry-page::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(10,15,30,0.93) 0%,
+        rgba(10,15,30,0.82) 50%,
+        rgba(10,15,30,0.93) 100%
+      );
+      z-index: 0;
+    }
+
+    /* Gold shimmer overlay */
+    .enquiry-overlay-gold {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.08) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.05) 0%, transparent 50%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* All content above overlays */
+    .enquiry-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── Page header ───────────────────────────────────────── */
+    .enquiry-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .enquiry-header h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .enquiry-header p {
+      font-size: 1rem;
+      color: var(--grey-light);
+      max-width: 540px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* ── Main grid — two columns ───────────────────────────── */
+    .enquiry-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-bottom: 40px;
+    }
+
+    /* ── Glass card style ──────────────────────────────────── */
+    .glass-card {
+      background: rgba(28,35,51,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 12px;
+      padding: 40px 36px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .glass-card:hover {
+      border-color: rgba(201,168,76,0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+    }
+
+    /* ── Enquiry card ──────────────────────────────────────── */
+    .enquiry-card-icon {
+      width: 64px; height: 64px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 24px;
+    }
+    .enquiry-card h2 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .enquiry-card p {
+      font-size: 0.9rem;
+      color: var(--grey-light);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
+    /* Contact options list */
+    .contact-options {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .contact-option {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      background: rgba(10,15,30,0.5);
+      border: 1px solid rgba(201,168,76,0.1);
+      border-radius: 8px;
+      transition: var(--transition);
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .contact-option:hover {
+      border-color: rgba(201,168,76,0.35);
+      background: rgba(201,168,76,0.06);
+      transform: translateX(6px);
+    }
+    .contact-option-icon {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+    .contact-option-info .label {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+    .contact-option-info .value {
+      font-size: 0.8rem;
+      color: var(--gold);
+    }
+    .contact-option-arrow {
+      margin-left: auto;
+      color: var(--gold);
+      font-size: 1rem;
+      opacity: 0.6;
+    }
+
+    /* ── Payment card ──────────────────────────────────────── */
+    .payment-card h2 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .payment-card p {
+      font-size: 0.9rem;
+      color: var(--grey-light);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    /* Plan pills */
+    .plan-pills {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .plan-pill {
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      border: 1px solid rgba(201,168,76,0.3);
+      background: rgba(201,168,76,0.06);
+      color: var(--gold);
+      transition: var(--transition);
+    }
+    .plan-pill.active,
+    .plan-pill:hover {
+      background: var(--gold);
+      color: var(--navy);
+      border-color: var(--gold);
+    }
+
+    /* Payment method buttons */
+    .payment-options {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .payment-option-btn {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 22px;
+      background: rgba(10,15,30,0.5);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+      color: var(--white);
+      font-family: var(--font-body);
+      width: 100%;
+      text-align: left;
+    }
+    .payment-option-btn:hover {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.08);
+    }
+    .payment-option-btn .po-icon { font-size: 1.8rem; flex-shrink: 0; }
+    .payment-option-btn .po-info .po-label {
+      font-weight: 700;
+      font-size: 0.92rem;
+      margin-bottom: 2px;
+    }
+    .payment-option-btn .po-info .po-sub {
+      font-size: 0.78rem;
+      color: var(--grey);
+    }
+    .payment-option-btn .po-arrow {
+      margin-left: auto;
+      color: var(--gold);
+      font-size: 1.1rem;
+    }
+
+    /* ── Telegram landing section ──────────────────────────── */
+    .telegram-landing {
+      grid-column: 1 / -1;   /* Full width */
+    }
+    .telegram-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .telegram-left { flex: 1; min-width: 260px; }
+    .telegram-left .tg-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .telegram-left h2 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .telegram-left p {
+      font-size: 0.9rem;
+      color: var(--grey-light);
+      line-height: 1.8;
+    }
+    .telegram-right {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-width: 280px;
+    }
+
+    /* Telegram button */
+    .btn-telegram {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 18px 32px;
+      background: linear-gradient(135deg, #229ED9, #1a8bbf);
+      color: white;
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 8px 30px rgba(34,158,217,0.3);
+    }
+    .btn-telegram:hover {
+      background: linear-gradient(135deg, #1a8bbf, #1377a0);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(34,158,217,0.45);
+    }
+    .btn-telegram-icon { font-size: 1.4rem; }
+
+    /* Telegram channel preview card */
+    .tg-preview {
+      background: rgba(10,15,30,0.7);
+      border: 1px solid rgba(34,158,217,0.25);
+      border-radius: 8px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .tg-preview-icon {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #229ED9, #1a8bbf);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .tg-preview-info .tg-channel-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+    .tg-preview-info .tg-members {
+      font-size: 0.75rem;
+      color: #229ED9;
+    }
+    .tg-live-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #4caf8a;
+      margin-left: auto;
+      box-shadow: 0 0 8px rgba(76,175,138,0.6);
+      animation: pulse 2s ease infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 8px rgba(76,175,138,0.6); }
+      50%      { box-shadow: 0 0 16px rgba(76,175,138,0.9); }
+    }
+
+    /* ── Stats row at bottom ───────────────────────────────── */
+    .enquiry-stats {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      background: rgba(28,35,51,0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 12px;
+      padding: 32px;
+      flex-wrap: wrap;
+    }
+    .enquiry-stat {
+      flex: 1;
+      min-width: 140px;
+      text-align: center;
+      padding: 16px 24px;
+      
+      
+    }
+    .enquiry-stat:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 20%; bottom: 20%;
+      width: 1px;
+      background: rgba(201,168,76,0.15);
+    }
+    .enquiry-stat .stat-num {
+      font-family: var(--font-impact);
+      font-size: 2.4rem;
+      color: var(--gold);
+      display: block;
+      letter-spacing: 0.05em;
+    }
+    .enquiry-stat .stat-label {
+      font-size: 0.75rem;
+      color: var(--grey);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-top: 4px;
+    }
+
+    /* ── Crypto details panel ──────────────────────────────── */
+    .crypto-panel {
+      display: none;
+      background: rgba(10,15,30,0.8);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 8px;
+      padding: 28px;
+      margin-top: 16px;
+    }
+    .crypto-panel.open { display: block; }
+    .crypto-field {
+      background: rgba(201,168,76,0.05);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin-bottom: 14px;
+    }
+    .crypto-field-label {
+      font-size: 0.7rem;
+      color: var(--grey);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 8px;
+    }
+    .crypto-field-value {
+      font-family: monospace;
+      font-size: 0.9rem;
+      color: var(--gold);
+      word-break: break-all;
+      margin-bottom: 10px;
+    }
+
+    /* ── Responsive ────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .enquiry-grid { grid-template-columns: 1fr; }
+      .telegram-landing { grid-column: 1; }
+      .telegram-inner { flex-direction: column; }
+      .telegram-right { width: 100%; }
+      .enquiry-stats { gap: 0; }
+      .enquiry-stat:not(:last-child)::after { display: none; }
+      .enquiry-stat { border-bottom: 1px solid rgba(201,168,76,0.1); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAVBAR ══════════════════════════════════════════════ -->
+  <nav class="navbar scrolled">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Decode<span>FX</span>Group</a>
+      <ul class="nav-links">
+         <li><a href="index.html">Home</a></li>
+  <li><a href="index.html#benefits">Benefits</a></li>
+  <li><a href="index.html#services">Services</a></li>
+  <li><a href="index.html#pricing">Pricing</a></li>
+  <li><a href="about.html">About</a></li>
+  <li><a href="index.html#partners">Partners</a></li>
+  <li><a href="contact.html">FAQ</a></li>
+  <li><a href="enquiries.html">Enquiries</a></li>
+</ul>
+      <div class="nav-cta nav-auth-area">
+        <button class="btn btn-outline" style="padding:10px 22px" data-modal="login">Sign In</button>
+        <button class="btn btn-primary" style="padding:10px 22px" data-action="enroll">Enroll Now</button>
+      </div>
+      <button class="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ══ MAIN PAGE ═══════════════════════════════════════════ -->
+  <div class="enquiry-page">
+    <div class="enquiry-overlay-gold"></div>
+
+    <div class="enquiry-content">
+
+      <!-- Page header -->
+      <div class="enquiry-header reveal">
+        <span class="badge">⚡ We Respond Within 24 Hour</span>
+        <h1>Get In Touch &amp; <span class="gold">Make Payment</span></h1>
+        <p>Reach us directly on WhatsApp or Telegram, or proceed to payment below. Our team is available daily to answer your questions.</p>
+      </div>
+
+      <!-- Main grid -->
+      <div class="enquiry-grid">
+
+        <!-- ── LEFT — Enquiries Card ───────────────────────── -->
+        <div class="glass-card enquiry-card reveal reveal-delay-1">
+          <div class="enquiry-card-icon">💬</div>
+          <h2>Send an <span class="gold">Enquiry</span></h2>
+          <p>Have a question before enrolling? Our team is ready to answer anything from curriculum details to managed trading terms.</p>
+
+          <div class="contact-options">
+
+            <!-- WhatsApp -->
+            <a href="https://wa.me/2348173133453?text=Hello%20DecodeFXGroup%2C%20I%20have%20an%20enquiry%20about%20enrolling."
+               target="_blank" class="contact-option">
+              <span class="contact-option-icon"><img src="Images/whatsapp2.png" alt="whatsapp logo" height="40px" width="40px"></span>
+              <div class="contact-option-info">
+                <div class="label">WhatsApp — Fastest Reply</div>
+                <div class="value">+234 817 313 3453</div>
+              </div>
+              <span class="contact-option-arrow">→</span>
+            </a>
+
+            <!-- Telegram -->
+            <a href="https://t.me/decodefxgroup" target="_blank" class="contact-option">
+              <span class="contact-option-icon"><img src="Images/telegram2.png" alt="telegram logo" height="40px" width="40px"></span>
+              <div class="contact-option-info">
+                <div class="label">Telegram Channel</div>
+                <div class="value">@Nathanpips_bot</div>
+              </div>
+              <span class="contact-option-arrow">→</span>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://instagram.com/decodefxgroup" target="_blank" class="contact-option">
+              <span class="contact-option-icon"><img src="Images/instagram2.png" alt="instagram logo" height="40px" width="40px"></span>
+              <div class="contact-option-info">
+                <div class="label">Instagram</div>
+                <div class="value">@thenathanpips</div>
+              </div>
+              <span class="contact-option-arrow">→</span>
+            </a>
+
+            <!-- Email -->
+            <a href="mailto:support@decodefxgroup.com" class="contact-option">
+              <span class="contact-option-icon">✉️</span>
+              <div class="contact-option-info">
+                <div class="label">Email Support</div>
+                <div class="value">support@decodefxgroup.com</div>
+              </div>
+              <span class="contact-option-arrow">→</span>
+            </a>
+
+          </div>
+
+          <!-- Response time note -->
+          <div style="background:rgba(76,175,138,0.08);border:1px solid rgba(76,175,138,0.2);border-radius:6px;padding:14px 18px;font-size:0.82rem;color:var(--grey-light);display:flex;gap:10px;align-items:center">
+            <span style="color:#4caf8a;font-size:1rem">●</span>
+            Team is currently <strong style="color:#4caf8a">online</strong>  expect a reply within 24 hours on WhatsApp.
+          </div>
+        </div>
+
+        <!-- ── RIGHT — Payment Card ────────────────────────── -->
+        <div class="glass-card payment-card reveal reveal-delay-2">
+          <div class="enquiry-card-icon">💳</div>
+          <h2>Make <span class="gold">Payment</span></h2>
+          <p>Select your plan then choose your preferred payment method. After payment, send proof to our WhatsApp for instant activation.</p>
+
+          <!-- Plan selector -->
+          <div class="plan-pills">
+            <button class="plan-pill active" data-plan="enrollment" data-amount="300">
+              Enroll — $300
+            </button>
+            <button class="plan-pill" data-plan="standard" data-amount="50">
+              Standard — $50/mo
+            </button>
+            <button class="plan-pill" data-plan="vip" data-amount="150">
+              VIP — $150/mo
+            </button>
+          </div>
+
+          <!-- Selected plan display -->
+          <div id="selectedPlan" style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);border-radius:6px;padding:14px 18px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-size:0.75rem;color:var(--grey);text-transform:uppercase;letter-spacing:0.1em">Selected Plan</div>
+              <div id="planLabel" style="font-weight:700;color:var(--white);margin-top:4px">Academy Enrollment</div>
+            </div>
+            <div id="planPrice" style="font-family:var(--font-impact);font-size:2rem;color:var(--gold)">$300</div>
+          </div>
+
+          <!-- Payment methods -->
+          <div class="payment-options">
+
+           
+
+            <!-- Binance / Crypto -->
+            <button class="payment-option-btn" onclick="toggleCrypto()">
+              <span class="po-icon">₿</span>
+              <div class="po-info">
+                <div class="po-label">Pay with Crypto (USDT)</div>
+                <div class="po-sub">Binance Pay ID or USDT Wallet</div>
+              </div>
+              <span class="po-arrow" id="cryptoArrow">→</span>
+            </button>
+
+          </div>
+
+          <!-- Crypto details panel -->
+          <div class="crypto-panel" id="cryptoPanel">
+            <div style="font-size:0.78rem;color:var(--gold);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px">
+              Crypto Payment Details
+            </div>
+
+           
+
+            <div class="crypto-field">
+              <div class="crypto-field-label">USDT Wallet Address (ERC20 (Ethereum))</div>
+              <!-- Replace with your real wallet address -->
+              <div class="crypto-field-value" id="walletAddr">0x85d1ce7cdb52c0be209def7ef041c3f767e68c5</div>
+              <button class="btn btn-outline" style="padding:8px 18px;font-size:0.75rem"
+                data-copy="0x85d1ce7cdb52c0be209def7ef041c3f7f67e68c5">📋 Copy Address</button>
+            </div>
+
+            <div style="font-size:0.82rem;color:var(--grey-light);background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.1);border-radius:6px;padding:14px;margin-top:4px">
+              ⚠️ After sending crypto, forward your transaction ID to WhatsApp:
+              <a href="https://wa.me/2348173133453" target="_blank" style="color:var(--gold);font-weight:700">
+                +234 817 313 3453
+              </a>
+            </div>
+          </div>
+          <!-- Bank Transfer Details Panel -->
+<div class="crypto-panel" id="bankPanel">
+
+  <!-- Bank header -->
+  <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(201,168,76,0.1)">
+    <div style="width:52px;height:52px;background:linear-gradient(135deg,#e63946,#c1121f);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0">
+      🏦
+    </div>
+    <div>
+      <div style="font-weight:700;font-size:1rem;color:var(--white)">Access Bank</div>
+      <div style="font-size:0.78rem;color:var(--grey)">Direct bank transfer — Nigeria</div>
+    </div>
+  </div>
+
+  <!-- Account Number -->
+  <div class="crypto-field">
+    <div class="crypto-field-label">Account Number</div>
+    <div class="crypto-field-value" style="font-size:1.6rem;letter-spacing:0.2em;font-weight:700">
+      1224074947
+    </div>
+    <button class="btn btn-outline"
+            style="padding:8px 18px;font-size:0.75rem;margin-top:8px"
+            data-copy="1224074947">
+      📋 Copy Account Number
+    </button>
+  </div>
+
+  <!-- Account Name -->
+  <div class="crypto-field">
+    <div class="crypto-field-label">Account Name</div>
+    <div class="crypto-field-value" style="font-size:1rem;letter-spacing:0.05em;color:var(--white);font-family:var(--font-body);font-weight:600">
+      AYOBAMI PELUMI ODEJIDE
+    </div>
+  </div>
+
+  <!-- Bank Name -->
+  <div class="crypto-field">
+    <div class="crypto-field-label">Bank Name</div>
+    <div class="crypto-field-value" style="font-size:1rem;color:var(--white);font-family:var(--font-body);font-weight:600">
+      Access Bank PLC
+    </div>
+  </div>
+
+  <!-- Amount to pay based on selected plan -->
+  <div style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);border-radius:6px;padding:16px 20px;margin-bottom:16px">
+    <div style="font-size:0.72rem;color:var(--grey);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px">
+      Amount to Transfer
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+      <div id="bankAmountNgn" style="font-family:var(--font-impact);font-size:2rem;color:var(--gold)">
+        ₦480,000
+      </div>
+      <div id="bankAmountUsd" style="font-size:0.85rem;color:var(--grey-light)">
+        = $300 USD
+      </div>
+    </div>
+    <div style="font-size:0.75rem;color:var(--grey);margin-top:8px">
+      ⚠️ Exchange rate: $1 = ₦1,600 — confirm current rate before transferring
+    </div>
+  </div>
+
+  <!-- Transfer instructions -->
+  <div style="background:rgba(76,175,138,0.06);border:1px solid rgba(76,175,138,0.15);border-radius:6px;padding:16px 18px;margin-bottom:4px">
+    <div style="font-size:0.78rem;font-weight:700;color:#4caf8a;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px">
+      ✅ Transfer Instructions
+    </div>
+    <ol style="font-size:0.82rem;color:var(--grey-light);line-height:2;padding-left:18px">
+      <li>Open your banking app or visit any Access Bank branch</li>
+      <li>Transfer the exact NGN amount shown above</li>
+      <li>Use your <strong style="color:var(--white)">name + DecodeFXGroup</strong> as transfer narration</li>
+      <li>Screenshot your transfer receipt</li>
+      <li>Send receipt to WhatsApp for instant account activation</li>
+    </ol>
+  </div>
+
+  <!-- Send receipt WhatsApp button -->
+  <a href="https://wa.me/2348173133453?text=Hello%20DecodeFXGroup%2C%20I%20have%20made%20a%20bank%20transfer%20to%20Access%20Bank%20account%201224074947.%20Please%20find%20my%20receipt%20attached."
+     target="_blank"
+     class="btn btn-primary"
+     style="width:100%;justify-content:center;margin-top:16px;display:flex">
+    <img src="Images/whatsapp2.png" alt="whatsapp logo" height="40px" width="40px"> on WhatsApp →
+  </a>
+
+</div>
+
+          <!-- ✅ NEW — Direct Bank Transfer -->
+  <button class="payment-option-btn" onclick="toggleBank()">
+    <span class="po-icon">🏦</span>
+    <div class="po-info">
+      <div class="po-label">Direct Bank Transfer</div>
+      <div class="po-sub">Access Bank — Nigeria</div>
+    </div>
+    <span class="po-arrow" id="bankArrow">→</span>
+  </button>
+
+</div>
+
+          
+
+          <!-- After payment note -->
+          <a href="https://wa.me/2348173133453?text=Hello%20DecodeFXGroup%2C%20I%20just%20made%20a%20payment%20and%20want%20to%20confirm%20my%20enrolment."
+             target="_blank"
+             class="btn btn-primary"
+             style="width:100%;justify-content:center;margin-top:20px">
+            <img src="Images/whatsapp2.png" alt="whatsapp logo" height="40px" width="40px" >Confirm Payment on WhatsApp →
+          </a>
+
+        </div>
+
+        <!-- ── FULL WIDTH — Telegram Landing ───────────────── -->
+        <div class="glass-card telegram-landing reveal">
+          <div class="telegram-inner">
+
+            <div class="telegram-left">
+              <span class="tg-icon"><img src="Images/telegram2.png" alt="telegram logo" height="40px" width="40px"></span>
+              <h2>Join Our <span class="gold">Telegram Channel</span></h2>
+              <p>Get free daily market insights, signal previews, trading tips, and community updates, before you even enroll. See what our VIP members receive every single day.</p>
+              <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px">
+                <div style="display:flex;align-items:center;gap:8px;font-size:0.82rem;color:var(--grey-light)">
+                  <span style="color:var(--gold)">✦</span> Free signal previews
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;font-size:0.82rem;color:var(--grey-light)">
+                  <span style="color:var(--gold)">✦</span> Daily market analysis
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;font-size:0.82rem;color:var(--grey-light)">
+                  <span style="color:var(--gold)">✦</span> Trading education
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;font-size:0.82rem;color:var(--grey-light)">
+                  <span style="color:var(--gold)">✦</span> Community support
+                </div>
+              </div>
+            </div>
+
+            <div class="telegram-right">
+
+              <!-- Channel preview card -->
+              <div class="tg-preview">
+                <div class="tg-preview-icon"><img src="Images/telegram2.png" alt="telegram logo"></div>
+                <div class="tg-preview-info">
+                  <div class="tg-channel-name">Nathanpips_bot</div>
+                  <div class="tg-members">500+ members · Signals & Education</div>
+                </div>
+                <div class="tg-live-dot"></div>
+              </div>
+
+              <!-- Join Telegram button -->
+              <a href="https://t.me/Nathanpips_bot"
+                 target="_blank"
+                 class="btn-telegram">
+                <span class="btn-telegram-icon"><img src="Images/telegram2.png" alt="telegram logo" height="40px" width="40px" height="40px" width="40px"></span>
+                Join Telegram Channel — Free
+              </a>
+
+              <!-- WhatsApp alternative -->
+              <a href="https://wa.me/2348173133453?text=Hello%20DecodeFXGroup%2C%20I%20want%20to%20join%20your%20community."
+                 target="_blank"
+                 class="btn btn-outline"
+                 style="width:100%;justify-content:center">
+                <img src="Images/whatsapp2.png" alt="whatsapp logo" height="40px" width="40px"> Or Message on WhatsApp
+              </a>
+
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end grid -->
+
+      <!-- Stats bar -->
+      <div class="enquiry-stats reveal">
+        <div class="enquiry-stat">
+          <span class="stat-num">2000+</span>
+          <div class="stat-label">Active Students</div>
+        </div>
+        <div class="enquiry-stat">
+          <span class="stat-num">90%</span>
+          <div class="stat-label">Signal Accuracy</div>
+        </div>
+        <div class="enquiry-stat">
+          <span class="stat-num">&lt;24hrs</span>
+          <div class="stat-label">Response Time</div>
+        </div>
+        <div class="enquiry-stat">
+          <span class="stat-num">50/50</span>
+          <div class="stat-label">Profit Split</div>
+        </div>
+        <div class="enquiry-stat">
+          <span class="stat-num">3</span>
+          <div class="stat-label">Broker Partners</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ FOOTER ══════════════════════════════════════════════ -->
+  <footer style="background:rgba(10,15,30,0.98);border-top:1px solid rgba(201,168,76,0.1);padding:32px 24px;text-align:center;position:relative;z-index:2">
+    <p style="font-size:0.82rem;color:var(--grey)">
+      © 2026 DecodeFXGroup. Trading involves significant risk of loss.
+      &nbsp;|&nbsp;
+      <a href="index.html" style="color:var(--gold)">← Back to Home</a>
+    </p>
+  </footer>
+
+  <!-- ══ WHATSAPP FLOAT ══════════════════════════════════════ -->
+  <a href="https://wa.me/2348173133453" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+    <img src="Images/whatsapp2.png" alt="whatsapp logo" height="40px" width="40px">
+  </a>
+
+  <!-- ══ LOGIN MODAL ═════════════════════════════════════════ -->
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal">
+      <button class="modal-close">✕</button>
+      <h2>Welcome <span class="gold">Back</span></h2>
+      <p>Sign in to access your account.</p>
+      <form id="loginForm">
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" name="email" placeholder="trader@example.com" required />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" name="password" placeholder="••••••••" required />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px">Sign In</button>
+      </form>
+      <p class="form-switch">Don't have an account? <a href="#" data-switch-modal="registerModal">Create one →</a></p>
+    </div>
+  </div>
+
+  <!-- ══ REGISTER MODAL ══════════════════════════════════════ -->
+  <div class="modal-overlay" id="registerModal">
+    <div class="modal">
+      <button class="modal-close">✕</button>
+      <h2>Start Your <span class="gold">Journey</span></h2>
+      <p>Create your account and enrol today.</p>
+      <form id="registerForm">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" name="name" placeholder="Your full name" required />
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" name="email" placeholder="trader@example.com" required />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" name="password" placeholder="Min. 8 characters" required />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px">Create Account</button>
+      </form>
+      <p class="form-switch">Already enrolled? <a href="#" data-switch-modal="loginModal">Sign in →</a></p>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+  <script>
+    /* ── Plan pill selector ─────────────────────────────────── */
+    let selectedPlan = { plan: 'enrollment', amount: 300, label: 'Academy Enrollment' };
+
+    document.querySelectorAll('.plan-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.plan-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+
+        selectedPlan = {
+          plan:   pill.dataset.plan,
+          amount: pill.dataset.amount,
+          label:  pill.dataset.plan === 'enrollment' ? 'Academy Enrollment' :
+                  pill.dataset.plan === 'standard'   ? 'Standard Signals'   :
+                  'VIP Elite Signals'
+        };
+
+        document.getElementById('planLabel').textContent = selectedPlan.label;
+        document.getElementById('planPrice').textContent = '$' + selectedPlan.amount;
+      });
+    });
+
+    /* ── Paystack handler ───────────────────────────────────── */
+    function handlePaystackPayment() {
+      const user  = Auth.getUser();
+      const email = user ? user.email : prompt('Enter your email to continue:');
+      if (!email) return;
+
+      const usdToNgn   = 1600;
+      const amountKobo = parseInt(selectedPlan.amount) * usdToNgn * 100;
+      initPaystack(amountKobo, email, function(response) {
+        showToast('Payment successful! Send confirmation to WhatsApp.', 'success');
+        setTimeout(() => {
+          window.open('https://wa.me/2348173133453?text=Hello%2C%20I%20just%20paid%20for%20' + selectedPlan.label + '.%20Reference:%20' + response.reference, '_blank');
+        }, 1500);
+      });
+    }
+    window.handlePaystackPayment = handlePaystackPayment;
+
+    /* ── Crypto panel toggle ────────────────────────────────── */
+    function toggleCrypto() {
+      const panel = document.getElementById('cryptoPanel');
+      const arrow = document.getElementById('cryptoArrow');
+      const isOpen = panel.classList.contains('open');
+      panel.classList.toggle('open');
+      arrow.textContent = isOpen ? '→' : '↓';
+    }
+    window.toggleCrypto = toggleCrypto;
+    /* ── Bank panel toggle ──────────────────────────────────── */
+function toggleBank() {
+  const panel     = document.getElementById('bankPanel');
+  const arrow     = document.getElementById('bankArrow');
+  const cryptoP   = document.getElementById('cryptoPanel');
+  const cryptoA   = document.getElementById('cryptoArrow');
+  const isOpen    = panel.classList.contains('open');
+
+  // Close crypto panel if open
+  cryptoP.classList.remove('open');
+  cryptoA.textContent = '→';
+
+  // Toggle bank panel
+  panel.classList.toggle('open', !isOpen);
+  arrow.textContent = isOpen ? '→' : '↓';
+
+  // Update NGN amount based on selected plan
+  const rate    = 1600;
+  const usd     = parseInt(selectedPlan.amount);
+  const ngn     = (usd * rate).toLocaleString();
+  document.getElementById('bankAmountNgn').textContent = '₦' + ngn;
+  document.getElementById('bankAmountUsd').textContent = '= $' + usd + ' USD';
+
+  if (!isOpen) {
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+window.toggleBank = toggleBank;
+  </script>
+</body>
+</html>
