@@ -430,16 +430,52 @@ const Auth = {
     return new Date(sub.expiresAt) > new Date();
   },
   login(email, password){
-    // Demo login — in production, validate against backend
-    if(!email || !password) return false;
-    const name = email.split('@')[0].replace(/[._]/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
-    const user = { id: Date.now(), email, name, plan:'VIP Elite', enrolledAt: new Date().toISOString() };
-    const expiry = new Date(); expiry.setDate(expiry.getDate()+30);
-    const sub = { plan:'VIP Elite', startedAt: new Date().toISOString(), expiresAt: expiry.toISOString() };
-    localStorage.setItem('dfx_user', JSON.stringify(user));
-    localStorage.setItem('dfx_subscription', JSON.stringify(sub));
-    return true;
-  },
+   window.handleLogin = async () => {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pw    = document.getElementById('loginPassword').value;
+  const errEl = document.getElementById('loginError');
+
+  if (!email || !pw) {
+    errEl.textContent = 'Please fill in all fields.';
+    errEl.classList.add('show');
+    return;
+  }
+
+  try {
+    const res  = await fetch('https://your-api.render.com/api/auth/login', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ email, password: pw }),
+    });
+    const data = await res.json();
+
+    if (!data.success) {
+      errEl.textContent = data.message;
+      errEl.classList.add('show');
+      return;
+    }
+
+    // Store token and user
+    localStorage.setItem('dfx_token', data.token);
+    localStorage.setItem('dfx_user',  JSON.stringify(data.user));
+
+    // Check enrollment before showing dashboard
+    if (!data.user.isEnrolled) {
+      errEl.textContent = 'Your account exists but you have not enrolled yet. Please complete payment first.';
+      errEl.classList.add('show');
+      localStorage.removeItem('dfx_token');
+      localStorage.removeItem('dfx_user');
+      return;
+    }
+
+    hideAuthModal();
+    initDashboard();
+
+  } catch (err) {
+    errEl.textContent = 'Connection error. Please try again.';
+    errEl.classList.add('show');
+  }
+};
   register(name, email, password){
     if(!name||!email||!password) return false;
     const user = { id: Date.now(), email, name, plan:'Academy', enrolledAt: new Date().toISOString() };
@@ -534,9 +570,38 @@ window.showToast = function(msg){
 };
 
 // Init
-const existingUser = Auth.getUser();
-if(existingUser){ hideAuthModal(); initDashboard(); }
-else { showAuthModal(); }
+// On page load — check token AND enrollment
+(async () => {
+  const token = localStorage.getItem('dfx_token');
+
+  if (!token) {
+    showAuthModal();
+    return;
+  }
+
+  try {
+    const res  = await fetch('https://your-api.render.com/api/auth/me', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    const data = await res.json();
+
+    if (!data.success || !data.user.isEnrolled) {
+      // Token invalid or not enrolled — clear and show login
+      localStorage.removeItem('dfx_token');
+      localStorage.removeItem('dfx_user');
+      showAuthModal();
+      return;
+    }
+
+    // Valid enrolled user — store fresh user data and load page
+    localStorage.setItem('dfx_user', JSON.stringify(data.user));
+    hideAuthModal();
+    initDashboard(); // or initAcademy() on academy.html
+
+  } catch (err) {
+    showAuthModal();
+  }
+})();
 </script>
 </body>
 </html>

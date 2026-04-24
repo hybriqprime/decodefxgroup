@@ -111,7 +111,7 @@
     <!-- Telegram CTA -->
     <div class="tg-cta">
       <p>📡 <strong>Signals are delivered on Telegram.</strong> Make sure you've joined the channel to receive live signals alongside your course.</p>
-      <a href="https://t.me/decodefxgroup" class="btn-sm btn-sm-primary" target="_blank">Join Telegram Channel</a>
+      <a href="https://t.me/Nathanpips_bot" class="btn-sm btn-sm-primary" target="_blank">Join Telegram Channel</a>
     </div>
 
     <!-- Modules -->
@@ -180,19 +180,53 @@ const Auth = {
   logout(){ localStorage.removeItem('dfx_user'); localStorage.removeItem('dfx_subscription'); window.location.href='index.html'; }
 };
 
-function handleLogin(){
-  const email=document.getElementById('loginEmail').value;
-  const pw=document.getElementById('loginPassword').value;
-  if(!email||!pw){showToast('Please fill in all fields.');return;}
-  const name=email.split('@')[0].replace(/[._]/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
-  const user={id:Date.now(),email,name,plan:'Academy',enrolledAt:new Date().toISOString()};
-  const expiry=new Date();expiry.setDate(expiry.getDate()+30);
-  const sub={plan:'Academy',startedAt:new Date().toISOString(),expiresAt:expiry.toISOString()};
-  localStorage.setItem('dfx_user',JSON.stringify(user));
-  localStorage.setItem('dfx_subscription',JSON.stringify(sub));
-  document.getElementById('authModal').classList.add('hidden');
-  initPage();
-}
+
+ window.handleLogin = async () => {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pw    = document.getElementById('loginPassword').value;
+  const errEl = document.getElementById('loginError');
+
+  if (!email || !pw) {
+    errEl.textContent = 'Please fill in all fields.';
+    errEl.classList.add('show');
+    return;
+  }
+
+  try {
+    const res  = await fetch('https://your-api.render.com/api/auth/login', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ email, password: pw }),
+    });
+    const data = await res.json();
+
+    if (!data.success) {
+      errEl.textContent = data.message;
+      errEl.classList.add('show');
+      return;
+    }
+
+    // Store token and user
+    localStorage.setItem('dfx_token', data.token);
+    localStorage.setItem('dfx_user',  JSON.stringify(data.user));
+
+    // Check enrollment before showing dashboard
+    if (!data.user.isEnrolled) {
+      errEl.textContent = 'Your account exists but you have not enrolled yet. Please complete payment first.';
+      errEl.classList.add('show');
+      localStorage.removeItem('dfx_token');
+      localStorage.removeItem('dfx_user');
+      return;
+    }
+
+    hideAuthModal();
+    initDashboard();
+
+  } catch (err) {
+    errEl.textContent = 'Connection error. Please try again.';
+    errEl.classList.add('show');
+  }
+};
 function handleLogout(){ Auth.logout(); }
 function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('visible'); }
 function closeSidebar(){ document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('visible'); }
