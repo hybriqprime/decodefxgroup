@@ -19,7 +19,10 @@
     </div>
     <div id="loginView">
       <h2>Welcome Back</h2>
-      <p>Sign in to access your dashboard and signals.</p>
+     <p class="auth-switch">
+  Don't have an account?
+  <a href="#" onclick="event.preventDefault(); switchToRegister()">Create one</a>
+</p>
       <div class="auth-error" id="loginError">Invalid email or password.</div>
       <div class="auth-form-group">
         <label>Email Address</label>
@@ -35,13 +38,14 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Request Access via WhatsApp
       </a>
-     <p class="auth-switch">Don't have an account? 
-  <a onclick="switchToRegister()" style="cursor:pointer">Create one</a>
-</p>
+     Don't have an account? <a href="#" onclick="event.preventDefault(); switchToRegister()">Create one</a>
     </div>
     <div id="registerView" style="display:none">
       <h2>Create Account</h2>
-      <p>Register after completing your enrollment payment.</p>
+      <p class="auth-switch">
+  Already have an account?
+  <a href="#" onclick="event.preventDefault(); switchToLogin()">Sign in</a>
+</p>
       <div class="auth-error" id="registerError"></div>
       <div class="auth-form-group">
         <label>Full Name</label>
@@ -64,56 +68,87 @@
 <!-- ── SIDEBAR ── -->
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 <aside class="sidebar" id="sidebar">
+
+  <!-- Logo -->
   <div class="sidebar-logo">
     <div class="sidebar-logo-inner">
       <div class="sidebar-logo-mark">D</div>
       <span class="sidebar-logo-text">Decode<span>FX</span>Group</span>
     </div>
   </div>
+
+  <!-- User info -->
   <div class="sidebar-user">
     <div class="sidebar-avatar" id="sidebarAvatar">?</div>
     <div class="sidebar-user-name" id="sidebarName">Loading...</div>
-    <div class="sidebar-user-plan" id="sidebarPlan">VIP Elite</div>
+    <div class="sidebar-user-plan" id="sidebarPlan">—</div>
     <div class="sidebar-sub-status">
       <span class="sub-dot" id="subDot"></span>
       <span id="subStatusText">Checking...</span>
     </div>
   </div>
+
+  <!-- Navigation -->
   <nav class="sidebar-nav">
-    <div class="sidebar-section-label">Main</div>
+
+    <span class="sidebar-section-label">Main</span>
+
     <a class="sidebar-link active" href="dashboard.html">
-      <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+      <svg viewBox="0 0 24 24">
+        <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+      </svg>
       Dashboard
     </a>
+
     <a class="sidebar-link" href="academy.html">
-      <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+      <svg viewBox="0 0 24 24">
+        <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/>
+      </svg>
       Academy
-      <span class="badge-count">3</span>
     </a>
-    <a class="sidebar-link" href="#">
-      <svg viewBox="0 0 24 24"><path d="M13 2.05V4.05C17.39 4.59 20.5 8.58 19.96 12.97C19.5 16.61 16.64 19.5 13 19.93V21.93C18.5 21.38 22.5 16.5 21.95 11C21.5 6.25 17.73 2.5 13 2.05M11 2.06C9.05 2.25 7.19 3 5.67 4.26L7.1 5.74C8.22 4.84 9.57 4.26 11 4.06V2.06M4.26 5.67C3 7.19 2.25 9.04 2.05 11H4.05C4.24 9.58 4.8 8.23 5.69 7.1L4.26 5.67M2.06 13C2.26 14.96 3.03 16.81 4.27 18.33L5.69 16.9C4.81 15.77 4.24 14.42 4.06 13H2.06M7.1 18.37L5.67 19.74C7.18 21 9.04 21.79 11 22V20C9.58 19.82 8.23 19.25 7.1 18.37M12 7L8 10L12 13L16 10L12 7z"/></svg>
+
+    <a class="sidebar-link" href="https://t.me/decodefxgroup" target="_blank">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-1.97 9.282c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.939z"/>
+      </svg>
       Live Signals
     </a>
-    <div class="sidebar-section-label" style="margin-top:16px">Account</div>
+
+    <span class="sidebar-section-label" style="margin-top:8px">Account</span>
+
     <a class="sidebar-link" href="account.html">
-      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+      <svg viewBox="0 0 24 24">
+        <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+      </svg>
       Subscription
     </a>
+
     <a class="sidebar-link" href="contact.html">
-      <svg viewBox="0 0 24 24"><path d="M11.5 2C6.81 2 3 5.81 3 10.5S6.81 19 11.5 19h.5v3c4.86-2.34 8-7 8-11.5C20 5.81 16.19 2 11.5 2zm1 14.5h-2v-2h2v2zm0-4h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2h-2c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5z"/></svg>
+      <svg viewBox="0 0 24 24">
+        <path d="M11.5 2C6.81 2 3 5.81 3 10.5S6.81 19 11.5 19h.5v3c4.86-2.34 8-7 8-11.5C20 5.81 16.19 2 11.5 2zm1 14.5h-2v-2h2v2zm0-4h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2h-2c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5z"/>
+      </svg>
       Support
     </a>
+
     <a class="sidebar-link" href="index.html">
-      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      <svg viewBox="0 0 24 24">
+        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+      </svg>
       Back to Site
     </a>
+
   </nav>
+
+  <!-- Sign out -->
   <div class="sidebar-footer">
     <a onclick="handleLogout()">
-      <svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+      <svg viewBox="0 0 24 24">
+        <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+      </svg>
       Sign Out
     </a>
   </div>
+
 </aside>
 
 <!-- ── MAIN CONTENT ── -->
@@ -147,7 +182,7 @@
         <div class="sub-icon">⚡</div>
         <div>
           <h3 id="subCardPlan">VIP Elite Signals</h3>
-          <p id="subCardExpiry">Active · Expires 20 May 2025</p>
+          <p id="subCardExpiry">Active · Expires 20 May 2026</p>
         </div>
       </div>
       <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
@@ -177,7 +212,7 @@
           <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
           Win Rate
         </div>
-        <div class="stat-card-value">91<span style="font-size:22px;font-family:'DM Sans',sans-serif;font-weight:400;color:var(--text-muted)">%</span></div>
+        <div class="stat-card-value">90<span style="font-size:22px;font-family:'DM Sans',sans-serif;font-weight:400;color:var(--text-muted)">%</span></div>
         <div class="stat-card-sub">Last 30 days</div>
         <div class="stat-card-change up">↑ +3% vs prev month</div>
       </div>
@@ -226,7 +261,7 @@
           <div class="module-row">
             <div class="module-status in-progress">▶</div>
             <div style="flex:1">
-              <div class="module-name">Smart Money Concepts (SMC)</div>
+              <div class="module-name">Liquidity Flux Trading (LFT)</div>
               <div class="module-progress-mini"><div class="module-progress-mini-fill"></div></div>
             </div>
             <span class="module-badge active">45%</span>
@@ -421,141 +456,294 @@
 
 <div class="toast" id="toast"></div>
 
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// ─── SUPABASE CONFIG ─────────────────────────────
-const SUPABASE_URL  = '
-https://qzekcbnxgpcmiiouxknc.supabase.co'; // ← paste yours
-const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF6ZWtjYm54Z3BjbWlpb3V4a25jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwNTg0MzYsImV4cCI6MjA5MjYzNDQzNn0.4EEn2aPQInIhOoPoqERFT5vBNSApMUfS_Gvhyll9MQQ';             // ← paste yours
 
-// Load Supabase from CDN — add this BEFORE this script tag:
+// ════════════════════════════════════════════════════════════
+// DecodeFXGroup — Dashboard Script
+// Powered by Supabase Auth
+// ════════════════════════════════════════════════════════════
 
+// ─── SUPABASE CONFIG ─────────────────────────────────────────
+const SUPABASE_URL  = 'https://qzekcbnxgpcmiiouxknc.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF6ZWtjYm54Z3BjbWlpb3V4a25jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwNTg0MzYsImV4cCI6MjA5MjYzNDQzNn0.4EEn2aPQInIhOoPoqERFT5vBNSApMUfS_Gvhyll9MQQ';
 const { createClient } = supabase;
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
 
-// ─── SHOW / HIDE AUTH MODAL ──────────────────────
-function showAuthModal(view = 'login') {
-  document.getElementById('authModal').classList.remove('hidden');
-  if (view === 'register') {
-    document.getElementById('loginView').style.display = 'none';
-    document.getElementById('registerView').style.display = 'block';
-  } else {
-    document.getElementById('loginView').style.display = 'block';
-    document.getElementById('registerView').style.display = 'none';
-  }
-}
-function hideAuthModal() {
-  document.getElementById('authModal').classList.add('hidden');
+// ─── SWITCH VIEWS INSIDE MODAL ───────────────────────────────
+function switchToRegister() {
+  document.getElementById('loginView').style.display    = 'none';
+  document.getElementById('registerView').style.display = 'block';
+  const err = document.getElementById('loginError');
+  if (err) { err.textContent = ''; err.classList.remove('show'); }
 }
 
-function switchToRegister() {
-  document.getElementById('loginView').style.display = 'none';
-  document.getElementById('registerView').style.display = 'block';
-  document.getElementById('loginError').classList.remove('show');
-}
 function switchToLogin() {
   document.getElementById('registerView').style.display = 'none';
-  document.getElementById('loginView').style.display = 'block';
-  document.getElementById('registerError').classList.remove('show');
+  document.getElementById('loginView').style.display    = 'block';
+  const err = document.getElementById('registerError');
+  if (err) { err.textContent = ''; err.classList.remove('show'); }
 }
 
-// ─── SIGN IN ─────────────────────────────────────
+// ─── SHOW / HIDE AUTH MODAL ──────────────────────────────────
+function showAuthModal() {
+  // Hide entire dashboard content so nothing leaks behind modal
+  const main = document.querySelector('.main-content');
+  if (main) main.style.visibility = 'hidden';
+  const sidebar = document.getElementById('sidebar');
+  if (sidebar) sidebar.style.visibility = 'hidden';
+  // Show modal
+  const modal = document.getElementById('authModal');
+  if (modal) modal.classList.remove('hidden');
+}
+
+function hideAuthModal() {
+  // Reveal dashboard content
+  const main = document.querySelector('.main-content');
+  if (main) main.style.visibility = 'visible';
+  const sidebar = document.getElementById('sidebar');
+  if (sidebar) sidebar.style.visibility = 'visible';
+  // Hide modal
+  const modal = document.getElementById('authModal');
+  if (modal) modal.classList.add('hidden');
+}
+
+// ─── SIGN IN ─────────────────────────────────────────────────
 async function handleLogin() {
   const email = document.getElementById('loginEmail').value.trim();
   const pw    = document.getElementById('loginPassword').value;
   const errEl = document.getElementById('loginError');
-  errEl.classList.remove('show');
+
+  // Clear previous error
+  if (errEl) { errEl.textContent = ''; errEl.classList.remove('show'); }
 
   if (!email || !pw) {
-    errEl.textContent = 'Please fill in all fields.';
-    errEl.classList.add('show');
+    if (errEl) {
+      errEl.textContent = 'Please enter your email and password.';
+      errEl.classList.add('show');
+    }
     return;
   }
 
-  const { data, error } = await sb.auth.signInWithPassword({ email, password: pw });
+  // Show loading on button
+  const btn = document.querySelector('#loginView .auth-submit');
+  if (btn) { btn.textContent = 'Signing in…'; btn.disabled = true; }
+
+  const { data, error } = await sb.auth.signInWithPassword({
+    email,
+    password: pw,
+  });
+
+  if (btn) { btn.textContent = 'Sign In →'; btn.disabled = false; }
 
   if (error) {
-    errEl.textContent = error.message === 'Invalid login credentials'
-      ? 'Incorrect email or password.'
-      : error.message;
-    errEl.classList.add('show');
+    if (errEl) {
+      errEl.textContent = error.message === 'Invalid login credentials'
+        ? 'Incorrect email or password. Please try again.'
+        : error.message;
+      errEl.classList.add('show');
+    }
     return;
   }
 
-  // Check enrollment
-  const { data: profile } = await sb
+  // Fetch profile to check enrollment
+  const { data: profile, error: profErr } = await sb
     .from('profiles')
     .select('*')
     .eq('id', data.user.id)
     .single();
 
-  if (!profile?.is_enrolled) {
+  if (profErr || !profile) {
     await sb.auth.signOut();
-    errEl.textContent = 'Your account is not yet enrolled. Please complete your payment first.';
-    errEl.classList.add('show');
-    // Show enroll button
-    errEl.innerHTML += '<br><br><a href="enquiries.html" style="color:var(--gold);font-weight:600;">Complete Enrollment →</a>';
+    if (errEl) {
+      errEl.textContent = 'Account profile not found. Please contact support on WhatsApp.';
+      errEl.classList.add('show');
+    }
     return;
   }
 
+  if (!profile.is_enrolled) {
+    await sb.auth.signOut();
+    if (errEl) {
+      errEl.innerHTML = `
+        Your account exists but you have not enrolled yet.<br><br>
+        <a href="enquiries.html"
+           style="color:var(--gold);font-weight:600;text-decoration:none">
+          Complete Enrollment →
+        </a>
+      `;
+      errEl.classList.add('show');
+    }
+    return;
+  }
+
+  // All good — load dashboard
   hideAuthModal();
   loadDashboard(data.user, profile);
 }
 
-// ─── REGISTER ────────────────────────────────────
+// ─── REGISTER ────────────────────────────────────────────────
 async function handleRegister() {
   const name  = document.getElementById('regName').value.trim();
   const email = document.getElementById('regEmail').value.trim();
   const pw    = document.getElementById('regPassword').value;
   const errEl = document.getElementById('registerError');
-  errEl.classList.remove('show');
+
+  // Clear previous error
+  if (errEl) {
+    errEl.textContent = '';
+    errEl.classList.remove('show');
+    errEl.removeAttribute('style');
+  }
 
   if (!name || !email || !pw) {
-    errEl.textContent = 'Please fill in all fields.';
-    errEl.classList.add('show');
+    if (errEl) {
+      errEl.textContent = 'Please fill in all fields.';
+      errEl.classList.add('show');
+    }
     return;
   }
+
   if (pw.length < 8) {
-    errEl.textContent = 'Password must be at least 8 characters.';
-    errEl.classList.add('show');
+    if (errEl) {
+      errEl.textContent = 'Password must be at least 8 characters.';
+      errEl.classList.add('show');
+    }
     return;
   }
+
+  // Show loading on button
+  const btn = document.querySelector('#registerView .auth-submit');
+  if (btn) { btn.textContent = 'Creating account…'; btn.disabled = true; }
 
   const { data, error } = await sb.auth.signUp({
     email,
     password: pw,
-    options: { data: { name } }
+    options: { data: { name } },
   });
 
+  if (btn) { btn.textContent = 'Create Account →'; btn.disabled = false; }
+
   if (error) {
-    errEl.textContent = error.message;
-    errEl.classList.add('show');
+    if (errEl) {
+      errEl.textContent = error.message.includes('already registered')
+        ? 'An account with this email already exists. Please sign in instead.'
+        : error.message;
+      errEl.classList.add('show');
+    }
     return;
   }
 
-  // Account created — but not enrolled yet
-  errEl.style.cssText = 'display:block;background:rgba(76,175,138,0.08);border:1px solid rgba(76,175,138,0.3);color:#4caf8a;border-radius:4px;padding:10px 14px;font-size:13px;margin-bottom:14px';
-  errEl.textContent = '✅ Account created! You must complete enrollment payment before accessing the dashboard.';
+  // Account created — not enrolled yet, send to payment page
+  if (errEl) {
+    errEl.style.cssText = `
+      display: block;
+      background: rgba(76,175,138,0.08);
+      border: 1px solid rgba(76,175,138,0.3);
+      color: #4caf8a;
+      border-radius: 4px;
+      padding: 12px 14px;
+      font-size: 13px;
+      margin-bottom: 14px;
+      line-height: 1.6;
+    `;
+    errEl.textContent =
+      '✅ Account created successfully! You need to complete your enrollment payment to access the dashboard. Redirecting you now…';
+    errEl.classList.add('show');
+  }
 
   setTimeout(() => {
     window.location.href = 'enquiries.html';
-  }, 2500);
+  }, 3000);
 }
 
-// ─── LOGOUT ──────────────────────────────────────
+// ─── LOGOUT ──────────────────────────────────────────────────
 async function handleLogout() {
   await sb.auth.signOut();
   window.location.href = 'index.html';
 }
 
-// ─── LOAD DASHBOARD DATA ─────────────────────────
-async function loadDashboard(user, profile) {
-  // Sidebar
-  const initials = profile.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
-  document.getElementById('sidebarAvatar').textContent = initials;
-  document.getElementById('sidebarName').textContent   = profile.name;
+// ─── SIDEBAR TOGGLE (mobile) ─────────────────────────────────
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  const ov = document.getElementById('sidebarOverlay');
+  if (ov) ov.classList.toggle('visible');
+}
 
-  // Get active subscription
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  const ov = document.getElementById('sidebarOverlay');
+  if (ov) ov.classList.remove('visible');
+}
+
+// ─── TOAST NOTIFICATION ──────────────────────────────────────
+function showToast(msg) {
+  let t = document.getElementById('toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'toast';
+    t.className = 'toast';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// ─── FORMAT DATE ─────────────────────────────────────────────
+function formatDate(dateStr) {
+  if (!dateStr) return 'Lifetime';
+  return new Date(dateStr).toLocaleDateString('en-GB', {
+    day: 'numeric', month: 'long', year: 'numeric',
+  });
+}
+
+// ─── GET PLAN LABEL ──────────────────────────────────────────
+function getPlanLabel(plan) {
+  const labels = {
+    academy:  'Academy Enrollment',
+    standard: 'Standard Signals',
+    vip:      'VIP Elite Signals',
+  };
+  return labels[plan] || plan || 'Academy';
+}
+
+// ─── LOAD DASHBOARD ──────────────────────────────────────────
+async function loadDashboard(user, profile) {
+
+  // ── Sidebar user info ─────────────────────────────────────
+  const initials = profile.name
+    .split(' ')
+    .map(n => n[0])
+    .join('')
+    .toUpperCase()
+    .slice(0, 2);
+
+  const avatarEl = document.getElementById('sidebarAvatar');
+  const nameEl   = document.getElementById('sidebarName');
+  const planEl   = document.getElementById('sidebarPlan');
+  const dotEl    = document.getElementById('subDot');
+  const statusEl = document.getElementById('subStatusText');
+
+  if (avatarEl) avatarEl.textContent = initials;
+  if (nameEl)   nameEl.textContent   = profile.name;
+
+  // ── Topbar date ───────────────────────────────────────────
+  const dateEl = document.getElementById('topbarDate');
+  if (dateEl) {
+    dateEl.textContent = new Date().toLocaleDateString('en-GB', {
+      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+    });
+  }
+
+  // ── Greeting ──────────────────────────────────────────────
+  const greetEl = document.getElementById('greetName');
+  if (greetEl) greetEl.textContent = profile.name.split(' ')[0];
+
+  const greetSubEl = document.getElementById('greetSub');
+  if (greetSubEl) greetSubEl.textContent = "Here's your trading overview for today.";
+
+  // ── Fetch subscription from Supabase ─────────────────────
   const { data: sub } = await sb
     .from('subscriptions')
     .select('*')
@@ -567,97 +755,115 @@ async function loadDashboard(user, profile) {
 
   const now      = new Date();
   const isActive = sub && (!sub.expires_at || new Date(sub.expires_at) > now);
-  const planLabel = sub ? sub.plan : 'No active plan';
+  const planLabel = getPlanLabel(sub?.plan || profile.plan);
 
-  document.getElementById('sidebarPlan').textContent = planLabel;
+  // ── Sidebar plan + status dot ────────────────────────────
+  if (planEl)   planEl.textContent   = planLabel;
+  if (dotEl)    dotEl.className      = 'sub-dot' + (isActive ? '' : ' inactive');
+  if (statusEl) statusEl.textContent = isActive
+    ? 'Subscription active'
+    : 'Subscription expired';
 
-  const dot    = document.getElementById('subDot');
-  const status = document.getElementById('subStatusText');
-  dot.className    = 'sub-dot' + (isActive ? '' : ' inactive');
-  status.textContent = isActive ? 'Subscription active' : 'Subscription expired';
+  // ── Subscription card ────────────────────────────────────
+  const subCardPlan   = document.getElementById('subCardPlan');
+  const subCardExpiry = document.getElementById('subCardExpiry');
+  const subBadge      = document.getElementById('subBadge');
+  const subCardActions = document.querySelector('.sub-card-actions');
 
-  // Greeting
-  const firstName = profile.name.split(' ')[0];
-  document.getElementById('greetName').textContent = firstName;
+  if (subCardPlan) subCardPlan.textContent = planLabel;
 
-  // Topbar date
-  document.getElementById('topbarDate').textContent =
-    now.toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+  if (sub) {
+    const expFmt = sub.expires_at
+      ? formatDate(sub.expires_at)
+      : 'Lifetime';
 
-  // Sub card
-  document.getElementById('subCardPlan').textContent = planLabel;
-
-  if (sub && sub.expires_at) {
-    const exp    = new Date(sub.expires_at);
-    const expFmt = exp.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
-    document.getElementById('subCardExpiry').textContent = isActive
-      ? `Active · Expires ${expFmt}`
-      : `Expired ${expFmt}`;
-  } else if (sub && !sub.expires_at) {
-    document.getElementById('subCardExpiry').textContent = 'Active · Lifetime access';
+    if (subCardExpiry) {
+      subCardExpiry.textContent = isActive
+        ? `Active · Expires ${expFmt}`
+        : `Expired ${expFmt} — Please renew`;
+    }
   } else {
-    document.getElementById('subCardExpiry').textContent = 'No active subscription';
+    if (subCardExpiry) subCardExpiry.textContent = 'No active subscription found';
   }
 
-  if (!isActive) {
-    const badge = document.getElementById('subBadge');
-    badge.className = 'sub-expired-badge';
-    badge.innerHTML = '<span class="sub-badge-dot"></span>Expired';
+  if (subBadge) {
+    if (isActive) {
+      subBadge.className = 'sub-active-badge';
+      subBadge.innerHTML = '<span class="sub-badge-dot"></span>Active';
+    } else {
+      subBadge.className = 'sub-expired-badge';
+      subBadge.innerHTML = '<span class="sub-badge-dot"></span>Expired';
+      // Show renewal toast
+      showToast('⚠️ Your subscription has expired. Please renew to continue.');
+    }
   }
 
-  // Hide upgrade card if already VIP
-  if (sub && sub.plan === 'vip') {
-    const card = document.getElementById('upgradeCard');
-    if (card) card.style.display = 'none';
+  // ── Hide VIP upgrade card if already on VIP ───────────────
+  const upgradeCard = document.getElementById('upgradeCard');
+  if (upgradeCard && sub?.plan === 'vip') {
+    upgradeCard.style.display = 'none';
   }
 }
 
-// ─── SIDEBAR TOGGLE ──────────────────────────────
-function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('open');
-  document.getElementById('sidebarOverlay').classList.toggle('visible');
-}
-function closeSidebar() {
-  document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('sidebarOverlay').classList.remove('visible');
-}
-
-// ─── TOAST ───────────────────────────────────────
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
-}
-
-// ─── BOOT ────────────────────────────────────────
+// ════════════════════════════════════════════════════════════
+// BOOT — This runs first when the page loads
+// Hides all content immediately, then checks auth
+// ════════════════════════════════════════════════════════════
 (async () => {
+
+  // Immediately hide dashboard content before auth check
+  // This prevents the dashboard from flashing visible to non-logged-in users
+  const main    = document.querySelector('.main-content');
+  const sidebar = document.getElementById('sidebar');
+  if (main)    main.style.visibility    = 'hidden';
+  if (sidebar) sidebar.style.visibility = 'hidden';
+
+  // Check if user already has an active Supabase session
   const { data: { session } } = await sb.auth.getSession();
 
   if (!session) {
-    showAuthModal('login');
+    // No session — show login modal
+    showAuthModal();
     return;
   }
 
-  const { data: profile } = await sb
+  // Session found — fetch their profile
+  const { data: profile, error } = await sb
     .from('profiles')
     .select('*')
     .eq('id', session.user.id)
     .single();
 
-  if (!profile?.is_enrolled) {
+  if (error || !profile) {
+    // Profile missing — sign out and show login
     await sb.auth.signOut();
-    showAuthModal('login');
-    document.getElementById('loginError').textContent =
-      'Please complete your enrollment payment before accessing the dashboard.';
-    document.getElementById('loginError').classList.add('show');
+    showAuthModal();
     return;
   }
 
+  if (!profile.is_enrolled) {
+    // Has account but not enrolled — sign out and redirect
+    await sb.auth.signOut();
+    showAuthModal();
+    const errEl = document.getElementById('loginError');
+    if (errEl) {
+      errEl.innerHTML = `
+        Please complete your enrollment payment before accessing the dashboard.<br><br>
+        <a href="enquiries.html"
+           style="color:var(--gold);font-weight:600;text-decoration:none">
+          Complete Enrollment →
+        </a>
+      `;
+      errEl.classList.add('show');
+    }
+    return;
+  }
+
+  // Valid enrolled user — reveal page and load data
   hideAuthModal();
-  loadDashboard(session.user, profile);
+  await loadDashboard(session.user, profile);
+
 })();
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </body>
 </html>

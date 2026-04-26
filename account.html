@@ -128,107 +128,132 @@
         <button class="btn-sm btn-sm-danger" onclick="confirmCancel()">Cancel Subscription</button>
       </div>
     </div>
+<!-- ══ RENEW YOUR PLAN ══ -->
+<div class="section-hdr" style="margin-top:8px">
+  <h3>Renew Your Plan</h3>
+  <div class="sep"></div>
+</div>
 
-    <!-- Payment methods -->
-    <div class="section-hdr">
-      <h3>Renew Your Plan</h3>
-      <div class="sep"></div>
-    </div>
-    <div class="payment-cards">
-      <div class="pay-card selected" onclick="selectPayMethod(this,'paystack')">
-        <div class="pay-icon-lg">💳</div>
-        <h4>Paystack</h4>
-        <p>Card, USSD, or bank transfer in Naira. Instant activation.</p>
-      </div>
-      <div class="pay-card" onclick="selectPayMethod(this,'crypto')">
-        <div class="pay-icon-lg">₿</div>
-        <h4>USDT (Crypto)</h4>
-        <p>TRC20 wallet or Binance Pay. Send proof to WhatsApp.</p>
-      </div>
-      <div class="pay-card" onclick="selectPayMethod(this,'bank')">
-        <div class="pay-icon-lg">🏦</div>
-        <h4>Access Bank</h4>
-        <p>Direct NGN bank transfer. Send proof to WhatsApp.</p>
-      </div>
-    </div>
+<div class="payment-cards" style="grid-template-columns:repeat(2,1fr)">
+  <div class="pay-card selected" onclick="selectPayMethod(this,'crypto')">
+    <div class="pay-icon-lg">₿</div>
+    <h4>USDT (Crypto)</h4>
+    <p>ERC20 wallet . Send payment proof to WhatsApp for activation.</p>
+  </div>
+  <div class="pay-card" onclick="selectPayMethod(this,'bank')">
+    <div class="pay-icon-lg">🏦</div>
+    <h4>Access Bank Transfer</h4>
+    <p>Direct NGN bank transfer. Send receipt to WhatsApp for activation.</p>
+  </div>
+</div>
 
-    <!-- Paystack panel -->
-    <div class="detail-panel" id="paystackPanel">
-      <h4>Pay via Paystack</h4>
-      <p>Secure card, USSD, and bank transfer. Rate: ₦1,600 / $1 USD</p>
-      <div class="detail-row">
-        <span class="lbl">Standard Signals</span>
-        <button class="btn-sm btn-sm-primary" onclick="paystackPay(50)">Pay $50 (₦80,000)</button>
-      </div>
-      <div class="detail-row">
-        <span class="lbl">VIP Elite Signals</span>
-        <button class="btn-sm btn-sm-primary" onclick="paystackPay(150)">Pay $150 (₦240,000)</button>
-      </div>
-      <div class="detail-row">
-        <span class="lbl">Academy Enrollment</span>
-        <button class="btn-sm btn-sm-primary" onclick="paystackPay(300)">Pay $300 (₦480,000)</button>
-      </div>
-    </div>
+<!-- Crypto Panel — shown by default -->
+<div class="detail-panel" id="cryptoPanel" style="display:block">
+  <h4>Pay with USDT (Crypto)</h4>
+  <p>Send the exact USDT amount for your plan, then send proof to WhatsApp.</p>
 
-    <!-- Crypto panel (hidden by default) -->
-    <div class="detail-panel" id="cryptoPanel" style="display:none">
-      <h4>Pay with USDT (Crypto)</h4>
-      <p>Send the exact USDT amount to one of the addresses below, then confirm via WhatsApp.</p>
-      <div class="detail-row">
-        <span class="lbl">Network</span>
-        <span class="val">TRON (TRC20)</span>
-      </div>
-      <div class="detail-row">
-        <span class="lbl">USDT Wallet (TRC20)</span>
-        <div style="display:flex;align-items:center;gap:8px">
-          <span class="val" style="font-size:12px;max-width:220px;word-break:break-all"><!-- Add your TRC20 wallet address here --><em style="color:var(--text-muted);font-style:normal">Add wallet in HTML</em></span>
-          <button class="copy-btn" data-copy="YOUR_TRC20_WALLET_HERE">Copy</button>
-        </div>
-      </div>
-      <div class="detail-row">
-        <span class="lbl">Binance Pay ID</span>
-        <div style="display:flex;align-items:center;gap:8px">
-          <span class="val"><!-- Add Binance Pay ID --><em style="color:var(--text-muted);font-style:normal">Add Pay ID</em></span>
-          <button class="copy-btn" data-copy="YOUR_BINANCE_PAY_ID">Copy</button>
-        </div>
-      </div>
-      <div class="note">After sending, forward your transaction screenshot to WhatsApp: <strong>+234 817 313 3453</strong> for activation within 1 hour.</div>
-      <div style="margin-top:14px">
-        <a href="https://wa.me/2348173133453?text=I%20just%20sent%20USDT%20for%20my%20DecodeFXGroup%20subscription.%20Please%20activate%20my%20account." class="btn-sm btn-sm-primary" target="_blank">Send Payment Proof on WhatsApp</a>
-      </div>
-    </div>
+  <div class="detail-row">
+    <span class="lbl">Network</span>
+    <span class="val">ETHEREUM (ERC20)</span>
+  </div>
 
-    <!-- Bank panel (hidden by default) -->
-    <div class="detail-panel" id="bankPanel" style="display:none">
-      <h4>Access Bank Transfer</h4>
-      <p>Transfer the exact Naira equivalent to the account below, then confirm via WhatsApp.</p>
-      <div class="detail-row">
-        <span class="lbl">Account Name</span>
-        <span class="val">AYOBAMI PELUMI ODEJIDE</span>
-      </div>
-      <div class="detail-row">
-        <span class="lbl">Account Number</span>
-        <div style="display:flex;align-items:center;gap:8px">
-          <span class="val">1224074947</span>
-          <button class="copy-btn" data-copy="1224074947">Copy</button>
-        </div>
-      </div>
-      <div class="detail-row">
-        <span class="lbl">Bank</span>
-        <span class="val">Access Bank PLC</span>
-      </div>
-      <div class="detail-row">
-        <span class="lbl">Reference</span>
-        <div style="display:flex;align-items:center;gap:8px">
-          <span class="val" id="payRef">DFX-<span id="refCode">000000</span></span>
-          <button class="copy-btn" data-copy="" id="copyRef">Copy</button>
-        </div>
-      </div>
-      <div class="note">Use your <strong>email address</strong> or the reference above as your transfer narration. After transferring, send your receipt to WhatsApp.</div>
-      <div style="margin-top:14px">
-        <a href="https://wa.me/2348173133453?text=I%20just%20made%20an%20Access%20Bank%20transfer%20for%20my%20DecodeFXGroup%20subscription.%20Please%20activate%20my%20account." class="btn-sm btn-sm-primary" target="_blank">Confirm Transfer on WhatsApp</a>
-      </div>
+  <div class="detail-row">
+    <span class="lbl">USDT Wallet Address</span>
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+      <!-- ↓ 0x85d1ce7cdb52c0be209def7ef041c3f7f67e68c5 -->
+      <span class="val" id="usdtWallet" style="font-size:12px;word-break:break-all">
+        0x85d1ce7cdb52c0be209def7ef041c3f7f67e68c5
+      </span>
+      <button class="copy-btn"
+        onclick="copyText(document.getElementById('usdtWallet').textContent.trim(), 'Wallet address')">
+        Copy
+      </button>
     </div>
+  </div>
+
+  
+  <div class="detail-row">
+    <span class="lbl">Amount — Standard</span>
+    <span class="val">$50 USDT</span>
+  </div>
+  <div class="detail-row">
+    <span class="lbl">Amount — VIP Elite</span>
+    <span class="val">$150 USDT</span>
+  </div>
+  <div class="detail-row">
+    <span class="lbl">Amount — Academy</span>
+    <span class="val">$300 USDT</span>
+  </div>
+
+  <div class="note">
+    After sending, screenshot your transaction and send it to WhatsApp:
+    <strong>+234 817 313 3453</strong>. Your account will be activated within 1 hour.
+  </div>
+
+  <div style="margin-top:16px">
+    <a href="https://wa.me/2348173133453?text=Hello%20DecodeFXGroup%2C%20I%20just%20sent%20USDT%20for%20my%20subscription.%20Please%20activate%20my%20account."
+       class="btn btn-primary"
+       style="width:100%;justify-content:center"
+       target="_blank">
+      <img src="Images/whatsapp2.png" alt="whatsapp logo" height="40px" width="40px"> Payment Proof on WhatsApp
+    </a>
+  </div>
+</div>
+
+<!-- Bank Panel — hidden by default -->
+<div class="detail-panel" id="bankPanel" style="display:none">
+  <h4>Access Bank Transfer</h4>
+  <p>Transfer the exact Naira amount for your plan, then confirm via WhatsApp.</p>
+
+  <div class="detail-row">
+    <span class="lbl">Account Name</span>
+    <span class="val">AYOBAMI PELUMI ODEJIDE</span>
+  </div>
+
+  <div class="detail-row">
+    <span class="lbl">Account Number</span>
+    <div style="display:flex;align-items:center;gap:8px">
+      <span class="val">1224074947</span>
+      <button class="copy-btn" onclick="copyText('1224074947', 'Account number')">Copy</button>
+    </div>
+  </div>
+
+  <div class="detail-row">
+    <span class="lbl">Bank</span>
+    <span class="val">Access Bank PLC</span>
+  </div>
+
+  <div class="detail-row">
+    <span class="lbl">Reference</span>
+    <div style="display:flex;align-items:center;gap:8px">
+      <span class="val">DFX-<span id="refCode">------</span></span>
+      <button class="copy-btn"
+        onclick="copyText('DFX-' + document.getElementById('refCode').textContent.trim(), 'Reference')">
+        Copy
+      </button>
+    </div>
+  </div>
+
+  <div class="note">
+    Use your <strong>email address</strong> or the reference above as your transfer narration.
+    After transferring, send your receipt to WhatsApp for activation.
+  </div>
+
+  <div style="margin-top:16px">
+    <a href="https://wa.me/2348173133453?text=Hello%20DecodeFXGroup%2C%20I%20just%20made%20an%20Access%20Bank%20transfer%20for%20my%20subscription.%20Please%20activate%20my%20account."
+       class="btn btn-primary"
+       style="width:100%;justify-content:center"
+       target="_blank">
+      <img src="Images/whatsapp2.png" alt="whatsapp logo" height="40px" width="40px"> Confirm Transfer on WhatsApp
+    </a>
+  </div>
+</div>
+
+    
+
+    
+
+        
 
     <!-- Plan comparison -->
     <div class="section-hdr" style="margin-top:8px">
@@ -247,7 +272,7 @@
           <li>Certificate of completion</li>
           <li>Private community access</li>
         </ul>
-        <button class="btn-sm btn-sm-primary" onclick="paystackPay(300)" style="width:100%;justify-content:center">Enroll — $300</button>
+        <button class="btn-sm btn-sm-primary"  style="width:100%;justify-content:center">Enroll — $300</button>
       </div>
       <div class="plan-tile">
         <h4>Standard Signals</h4>
@@ -283,114 +308,255 @@
 
 <div class="toast" id="toast"></div>
 
-<script src="https://js.paystack.co/v1/inline.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-const Auth = {
-  getUser(){ try{ return JSON.parse(localStorage.getItem('dfx_user')); }catch{ return null; } },
-  getSub(){ try{ return JSON.parse(localStorage.getItem('dfx_subscription')); }catch{ return null; } },
-  isSubscribed(){ const sub=this.getSub(); return sub && new Date(sub.expiresAt)>new Date(); },
-  logout(){ localStorage.removeItem('dfx_user'); localStorage.removeItem('dfx_subscription'); window.location.href='index.html'; }
-};
 
-function handleLogin(){
-  const email=document.getElementById('loginEmail').value;
-  const pw=document.getElementById('loginPassword').value;
-  if(!email||!pw){showToast('Please fill in all fields.');return;}
-  const name=email.split('@')[0].replace(/[._]/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
-  const user={id:Date.now(),email,name,plan:'VIP Elite',enrolledAt:new Date().toISOString()};
-  const expiry=new Date();expiry.setDate(expiry.getDate()+30);
-  const sub={plan:'VIP Elite',startedAt:new Date().toISOString(),expiresAt:expiry.toISOString()};
-  localStorage.setItem('dfx_user',JSON.stringify(user));
-  localStorage.setItem('dfx_subscription',JSON.stringify(sub));
-  document.getElementById('authModal').classList.add('hidden');
-  initPage();
-}
-function handleLogout(){ Auth.logout(); }
-function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('visible'); }
-function closeSidebar(){ document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('visible'); }
+// ─── SUPABASE CONFIG ─────────────────────────────────────────
+const SUPABASE_URL  = 'https://qzekcbnxgpcmiiouxknc.supabase.co';  // ← your project URL
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF6ZWtjYm54Z3BjbWlpb3V4a25jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwNTg0MzYsImV4cCI6MjA5MjYzNDQzNn0.4EEn2aPQInIhOoPoqERFT5vBNSApMUfS_Gvhyll9MQQ';              // ← your anon key
+const { createClient } = supabase;
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
 
-function selectPayMethod(card, method){
-  document.querySelectorAll('.pay-card').forEach(c=>c.classList.remove('selected'));
-  card.classList.add('selected');
-  document.getElementById('paystackPanel').style.display = method==='paystack' ? 'block' : 'none';
-  document.getElementById('cryptoPanel').style.display = method==='crypto' ? 'block' : 'none';
-  document.getElementById('bankPanel').style.display = method==='bank' ? 'block' : 'none';
+// ─── TOAST ───────────────────────────────────────────────────
+function showToast(msg) {
+  let t = document.getElementById('toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'toast';
+    t.className = 'toast';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
 }
 
-function paystackPay(amount){
-  const user = Auth.getUser();
-  const email = user ? user.email : prompt('Enter your email:');
-  if(!email) return;
-  try{
-    const handler = PaystackPop.setup({
-      key:'pk_live_YOUR_PAYSTACK_PUBLIC_KEY',
-      email,
-      amount: amount * 1600 * 100,
-      currency:'NGN',
-      ref:'DFX-'+Date.now(),
-      onClose:()=>showToast('Payment cancelled.'),
-      callback:(res)=>{
-        showToast('Payment successful! Redirecting to WhatsApp...');
-        const msg=encodeURIComponent(`Payment successful! Reference: ${res.reference}. Please activate my DecodeFXGroup subscription.`);
-        setTimeout(()=>window.open(`https://wa.me/2348173133453?text=${msg}`,'_blank'),1500);
-      }
-    });
-    handler.openIframe();
-  } catch(e){ showToast('Paystack not loaded. Please try another payment method.'); }
+// ─── SIDEBAR TOGGLE ──────────────────────────────────────────
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  const ov = document.getElementById('sidebarOverlay');
+  if (ov) ov.classList.toggle('visible');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  const ov = document.getElementById('sidebarOverlay');
+  if (ov) ov.classList.remove('visible');
 }
 
-function confirmCancel(){
-  const msg = encodeURIComponent('I would like to cancel my DecodeFXGroup subscription. Please process my cancellation.');
+// ─── SIGN IN ─────────────────────────────────────────────────
+async function handleLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pw    = document.getElementById('loginPassword').value;
+
+  if (!email || !pw) {
+    showToast('Please fill in your email and password.');
+    return;
+  }
+
+  const btn = document.querySelector('#authModal .auth-submit');
+  if (btn) { btn.textContent = 'Signing in…'; btn.disabled = true; }
+
+  const { data, error } = await sb.auth.signInWithPassword({ email, password: pw });
+
+  if (btn) { btn.textContent = 'Sign In →'; btn.disabled = false; }
+
+  if (error) {
+    showToast(
+      error.message === 'Invalid login credentials'
+        ? 'Incorrect email or password.'
+        : error.message
+    );
+    return;
+  }
+
+  const { data: profile } = await sb
+    .from('profiles')
+    .select('*')
+    .eq('id', data.user.id)
+    .single();
+
+  if (!profile?.is_enrolled) {
+    await sb.auth.signOut();
+    showToast('Please complete your enrollment payment before accessing your account.');
+    setTimeout(() => window.location.href = 'enquiries.html', 2500);
+    return;
+  }
+
+  const modal = document.getElementById('authModal');
+  if (modal) modal.classList.add('hidden');
+
+  loadAccountPage(data.user, profile);
+}
+
+// ─── LOGOUT ──────────────────────────────────────────────────
+async function handleLogout() {
+  await sb.auth.signOut();
+  window.location.href = 'index.html';
+}
+
+// ─── CANCEL SUBSCRIPTION ─────────────────────────────────────
+function confirmCancel() {
+  const msg = encodeURIComponent(
+    'Hello DecodeFXGroup, I would like to cancel my subscription. Please process my cancellation.'
+  );
   window.open(`https://wa.me/2348173133453?text=${msg}`, '_blank');
 }
 
-window.showToast = function(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),3000);
-};
-
-document.querySelectorAll('.copy-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    const val=btn.dataset.copy;
-    if(val) navigator.clipboard.writeText(val).then(()=>showToast('Copied!'));
-  });
-});
-
-function initPage(){
-  const user=Auth.getUser();
-  if(!user){ return; }
-  document.getElementById('authModal').classList.add('hidden');
-
-  const initials=user.name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2);
-  document.getElementById('sidebarAvatar').textContent=initials;
-  document.getElementById('sidebarName').textContent=user.name;
-
-  const sub=Auth.getSub();
-  const isActive=Auth.isSubscribed();
-
-  if(sub){
-    document.getElementById('sidebarPlan').textContent=sub.plan;
-    document.getElementById('subCardPlan').textContent=sub.plan;
-    document.getElementById('subCardEmail').textContent=user.email;
-    document.getElementById('subDetailPlan').textContent=sub.plan;
-    const start=new Date(sub.startedAt);
-    const end=new Date(sub.expiresAt);
-    document.getElementById('subDetailStart').textContent=start.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
-    document.getElementById('subDetailExpiry').textContent=end.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
-    const badge=document.getElementById('subBadge');
-    if(!isActive){ badge.className='sub-expired-badge'; badge.innerHTML='<span class="sub-badge-dot"></span>Expired'; }
+// ─── COPY TO CLIPBOARD ───────────────────────────────────────
+function copyText(value, label) {
+  if (!value || value.startsWith('YOUR_') || value.startsWith('Add')) {
+    showToast('⚠️ This value has not been set yet. Please contact support.');
+    return;
   }
-
-  // Generate reference code
-  const ref='DFX'+Date.now().toString().slice(-6);
-  document.getElementById('refCode').textContent=ref;
-  document.getElementById('copyRef').dataset.copy='DFX'+ref;
+  navigator.clipboard.writeText(value)
+    .then(() => showToast(`✅ ${label} copied to clipboard!`))
+    .catch(() => showToast('Could not copy — please copy manually.'));
 }
 
-const existingUser=Auth.getUser();
-if(existingUser){ initPage(); }
-else { document.getElementById('authModal').classList.remove('hidden'); }
+// ─── FORMAT DATE ─────────────────────────────────────────────
+function formatDate(dateStr) {
+  if (!dateStr) return 'Lifetime';
+  return new Date(dateStr).toLocaleDateString('en-GB', {
+    day: 'numeric', month: 'long', year: 'numeric'
+  });
+}
+
+// ─── PLAN LABEL ──────────────────────────────────────────────
+function getPlanLabel(plan) {
+  const labels = {
+    academy:  'Academy Enrollment',
+    standard: 'Standard Signals',
+    vip:      'VIP Elite Signals',
+  };
+  return labels[plan] || plan || 'No active plan';
+}
+
+// ─── LOAD ACCOUNT PAGE ───────────────────────────────────────
+async function loadAccountPage(user, profile) {
+
+  // ── Sidebar ──────────────────────────────────────────────
+  const initials = profile.name
+    .split(' ')
+    .map(n => n[0])
+    .join('')
+    .toUpperCase()
+    .slice(0, 2);
+
+  const avatarEl = document.getElementById('sidebarAvatar');
+  const nameEl   = document.getElementById('sidebarName');
+  const planEl   = document.getElementById('sidebarPlan');
+  if (avatarEl) avatarEl.textContent = initials;
+  if (nameEl)   nameEl.textContent   = profile.name;
+  if (planEl)   planEl.textContent   = getPlanLabel(profile.plan);
+
+  // ── Fetch active subscription from Supabase ───────────────
+  const { data: sub } = await sb
+    .from('subscriptions')
+    .select('*')
+    .eq('user_id', user.id)
+    .eq('is_active', true)
+    .order('created_at', { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  const now      = new Date();
+  const isActive = sub && (!sub.expires_at || new Date(sub.expires_at) > now);
+  const planLabel = getPlanLabel(sub?.plan || profile.plan);
+
+  // ── Subscription status card ──────────────────────────────
+  const subCardPlan   = document.getElementById('subCardPlan');
+  const subCardEmail  = document.getElementById('subCardEmail');
+  const subBadge      = document.getElementById('subBadge');
+  const detPlan       = document.getElementById('subDetailPlan');
+  const detStart      = document.getElementById('subDetailStart');
+  const detExpiry     = document.getElementById('subDetailExpiry');
+
+  if (subCardPlan)  subCardPlan.textContent  = planLabel;
+  if (subCardEmail) subCardEmail.textContent = profile.email || user.email;
+  if (detPlan)      detPlan.textContent      = planLabel;
+  if (detStart)     detStart.textContent     = sub ? formatDate(sub.started_at) : '—';
+  if (detExpiry)    detExpiry.textContent    = sub
+    ? (sub.expires_at ? formatDate(sub.expires_at) : 'Lifetime')
+    : '—';
+
+  // Update badge to active or expired
+  if (subBadge) {
+    if (isActive) {
+      subBadge.className = 'sub-active-badge';
+      subBadge.innerHTML = '<span class="sub-badge-dot"></span>Active';
+    } else {
+      subBadge.className = 'sub-expired-badge';
+      subBadge.innerHTML = '<span class="sub-badge-dot"></span>Expired';
+    }
+  }
+
+  // ── Generate unique bank transfer reference ───────────────
+  const ref    = 'DFX' + String(Date.now()).slice(-6);
+  const refEl  = document.getElementById('refCode');
+  if (refEl) refEl.textContent = ref;
+
+  // ── Mark current plan tile ────────────────────────────────
+  const currentPlan = sub?.plan || profile.plan || '';
+  document.querySelectorAll('.plan-tile').forEach(tile => {
+    const h4 = tile.querySelector('h4');
+    if (!h4) return;
+    const tileText = h4.textContent.toLowerCase();
+    const match =
+      (currentPlan === 'vip'      && tileText.includes('vip'))      ||
+      (currentPlan === 'standard' && tileText.includes('standard')) ||
+      (currentPlan === 'academy'  && tileText.includes('academy'));
+
+    if (match) {
+      tile.classList.add('current');
+      if (!tile.querySelector('.current-tag')) {
+        const tag = document.createElement('div');
+        tag.className   = 'current-tag';
+        tag.textContent = 'Current Plan';
+        tile.insertBefore(tag, tile.firstChild);
+      }
+    }
+  });
+
+  // ── Show/hide renewal reminder ────────────────────────────
+  if (!isActive) {
+    showToast('⚠️ Your subscription has expired. Please renew to continue accessing signals.');
+  }
+}
+
+// ─── BOOT — runs when page loads ─────────────────────────────
+(async () => {
+  const { data: { session } } = await sb.auth.getSession();
+
+  if (!session) {
+    // No session — show login modal (visible by default in HTML)
+    return;
+  }
+
+  const { data: profile, error } = await sb
+    .from('profiles')
+    .select('*')
+    .eq('id', session.user.id)
+    .single();
+
+  if (error || !profile) {
+    await sb.auth.signOut();
+    return;
+  }
+
+  if (!profile.is_enrolled) {
+    await sb.auth.signOut();
+    showToast('Please complete your enrollment payment first.');
+    setTimeout(() => window.location.href = 'enquiries.html', 2500);
+    return;
+  }
+
+  // Valid user — hide modal and load page
+  const modal = document.getElementById('authModal');
+  if (modal) modal.classList.add('hidden');
+
+  loadAccountPage(session.user, profile);
+})();
+
 </script>
 </body>
 </html>
