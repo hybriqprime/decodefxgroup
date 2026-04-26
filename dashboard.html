@@ -35,7 +35,9 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Request Access via WhatsApp
       </a>
-      <p class="auth-switch">Don't have an account? <a onclick="switchToRegister()">Create one</a></p>
+     <p class="auth-switch">Don't have an account? 
+  <a onclick="switchToRegister()" style="cursor:pointer">Create one</a>
+</p>
     </div>
     <div id="registerView" style="display:none">
       <h2>Create Account</h2>
@@ -245,7 +247,7 @@
       <div class="card">
         <div class="card-header">
           <span class="card-title">Signal History</span>
-          <a class="card-link" href="https://t.me/decodefxgroup" target="_blank">View on Telegram →</a>
+          <a class="card-link" href="https://t.me/Nathanpips_bot" target="_blank">View on Telegram →</a>
         </div>
         <div style="display:flex;flex-direction:column;gap:0">
           <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(201,168,76,0.07)">
@@ -419,21 +421,50 @@
 
 <div class="toast" id="toast"></div>
 
+
 <script>
-// ── AUTH SYSTEM ──
-const Auth = {
-  getUser(){ try{ return JSON.parse(localStorage.getItem('dfx_user')); }catch{ return null; } },
-  getSub(){ try{ return JSON.parse(localStorage.getItem('dfx_subscription')); }catch{ return null; } },
-  isSubscribed(){
-    const sub = this.getSub();
-    if(!sub) return false;
-    return new Date(sub.expiresAt) > new Date();
-  },
-  login(email, password){
-   window.handleLogin = async () => {
+// ─── SUPABASE CONFIG ─────────────────────────────
+const SUPABASE_URL  = '
+https://qzekcbnxgpcmiiouxknc.supabase.co'; // ← paste yours
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF6ZWtjYm54Z3BjbWlpb3V4a25jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwNTg0MzYsImV4cCI6MjA5MjYzNDQzNn0.4EEn2aPQInIhOoPoqERFT5vBNSApMUfS_Gvhyll9MQQ';             // ← paste yours
+
+// Load Supabase from CDN — add this BEFORE this script tag:
+
+const { createClient } = supabase;
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
+
+// ─── SHOW / HIDE AUTH MODAL ──────────────────────
+function showAuthModal(view = 'login') {
+  document.getElementById('authModal').classList.remove('hidden');
+  if (view === 'register') {
+    document.getElementById('loginView').style.display = 'none';
+    document.getElementById('registerView').style.display = 'block';
+  } else {
+    document.getElementById('loginView').style.display = 'block';
+    document.getElementById('registerView').style.display = 'none';
+  }
+}
+function hideAuthModal() {
+  document.getElementById('authModal').classList.add('hidden');
+}
+
+function switchToRegister() {
+  document.getElementById('loginView').style.display = 'none';
+  document.getElementById('registerView').style.display = 'block';
+  document.getElementById('loginError').classList.remove('show');
+}
+function switchToLogin() {
+  document.getElementById('registerView').style.display = 'none';
+  document.getElementById('loginView').style.display = 'block';
+  document.getElementById('registerError').classList.remove('show');
+}
+
+// ─── SIGN IN ─────────────────────────────────────
+async function handleLogin() {
   const email = document.getElementById('loginEmail').value.trim();
   const pw    = document.getElementById('loginPassword').value;
   const errEl = document.getElementById('loginError');
+  errEl.classList.remove('show');
 
   if (!email || !pw) {
     errEl.textContent = 'Please fill in all fields.';
@@ -441,167 +472,192 @@ const Auth = {
     return;
   }
 
-  try {
-    const res  = await fetch('https://your-api.render.com/api/auth/login', {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({ email, password: pw }),
-    });
-    const data = await res.json();
+  const { data, error } = await sb.auth.signInWithPassword({ email, password: pw });
 
-    if (!data.success) {
-      errEl.textContent = data.message;
-      errEl.classList.add('show');
-      return;
-    }
-
-    // Store token and user
-    localStorage.setItem('dfx_token', data.token);
-    localStorage.setItem('dfx_user',  JSON.stringify(data.user));
-
-    // Check enrollment before showing dashboard
-    if (!data.user.isEnrolled) {
-      errEl.textContent = 'Your account exists but you have not enrolled yet. Please complete payment first.';
-      errEl.classList.add('show');
-      localStorage.removeItem('dfx_token');
-      localStorage.removeItem('dfx_user');
-      return;
-    }
-
-    hideAuthModal();
-    initDashboard();
-
-  } catch (err) {
-    errEl.textContent = 'Connection error. Please try again.';
+  if (error) {
+    errEl.textContent = error.message === 'Invalid login credentials'
+      ? 'Incorrect email or password.'
+      : error.message;
     errEl.classList.add('show');
+    return;
   }
-};
-  register(name, email, password){
-    if(!name||!email||!password) return false;
-    const user = { id: Date.now(), email, name, plan:'Academy', enrolledAt: new Date().toISOString() };
-    const expiry = new Date(); expiry.setDate(expiry.getDate()+30);
-    const sub = { plan:'Academy (30-day trial)', startedAt: new Date().toISOString(), expiresAt: expiry.toISOString() };
-    localStorage.setItem('dfx_user', JSON.stringify(user));
-    localStorage.setItem('dfx_subscription', JSON.stringify(sub));
-    return true;
-  },
-  logout(){ localStorage.removeItem('dfx_user'); localStorage.removeItem('dfx_subscription'); window.location.href='index.html'; }
-};
 
-function handleLogin(){
-  const email = document.getElementById('loginEmail').value;
-  const pw = document.getElementById('loginPassword').value;
-  if(!email||!pw){ showAuthError('loginError','Please fill in all fields.'); return; }
-  if(Auth.login(email,pw)){ hideAuthModal(); initDashboard(); showToast('Welcome back!'); }
-  else { showAuthError('loginError','Invalid credentials. Try any email/password for demo.'); }
+  // Check enrollment
+  const { data: profile } = await sb
+    .from('profiles')
+    .select('*')
+    .eq('id', data.user.id)
+    .single();
+
+  if (!profile?.is_enrolled) {
+    await sb.auth.signOut();
+    errEl.textContent = 'Your account is not yet enrolled. Please complete your payment first.';
+    errEl.classList.add('show');
+    // Show enroll button
+    errEl.innerHTML += '<br><br><a href="enquiries.html" style="color:var(--gold);font-weight:600;">Complete Enrollment →</a>';
+    return;
+  }
+
+  hideAuthModal();
+  loadDashboard(data.user, profile);
 }
-function handleRegister(){
-  const name = document.getElementById('regName').value;
-  const email = document.getElementById('regEmail').value;
-  const pw = document.getElementById('regPassword').value;
-  if(!name||!email||!pw){ showAuthError('registerError','Please fill in all fields.'); return; }
-  if(Auth.register(name,email,pw)){ hideAuthModal(); initDashboard(); showToast('Account created!'); }
+
+// ─── REGISTER ────────────────────────────────────
+async function handleRegister() {
+  const name  = document.getElementById('regName').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const pw    = document.getElementById('regPassword').value;
+  const errEl = document.getElementById('registerError');
+  errEl.classList.remove('show');
+
+  if (!name || !email || !pw) {
+    errEl.textContent = 'Please fill in all fields.';
+    errEl.classList.add('show');
+    return;
+  }
+  if (pw.length < 8) {
+    errEl.textContent = 'Password must be at least 8 characters.';
+    errEl.classList.add('show');
+    return;
+  }
+
+  const { data, error } = await sb.auth.signUp({
+    email,
+    password: pw,
+    options: { data: { name } }
+  });
+
+  if (error) {
+    errEl.textContent = error.message;
+    errEl.classList.add('show');
+    return;
+  }
+
+  // Account created — but not enrolled yet
+  errEl.style.cssText = 'display:block;background:rgba(76,175,138,0.08);border:1px solid rgba(76,175,138,0.3);color:#4caf8a;border-radius:4px;padding:10px 14px;font-size:13px;margin-bottom:14px';
+  errEl.textContent = '✅ Account created! You must complete enrollment payment before accessing the dashboard.';
+
+  setTimeout(() => {
+    window.location.href = 'enquiries.html';
+  }, 2500);
 }
-function handleLogout(){ Auth.logout(); }
-function switchToRegister(){ document.getElementById('loginView').style.display='none'; document.getElementById('registerView').style.display='block'; }
-function switchToLogin(){ document.getElementById('registerView').style.display='none'; document.getElementById('loginView').style.display='block'; }
-function showAuthError(id, msg){ const el=document.getElementById(id); el.textContent=msg; el.classList.add('show'); }
-function hideAuthModal(){ document.getElementById('authModal').classList.add('hidden'); document.body.style.overflow=''; }
-function showAuthModal(){ document.getElementById('authModal').classList.remove('hidden'); }
 
-// Allow Enter key to submit
-document.getElementById('loginPassword').addEventListener('keydown', e=>{ if(e.key==='Enter') handleLogin(); });
-document.getElementById('loginEmail').addEventListener('keydown', e=>{ if(e.key==='Enter') handleLogin(); });
+// ─── LOGOUT ──────────────────────────────────────
+async function handleLogout() {
+  await sb.auth.signOut();
+  window.location.href = 'index.html';
+}
 
-function initDashboard(){
-  const user = Auth.getUser();
-  if(!user){ showAuthModal(); return; }
-
-  const sub = Auth.getSub();
-  const isActive = Auth.isSubscribed();
-
-  // Sidebar user info
-  const initials = user.name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2);
+// ─── LOAD DASHBOARD DATA ─────────────────────────
+async function loadDashboard(user, profile) {
+  // Sidebar
+  const initials = profile.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
   document.getElementById('sidebarAvatar').textContent = initials;
-  document.getElementById('sidebarName').textContent = user.name;
-  document.getElementById('sidebarPlan').textContent = sub ? sub.plan : 'No plan';
-  const dot = document.getElementById('subDot');
-  dot.className = 'sub-dot' + (isActive ? '' : ' inactive');
-  document.getElementById('subStatusText').textContent = isActive ? 'Subscription active' : 'Subscription expired';
+  document.getElementById('sidebarName').textContent   = profile.name;
+
+  // Get active subscription
+  const { data: sub } = await sb
+    .from('subscriptions')
+    .select('*')
+    .eq('user_id', user.id)
+    .eq('is_active', true)
+    .order('created_at', { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  const now      = new Date();
+  const isActive = sub && (!sub.expires_at || new Date(sub.expires_at) > now);
+  const planLabel = sub ? sub.plan : 'No active plan';
+
+  document.getElementById('sidebarPlan').textContent = planLabel;
+
+  const dot    = document.getElementById('subDot');
+  const status = document.getElementById('subStatusText');
+  dot.className    = 'sub-dot' + (isActive ? '' : ' inactive');
+  status.textContent = isActive ? 'Subscription active' : 'Subscription expired';
 
   // Greeting
-  document.getElementById('greetName').textContent = user.name.split(' ')[0];
-  const hour = new Date().getHours();
-  const greet = hour<12?'Good morning':'hour<17?Good afternoon':'Good evening';
-  document.getElementById('greetSub').textContent = `Here's your trading overview for today.`;
+  const firstName = profile.name.split(' ')[0];
+  document.getElementById('greetName').textContent = firstName;
 
   // Topbar date
-  document.getElementById('topbarDate').textContent = new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('topbarDate').textContent =
+    now.toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
 
   // Sub card
-  if(sub){
-    document.getElementById('subCardPlan').textContent = sub.plan;
-    const exp = new Date(sub.expiresAt);
+  document.getElementById('subCardPlan').textContent = planLabel;
+
+  if (sub && sub.expires_at) {
+    const exp    = new Date(sub.expires_at);
+    const expFmt = exp.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
     document.getElementById('subCardExpiry').textContent = isActive
-      ? `Active · Expires ${exp.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}`
-      : `Expired ${exp.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}`;
-    const badge = document.getElementById('subBadge');
-    if(!isActive){ badge.className='sub-expired-badge'; badge.innerHTML='<span class="sub-badge-dot"></span>Expired'; }
+      ? `Active · Expires ${expFmt}`
+      : `Expired ${expFmt}`;
+  } else if (sub && !sub.expires_at) {
+    document.getElementById('subCardExpiry').textContent = 'Active · Lifetime access';
+  } else {
+    document.getElementById('subCardExpiry').textContent = 'No active subscription';
   }
 
-  // Show/hide upgrade card based on plan
-  if(sub && sub.plan.includes('VIP')) document.getElementById('upgradeCard').style.display='none';
+  if (!isActive) {
+    const badge = document.getElementById('subBadge');
+    badge.className = 'sub-expired-badge';
+    badge.innerHTML = '<span class="sub-badge-dot"></span>Expired';
+  }
+
+  // Hide upgrade card if already VIP
+  if (sub && sub.plan === 'vip') {
+    const card = document.getElementById('upgradeCard');
+    if (card) card.style.display = 'none';
+  }
 }
 
-// Sidebar toggle
-function toggleSidebar(){
+// ─── SIDEBAR TOGGLE ──────────────────────────────
+function toggleSidebar() {
   document.getElementById('sidebar').classList.toggle('open');
   document.getElementById('sidebarOverlay').classList.toggle('visible');
 }
-function closeSidebar(){
+function closeSidebar() {
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('sidebarOverlay').classList.remove('visible');
 }
 
-window.showToast = function(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),3000);
-};
+// ─── TOAST ───────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
 
-// Init
-// On page load — check token AND enrollment
+// ─── BOOT ────────────────────────────────────────
 (async () => {
-  const token = localStorage.getItem('dfx_token');
+  const { data: { session } } = await sb.auth.getSession();
 
-  if (!token) {
-    showAuthModal();
+  if (!session) {
+    showAuthModal('login');
     return;
   }
 
-  try {
-    const res  = await fetch('https://your-api.render.com/api/auth/me', {
-      headers: { 'Authorization': `Bearer ${token}` }
-    });
-    const data = await res.json();
+  const { data: profile } = await sb
+    .from('profiles')
+    .select('*')
+    .eq('id', session.user.id)
+    .single();
 
-    if (!data.success || !data.user.isEnrolled) {
-      // Token invalid or not enrolled — clear and show login
-      localStorage.removeItem('dfx_token');
-      localStorage.removeItem('dfx_user');
-      showAuthModal();
-      return;
-    }
-
-    // Valid enrolled user — store fresh user data and load page
-    localStorage.setItem('dfx_user', JSON.stringify(data.user));
-    hideAuthModal();
-    initDashboard(); // or initAcademy() on academy.html
-
-  } catch (err) {
-    showAuthModal();
+  if (!profile?.is_enrolled) {
+    await sb.auth.signOut();
+    showAuthModal('login');
+    document.getElementById('loginError').textContent =
+      'Please complete your enrollment payment before accessing the dashboard.';
+    document.getElementById('loginError').classList.add('show');
+    return;
   }
+
+  hideAuthModal();
+  loadDashboard(session.user, profile);
 })();
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </body>
 </html>

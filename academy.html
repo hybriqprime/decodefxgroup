@@ -128,122 +128,123 @@
 <div class="toast" id="toast"></div>
 
 <script>
+const SUPABASE_URL  = 'https://qzekcbnxgpcmiiouxknc.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF6ZWtjYm54Z3BjbWlpb3V4a25jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwNTg0MzYsImV4cCI6MjA5MjYzNDQzNn0.4EEn2aPQInIhOoPoqERFT5vBNSApMUfS_Gvhyll9MQQ';
+const { createClient } = supabase;
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
+
+async function handleLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pw    = document.getElementById('loginPassword').value;
+  if (!email || !pw) { showToast('Please fill in all fields.'); return; }
+
+  const { data, error } = await sb.auth.signInWithPassword({ email, password: pw });
+  if (error) { showToast('Incorrect email or password.'); return; }
+
+  const { data: profile } = await sb
+    .from('profiles').select('*').eq('id', data.user.id).single();
+
+  if (!profile?.is_enrolled) {
+    await sb.auth.signOut();
+    showToast('Please complete enrollment payment first.');
+    setTimeout(() => window.location.href = 'enquiries.html', 2000);
+    return;
+  }
+
+  document.getElementById('authModal').classList.add('hidden');
+  initPage(data.user, profile);
+}
+
+async function handleLogout() {
+  await sb.auth.signOut();
+  window.location.href = 'index.html';
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('visible');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('visible');
+}
+function openModule(num, status) {
+  if (status === 'locked') { showToast('🔒 Complete previous module to unlock.'); return; }
+  showToast(`Opening Module ${num}…`);
+}
+
+function initPage(user, profile) {
+  const initials = profile.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+  document.getElementById('sidebarAvatar').textContent = initials;
+  document.getElementById('sidebarName').textContent   = profile.name;
+  document.getElementById('sidebarPlan').textContent   = profile.plan || 'Academy';
+  renderModules();
+}
+
+// Module data
 const MODULES = [
-  { num:'01', title:'Forex Fundamentals & Market Structure', desc:'Currency pairs, pip values, session times, spread, lot sizes, and how the global forex market actually operates.', lessons:6, status:'complete', progress:100 },
-  { num:'02', title:'Technical Analysis Mastery', desc:'Chart reading, timeframe confluences, support & resistance, trend identification, and chart patterns professionals actually trade.', lessons:8, status:'complete', progress:100 },
-  { num:'03', title:'Smart Money Concepts (SMC)', desc:'Order blocks, fair value gaps, liquidity sweeps, break of structure, change of character — the institutional framework.', lessons:10, status:'in-progress', progress:45 },
-  { num:'04', title:'Risk Management & Psychology', desc:'Position sizing models, drawdown management, the 1% rule, trading psychology, and building a professional mindset.', lessons:7, status:'locked', progress:0 },
-  { num:'05', title:'Live Trading & Signal Reading', desc:'Real-time trade execution, interpreting live signals, managing open trades, and journaling for continuous improvement.', lessons:8, status:'locked', progress:0 },
-  { num:'06', title:'Advanced Order Flow Analysis', desc:'Depth of market, volume profiling, institutional order flow interpretation, and reading the tape at a professional level.', lessons:6, status:'locked', progress:0 },
-  { num:'07', title:'Multi-Timeframe Analysis', desc:'Top-down analysis methodology: how to align HTF bias with LTF entries for maximum probability confluences.', lessons:5, status:'locked', progress:0 },
-  { num:'08', title:'News Trading & Fundamentals', desc:'High-impact news events, central bank policy, economic calendars, and integrating macro fundamentals with technical setups.', lessons:5, status:'locked', progress:0 },
-  { num:'09', title:'Gold (XAUUSD) Specialisation', desc:'Gold-specific market dynamics, correlations, seasonal patterns, and why gold is the most signal-friendly instrument.', lessons:6, status:'locked', progress:0 },
-  { num:'10', title:'Prop Firm Challenge Strategy', desc:'How to structure your trading to pass funded account challenges: FTMO, My Forex Funds, The5ers — systematically.', lessons:7, status:'locked', progress:0 },
-  { num:'11', title:'Portfolio & Account Management', desc:'Managing multiple positions, correlation risk, compounding strategy, and building your trading business professionally.', lessons:5, status:'locked', progress:0 },
-  { num:'12', title:'Building Your Trading Plan', desc:'Constructing a complete, personal trading plan covering rules, routine, risk parameters, review process, and long-term goals.', lessons:4, status:'locked', progress:0 },
+  { num:'01', title:'Forex Fundamentals & Market Structure',  desc:'Currency pairs, pip values, session times, and how institutional order flow drives price action.',                 lessons:6,  status:'complete',    progress:100 },
+  { num:'02', title:'Technical Analysis Mastery',             desc:'Chart reading, timeframe confluences, support/resistance, and the patterns professionals actually trade.',          lessons:8,  status:'complete',    progress:100 },
+  { num:'03', title:'Liquidity Flux Trading (LFT)',           desc:'Order blocks, fair value gaps, liquidity sweeps, and how to read the market from an institutional perspective.',    lessons:10, status:'in-progress', progress:45  },
+  { num:'04', title:'Risk Management & Psychology',           desc:'Position sizing models, drawdown management, trading psychology, and building a professional mindset.',             lessons:7,  status:'locked',      progress:0   },
+  { num:'05', title:'Live Trading & Signal Reading',          desc:'Real-time trade execution, interpreting live signals, managing open trades, and journaling for improvement.',       lessons:8,  status:'locked',      progress:0   },
+  { num:'06', title:'Advanced Order Flow Analysis',           desc:'Depth of market, volume profiling, institutional order flow interpretation, and reading the tape professionally.',  lessons:6,  status:'locked',      progress:0   },
+  { num:'07', title:'Multi-Timeframe Analysis',               desc:'Top-down analysis: how to align HTF bias with LTF entries for maximum probability confluences.',                   lessons:5,  status:'locked',      progress:0   },
+  { num:'08', title:'News Trading & Fundamentals',            desc:'High-impact news events, central bank policy, and integrating macro fundamentals with technical setups.',          lessons:5,  status:'locked',      progress:0   },
+  { num:'09', title:'Gold (XAUUSD) Specialisation',          desc:'Gold-specific market dynamics, correlations, seasonal patterns, and why gold is the most signal-friendly asset.',  lessons:6,  status:'locked',      progress:0   },
+  { num:'10', title:'Prop Firm Challenge Strategy',           desc:'How to structure your trading to pass FTMO, My Forex Funds, The5ers — systematically.',                           lessons:7,  status:'locked',      progress:0   },
+  { num:'11', title:'Portfolio & Account Management',         desc:'Managing multiple positions, correlation risk, compounding strategy, and building your trading business.',         lessons:5,  status:'locked',      progress:0   },
+  { num:'12', title:'Building Your Trading Plan',             desc:'Constructing your complete personal trading plan: rules, routine, risk parameters, and long-term goals.',          lessons:4,  status:'locked',      progress:0   },
 ];
 
-function renderModules(){
+function renderModules() {
   const grid = document.getElementById('modulesGrid');
+  if (!grid) return;
   grid.innerHTML = '';
   MODULES.forEach(mod => {
-    const btnText = mod.status==='complete' ? 'Review' : mod.status==='in-progress' ? 'Continue' : '🔒 Locked';
-    const btnClass = mod.status==='complete' ? 'review' : mod.status==='in-progress' ? 'continue' : 'locked';
-    const badgeText = mod.status==='complete' ? 'Complete' : mod.status==='in-progress' ? 'In Progress' : 'Locked';
+    const btnLabel  = mod.status === 'complete' ? 'Review' : mod.status === 'in-progress' ? 'Continue' : '🔒 Locked';
+    const btnClass  = mod.status === 'complete' ? 'review' : mod.status === 'in-progress' ? 'continue' : 'locked';
+    const badgeTxt  = mod.status === 'complete' ? 'Complete' : mod.status === 'in-progress' ? 'In Progress' : 'Locked';
+    const badgeCls  = mod.status === 'in-progress' ? 'active' : mod.status;
     const card = document.createElement('div');
     card.className = `module-card ${mod.status}`;
     card.innerHTML = `
       <div class="module-progress-bar"><div class="module-progress-fill" style="width:${mod.progress}%"></div></div>
       <div class="module-card-top">
         <div class="module-num">Module ${mod.num}</div>
-        <div class="module-status-badge ${mod.status==='in-progress'?'active':mod.status}">${badgeText}</div>
-        <h3>${mod.title}</h3>
-        <p>${mod.desc}</p>
+        <div class="module-status-badge ${badgeCls}">${badgeTxt}</div>
+        <h3>${mod.title}</h3><p>${mod.desc}</p>
       </div>
       <div class="module-card-bottom">
         <span class="lesson-count">${mod.lessons} lessons</span>
-        <button class="module-card-btn ${btnClass}" onclick="openModule('${mod.num}','${mod.status}')">${btnText}</button>
-      </div>
-    `;
+        <button class="module-card-btn ${btnClass}" onclick="openModule('${mod.num}','${mod.status}')">${btnLabel}</button>
+      </div>`;
     grid.appendChild(card);
   });
 }
 
-function openModule(num, status){
-  if(status==='locked'){ showToast('🔒 Complete the previous module to unlock this one.'); return; }
-  showToast(`Opening Module ${num}... Redirecting to lesson player.`);
-}
+(async () => {
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) { return; } // modal already visible by default
 
-// Auth
-const Auth = {
-  getUser(){ try{ return JSON.parse(localStorage.getItem('dfx_user')); }catch{ return null; } },
-  logout(){ localStorage.removeItem('dfx_user'); localStorage.removeItem('dfx_subscription'); window.location.href='index.html'; }
-};
+  const { data: profile } = await sb
+    .from('profiles').select('*').eq('id', session.user.id).single();
 
-
- window.handleLogin = async () => {
-  const email = document.getElementById('loginEmail').value.trim();
-  const pw    = document.getElementById('loginPassword').value;
-  const errEl = document.getElementById('loginError');
-
-  if (!email || !pw) {
-    errEl.textContent = 'Please fill in all fields.';
-    errEl.classList.add('show');
+  if (!profile?.is_enrolled) {
+    await sb.auth.signOut();
     return;
   }
 
-  try {
-    const res  = await fetch('https://your-api.render.com/api/auth/login', {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({ email, password: pw }),
-    });
-    const data = await res.json();
-
-    if (!data.success) {
-      errEl.textContent = data.message;
-      errEl.classList.add('show');
-      return;
-    }
-
-    // Store token and user
-    localStorage.setItem('dfx_token', data.token);
-    localStorage.setItem('dfx_user',  JSON.stringify(data.user));
-
-    // Check enrollment before showing dashboard
-    if (!data.user.isEnrolled) {
-      errEl.textContent = 'Your account exists but you have not enrolled yet. Please complete payment first.';
-      errEl.classList.add('show');
-      localStorage.removeItem('dfx_token');
-      localStorage.removeItem('dfx_user');
-      return;
-    }
-
-    hideAuthModal();
-    initDashboard();
-
-  } catch (err) {
-    errEl.textContent = 'Connection error. Please try again.';
-    errEl.classList.add('show');
-  }
-};
-function handleLogout(){ Auth.logout(); }
-function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('visible'); }
-function closeSidebar(){ document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('visible'); }
-window.showToast=function(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),3000); };
-
-function initPage(){
-  const user=Auth.getUser();
-  if(!user){ document.getElementById('authModal').classList.remove('hidden'); return; }
   document.getElementById('authModal').classList.add('hidden');
-  const initials=user.name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2);
-  document.getElementById('sidebarAvatar').textContent=initials;
-  document.getElementById('sidebarName').textContent=user.name;
-  try{ const sub=JSON.parse(localStorage.getItem('dfx_subscription')); document.getElementById('sidebarPlan').textContent=sub?sub.plan:'Academy'; }catch{}
-  renderModules();
-}
-
-initPage();
+  initPage(session.user, profile);
+})();
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </body>
 </html>
