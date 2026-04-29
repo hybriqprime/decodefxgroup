@@ -9,6 +9,74 @@
 <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+  <!-- ══ TOP NAVBAR ══ -->
+<nav class="dash-nav" id="dashNav">
+  <div class="dash-nav-inner">
+
+    <!-- Logo -->
+    <a href="index.html" class="dash-nav-logo">
+      <div class="dash-logo-mark">
+        <img src="Images/logo2.png" alt="Logo"
+             style="width:22px;height:22px;object-fit:contain;display:block;">
+      </div>
+      <span class="dash-logo-text">Decode<span>FX</span>Group</span>
+    </a>
+
+    <!-- Desktop links -->
+    <div class="dash-nav-links">
+      <a href="dashboard.html" class="dash-nav-link">Dashboard</a>
+      <a href="academy.html"   class="dash-nav-link">Academy</a>
+      <a href="https://t.me/decodefxgroup" class="dash-nav-link" target="_blank">
+        Live Signals
+      </a>
+      <a href="account.html"   class="dash-nav-link">Subscription</a>
+      <a href="contact.html"   class="dash-nav-link">Support</a>
+    </div>
+
+    <!-- Desktop right actions -->
+    <div class="dash-nav-actions">
+      <div class="dash-user-pill" id="navUserPill">
+        <div class="dash-user-avatar" id="navAvatar">?</div>
+        <span class="dash-user-name" id="navUserName">Loading...</span>
+      </div>
+      <button class="dash-signout-btn" onclick="handleLogout()">Sign Out</button>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button class="dash-hamburger" id="dashHamburger" onclick="toggleDashMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+</nav>
+
+<!-- ══ MOBILE MENU OVERLAY ══ -->
+<div class="dash-mobile-overlay" id="dashMobileMenu">
+  <button class="dash-mobile-close" onclick="closeDashMenu()">✕</button>
+
+  <div class="dash-mobile-user">
+    <div class="dash-mobile-avatar" id="mobileAvatar">?</div>
+    <div class="dash-mobile-name" id="mobileUserName">Loading...</div>
+    <div class="dash-mobile-plan" id="mobileUserPlan">—</div>
+  </div>
+
+  <div class="dash-mobile-links">
+    <a href="dashboard.html" onclick="closeDashMenu()">Dashboard</a>
+    <a href="academy.html"   onclick="closeDashMenu()">Academy</a>
+    <a href="https://t.me/decodefxgroup" target="_blank" onclick="closeDashMenu()">
+      Live Signals
+    </a>
+    <a href="account.html"   onclick="closeDashMenu()">Subscription</a>
+    <a href="contact.html"   onclick="closeDashMenu()">Support</a>
+    <a href="index.html"     onclick="closeDashMenu()">Back to Site</a>
+  </div>
+
+  <button class="dash-mobile-signout" onclick="handleLogout()">
+    Sign Out
+  </button>
+</div>
 
 <div class="auth-modal" id="authModal">
   <div class="auth-box">
@@ -33,279 +101,297 @@
 
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-logo">
-    <div class="sidebar-logo-inner">
-      <div class="sidebar-logo-mark">D</div>
-      <span class="sidebar-logo-text">Decode<span>FX</span>Group</span>
-    </div>
-  </div>
-  <div class="sidebar-user">
-    <div class="sidebar-avatar" id="sidebarAvatar">?</div>
-    <div class="sidebar-user-name" id="sidebarName">Loading...</div>
-    <div class="sidebar-user-plan" id="sidebarPlan">—</div>
-  </div>
-  <nav class="sidebar-nav">
-    <div class="sidebar-section-label">Main</div>
-    <a class="sidebar-link" href="dashboard.html">
-      <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
-      Dashboard
-    </a>
-    <a class="sidebar-link" href="academy.html">
-      <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
-      Academy
-    </a>
-    <a class="sidebar-link" href="#">
-      <svg viewBox="0 0 24 24"><path d="M13 2.05V4.05C17.39 4.59 20.5 8.58 19.96 12.97C19.5 16.61 16.64 19.5 13 19.93V21.93C18.5 21.38 22.5 16.5 21.95 11C21.5 6.25 17.73 2.5 13 2.05M11 2.06C9.05 2.25 7.19 3 5.67 4.26L7.1 5.74C8.22 4.84 9.57 4.26 11 4.06V2.06M4.26 5.67C3 7.19 2.25 9.04 2.05 11H4.05C4.24 9.58 4.8 8.23 5.69 7.1L4.26 5.67M2.06 13C2.26 14.96 3.03 16.81 4.27 18.33L5.69 16.9C4.81 15.77 4.24 14.42 4.06 13H2.06M7.1 18.37L5.67 19.74C7.18 21 9.04 21.79 11 22V20C9.58 19.82 8.23 19.25 7.1 18.37M12 7L8 10L12 13L16 10L12 7z"/></svg>
-      Live Signals
-    </a>
-    <div class="sidebar-section-label" style="margin-top:16px">Account</div>
-    <a class="sidebar-link active" href="account.html">
-      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
-      Subscription
-    </a>
-    <a class="sidebar-link" href="contact.html">
-      <svg viewBox="0 0 24 24"><path d="M11.5 2C6.81 2 3 5.81 3 10.5S6.81 19 11.5 19h.5v3c4.86-2.34 8-7 8-11.5C20 5.81 16.19 2 11.5 2zm1 14.5h-2v-2h2v2zm0-4h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2h-2c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5z"/></svg>
-      Support
-    </a>
-    <a class="sidebar-link" href="index.html">
-      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-      Back to Site
-    </a>
-  </nav>
-  <div class="sidebar-footer">
-    <a onclick="handleLogout()">
-      <svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
-      Sign Out
-    </a>
-  </div>
-</aside>
 
 <main class="main-content">
+
+  <!-- ══ TOPBAR ══ -->
   <div class="topbar">
-    <div style="display:flex;align-items:center;gap:12px">
-      <button class="sidebar-toggle" onclick="toggleSidebar()">
-        <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" width="22" height="22">
+          <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+        </svg>
       </button>
-      <div>
-        <div class="topbar-title">My Account</div>
-        <div class="topbar-sub">Subscription &amp; Payment Management</div>
+      <div class="topbar-left">
+        <h2>My Account</h2>
+        <p>Subscription &amp; Payment Management</p>
       </div>
     </div>
-    <a href="dashboard.html" class="btn-sm btn-sm-outline">← Dashboard</a>
+    <a href="dashboard.html" class="topbar-back-btn">← Dashboard</a>
   </div>
 
+  <!-- ══ PAGE BODY ══ -->
   <div class="page-body">
 
-    <!-- Subscription status -->
-    <div class="sub-status-card">
-      <div class="sub-status-top">
+    <!-- ── Subscription Status Card ── -->
+    <div class="acc-sub-card">
+      <div class="acc-sub-top">
         <div>
-          <h2 id="subCardPlan">VIP Elite Signals</h2>
-          <p id="subCardEmail">Loading...</p>
+          <p class="acc-sub-label">Current Plan</p>
+          <h2 id="subCardPlan">Loading...</h2>
+          <p class="acc-sub-email" id="subCardEmail">—</p>
         </div>
         <div class="sub-active-badge" id="subBadge">
-          <span class="sub-badge-dot"></span>Active
+          <span class="sub-badge-dot"></span>
+          Checking...
         </div>
       </div>
-      <div class="sub-details-grid">
-        <div class="sub-detail">
-          <div class="label">Plan</div>
-          <div class="value gold" id="subDetailPlan">VIP Elite</div>
+
+      <div class="acc-details-grid">
+        <div class="acc-detail-box">
+          <span class="acc-detail-label">Plan</span>
+          <span class="acc-detail-value gold" id="subDetailPlan">—</span>
         </div>
-        <div class="sub-detail">
-          <div class="label">Started</div>
-          <div class="value" id="subDetailStart">—</div>
+        <div class="acc-detail-box">
+          <span class="acc-detail-label">Started</span>
+          <span class="acc-detail-value" id="subDetailStart">—</span>
         </div>
-        <div class="sub-detail">
-          <div class="label">Expires</div>
-          <div class="value" id="subDetailExpiry">—</div>
+        <div class="acc-detail-box">
+          <span class="acc-detail-label">Expires</span>
+          <span class="acc-detail-value" id="subDetailExpiry">—</span>
         </div>
       </div>
-      <div class="sub-actions">
-        <a href="enquiries.html" class="btn-sm btn-sm-primary">Renew / Upgrade</a>
-        <a href="https://wa.me/2348173133453?text=I%20need%20help%20with%20my%20DecodeFXGroup%20subscription..." class="btn-sm btn-sm-outline" target="_blank">📱 Contact Support</a>
-        <button class="btn-sm btn-sm-danger" onclick="confirmCancel()">Cancel Subscription</button>
+
+      <div class="acc-sub-actions">
+        <a href="enquiries.html" class="acc-btn-primary">Renew / Upgrade</a>
+        <a href="https://wa.me/2348173133453?text=I%20need%20help%20with%20my%20DecodeFXGroup%20subscription..."
+           class="acc-btn-outline"
+           target="_blank">
+          📱 Contact Support
+        </a>
+        <button class="acc-btn-danger" onclick="confirmCancel()">
+          Cancel Subscription
+        </button>
       </div>
     </div>
-<!-- ══ RENEW YOUR PLAN ══ -->
-<div class="section-hdr" style="margin-top:8px">
-  <h3>Renew Your Plan</h3>
-  <div class="sep"></div>
-</div>
 
-<div class="payment-cards" style="grid-template-columns:repeat(2,1fr)">
-  <div class="pay-card selected" onclick="selectPayMethod(this,'crypto')">
-    <div class="pay-icon-lg">₿</div>
-    <h4>USDT (Crypto)</h4>
-    <p>ERC20 wallet . Send payment proof to WhatsApp for activation.</p>
-  </div>
-  <div class="pay-card" onclick="selectPayMethod(this,'bank')">
-    <div class="pay-icon-lg">🏦</div>
-    <h4>Access Bank Transfer</h4>
-    <p>Direct NGN bank transfer. Send receipt to WhatsApp for activation.</p>
-  </div>
-</div>
-
-<!-- Crypto Panel — shown by default -->
-<div class="detail-panel" id="cryptoPanel" style="display:block">
-  <h4>Pay with USDT (Crypto)</h4>
-  <p>Send the exact USDT amount for your plan, then send proof to WhatsApp.</p>
-
-  <div class="detail-row">
-    <span class="lbl">Network</span>
-    <span class="val">ETHEREUM (ERC20)</span>
-  </div>
-
-  <div class="detail-row">
-    <span class="lbl">USDT Wallet Address</span>
-    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-      <!-- ↓ 0x85d1ce7cdb52c0be209def7ef041c3f7f67e68c5 -->
-      <span class="val" id="usdtWallet" style="font-size:12px;word-break:break-all">
-        0x85d1ce7cdb52c0be209def7ef041c3f7f67e68c5
-      </span>
-      <button class="copy-btn"
-        onclick="copyText(document.getElementById('usdtWallet').textContent.trim(), 'Wallet address')">
-        Copy
-      </button>
+    <!-- ── Section Header: Renew ── -->
+    <div class="acc-section-header">
+      <h3>Renew Your Plan</h3>
+      <div class="acc-section-line"></div>
     </div>
-  </div>
 
-  
-  <div class="detail-row">
-    <span class="lbl">Amount — Standard</span>
-    <span class="val">$50 USDT</span>
-  </div>
-  <div class="detail-row">
-    <span class="lbl">Amount — VIP Elite</span>
-    <span class="val">$150 USDT</span>
-  </div>
-  <div class="detail-row">
-    <span class="lbl">Amount — Academy</span>
-    <span class="val">$300 USDT</span>
-  </div>
+    <!-- ── Payment Method Cards ── -->
+    <div class="acc-pay-cards">
 
-  <div class="note">
-    After sending, screenshot your transaction and send it to WhatsApp:
-    <strong>+234 817 313 3453</strong>. Your account will be activated within 1 hour.
-  </div>
+      <div class="acc-pay-card selected" id="cryptoCard"
+           onclick="selectPayMethod('crypto')">
+        <div class="acc-pay-icon">₿</div>
+        <h4>USDT (Crypto)</h4>
+        <p>ERC20 wallet . Send payment proof to WhatsApp.</p>
+      </div>
 
-  <div style="margin-top:16px">
-    <a href="https://wa.me/2348173133453?text=Hello%20DecodeFXGroup%2C%20I%20just%20sent%20USDT%20for%20my%20subscription.%20Please%20activate%20my%20account."
-       class="btn btn-primary"
-       style="width:100%;justify-content:center"
-       target="_blank">
-      <img src="Images/whatsapp2.png" alt="whatsapp logo" height="40px" width="40px"> Payment Proof on WhatsApp
-    </a>
-  </div>
-</div>
+      <div class="acc-pay-card" id="bankCard"
+           onclick="selectPayMethod('bank')">
+        <div class="acc-pay-icon">🏦</div>
+        <h4>Access Bank Transfer</h4>
+        <p>Direct NGN bank transfer. Send receipt to WhatsApp for activation.</p>
+      </div>
 
-<!-- Bank Panel — hidden by default -->
-<div class="detail-panel" id="bankPanel" style="display:none">
-  <h4>Access Bank Transfer</h4>
-  <p>Transfer the exact Naira amount for your plan, then confirm via WhatsApp.</p>
-
-  <div class="detail-row">
-    <span class="lbl">Account Name</span>
-    <span class="val">AYOBAMI PELUMI ODEJIDE</span>
-  </div>
-
-  <div class="detail-row">
-    <span class="lbl">Account Number</span>
-    <div style="display:flex;align-items:center;gap:8px">
-      <span class="val">1224074947</span>
-      <button class="copy-btn" onclick="copyText('1224074947', 'Account number')">Copy</button>
     </div>
-  </div>
 
-  <div class="detail-row">
-    <span class="lbl">Bank</span>
-    <span class="val">Access Bank PLC</span>
-  </div>
+    <!-- ── Crypto Panel (shown by default) ── -->
+    <div class="acc-panel" id="cryptoPanel">
+      <h4 class="acc-panel-title">Pay with USDT (Crypto)</h4>
+      <p class="acc-panel-sub">
+        Send the exact USDT amount for your plan, then send proof to WhatsApp.
+      </p>
 
-  <div class="detail-row">
-    <span class="lbl">Reference</span>
-    <div style="display:flex;align-items:center;gap:8px">
-      <span class="val">DFX-<span id="refCode">------</span></span>
-      <button class="copy-btn"
-        onclick="copyText('DFX-' + document.getElementById('refCode').textContent.trim(), 'Reference')">
-        Copy
-      </button>
-    </div>
-  </div>
+      <div class="acc-panel-rows">
 
-  <div class="note">
-    Use your <strong>email address</strong> or the reference above as your transfer narration.
-    After transferring, send your receipt to WhatsApp for activation.
-  </div>
+        <div class="acc-panel-row">
+          <span class="acc-row-label">Network</span>
+          <span class="acc-row-value">ETHEREUM (ERC20)</span>
+        </div>
 
-  <div style="margin-top:16px">
-    <a href="https://wa.me/2348173133453?text=Hello%20DecodeFXGroup%2C%20I%20just%20made%20an%20Access%20Bank%20transfer%20for%20my%20subscription.%20Please%20activate%20my%20account."
-       class="btn btn-primary"
-       style="width:100%;justify-content:center"
-       target="_blank">
-      <img src="Images/whatsapp2.png" alt="whatsapp logo" height="40px" width="40px"> Confirm Transfer on WhatsApp
-    </a>
-  </div>
-</div>
-
-    
-
-    
+        <div class="acc-panel-row">
+          <span class="acc-row-label">USDT Wallet</span>
+          <div class="acc-row-copy-group">
+            <span class="acc-row-value small" id="usdtWallet">
+              <!-- Replace with your real TRC20 wallet address -->
+              --0x85d1ce7cdb52c0be209def041c3f7f67e68c5--
+            </span>
+            <button class="acc-copy-btn"
+              onclick="copyText('--0x85d1ce7cdb52c0be209def041c3f7f67e68c5--', 'Wallet address')">
+              Copy
+            </button>
+          </div>
+        </div>
 
         
 
-    <!-- Plan comparison -->
-    <div class="section-hdr" style="margin-top:8px">
-      <h3>Available Plans</h3>
-      <div class="sep"></div>
+        <div class="acc-panel-row">
+          <span class="acc-row-label">Academy Enrollment</span>
+          <span class="acc-row-value">$300 USDT</span>
+        </div>
+
+        <div class="acc-panel-row">
+          <span class="acc-row-label">Standard Signals</span>
+          <span class="acc-row-value">$50 USDT / month</span>
+        </div>
+
+        <div class="acc-panel-row">
+          <span class="acc-row-label">VIP Elite Signals</span>
+          <span class="acc-row-value">$150 USDT / month</span>
+        </div>
+
+      </div>
+
+      <div class="acc-panel-note">
+        After sending, screenshot your transaction and send it to WhatsApp:
+        <strong>+234 817 313 3453</strong>.
+        Your account will be activated within 1 hour.
+      </div>
+
+      <a href="https://wa.me/2348173133453?text=Hello%20DecodeFXGroup%2C%20I%20just%20sent%20USDT%20for%20my%20subscription.%20Please%20activate%20my%20account."
+         class="acc-btn-primary acc-btn-full"
+         target="_blank">
+        📱 Send Payment Proof on WhatsApp
+      </a>
     </div>
-    <div class="plan-grid">
-      <div class="plan-tile">
+
+    <!-- ── Bank Transfer Panel (hidden by default) ── -->
+    <div class="acc-panel" id="bankPanel" style="display:none">
+      <h4 class="acc-panel-title">Access Bank Transfer</h4>
+      <p class="acc-panel-sub">
+        Transfer the Naira equivalent for your plan, then confirm via WhatsApp.
+      </p>
+
+      <div class="acc-panel-rows">
+
+        <div class="acc-panel-row">
+          <span class="acc-row-label">Account Name</span>
+          <span class="acc-row-value">AYOBAMI PELUMI ODEJIDE</span>
+        </div>
+
+        <div class="acc-panel-row">
+          <span class="acc-row-label">Account Number</span>
+          <div class="acc-row-copy-group">
+            <span class="acc-row-value">1224074947</span>
+            <button class="acc-copy-btn"
+              onclick="copyText('1224074947', 'Account number')">
+              Copy
+            </button>
+          </div>
+        </div>
+
+        <div class="acc-panel-row">
+          <span class="acc-row-label">Bank</span>
+          <span class="acc-row-value">Access Bank PLC</span>
+        </div>
+
+        <div class="acc-panel-row">
+          <span class="acc-row-label">Reference</span>
+          <div class="acc-row-copy-group">
+            <span class="acc-row-value">
+              DFX-<span id="refCode">------</span>
+            </span>
+            <button class="acc-copy-btn"
+              onclick="copyText('DFX-' + document.getElementById('refCode').textContent.trim(), 'Reference')">
+              Copy
+            </button>
+          </div>
+        </div>
+
+        <div class="acc-panel-row">
+          <span class="acc-row-label">Academy Enrollment</span>
+          <span class="acc-row-value">₦480,000</span>
+        </div>
+
+        <div class="acc-panel-row">
+          <span class="acc-row-label">Standard Signals</span>
+          <span class="acc-row-value">₦80,000 / month</span>
+        </div>
+
+        <div class="acc-panel-row">
+          <span class="acc-row-label">VIP Elite Signals</span>
+          <span class="acc-row-value">₦240,000 / month</span>
+        </div>
+
+      </div>
+
+      <div class="acc-panel-note">
+        Use your <strong>email address</strong> or the reference code as your
+        transfer narration. After transferring, send your receipt to WhatsApp
+        for activation.
+      </div>
+
+      <a href="https://wa.me/2348173133453?text=Hello%20DecodeFXGroup%2C%20I%20just%20made%20an%20Access%20Bank%20transfer%20for%20my%20subscription.%20Please%20activate%20my%20account."
+         class="acc-btn-primary acc-btn-full"
+         target="_blank">
+        📱 Confirm Transfer on WhatsApp
+      </a>
+    </div>
+
+    <!-- ── Section Header: Plans ── -->
+    <div class="acc-section-header" style="margin-top:8px">
+      <h3>Available Plans</h3>
+      <div class="acc-section-line"></div>
+    </div>
+
+    <!-- ── Plan Tiles ── -->
+    <div class="acc-plan-grid">
+
+      <div class="acc-plan-tile" id="planAcademy">
+        <div class="acc-plan-icon">🎓</div>
         <h4>Academy Enrollment</h4>
-        <div class="price">$300</div>
-        <div class="period">One-time · Lifetime access</div>
-        <ul class="plan-features">
+        <div class="acc-plan-price">$300</div>
+        <div class="acc-plan-period">One-time · Lifetime access</div>
+        <ul class="acc-plan-features">
           <li>12-module LMS curriculum</li>
           <li>30 days free VIP signals</li>
           <li>Risk management playbook</li>
           <li>Certificate of completion</li>
           <li>Private community access</li>
         </ul>
-        <button class="btn-sm btn-sm-primary"  style="width:100%;justify-content:center">Enroll — $300</button>
+        <button class="acc-plan-btn outline"
+          onclick="selectPayMethod('crypto'); document.querySelector('.acc-pay-cards').scrollIntoView({behavior:'smooth'})">
+          Enroll — $300
+        </button>
       </div>
-      <div class="plan-tile">
+
+      <div class="acc-plan-tile" id="planStandard">
+        <div class="acc-plan-icon">⚡</div>
         <h4>Standard Signals</h4>
-        <div class="price">$50</div>
-        <div class="period">Per month</div>
-        <ul class="plan-features">
+        <div class="acc-plan-price">$50</div>
+        <div class="acc-plan-period">Per month</div>
+        <ul class="acc-plan-features">
           <li>3–5 daily trade signals</li>
           <li>Exact entry, SL &amp; TP</li>
           <li>Telegram delivery</li>
           <li>Weekly market analysis</li>
           <li>Community access</li>
         </ul>
-        <button class="btn-sm btn-sm-outline" onclick="paystackPay(50)" style="width:100%;justify-content:center">Subscribe — $50/mo</button>
+        <button class="acc-plan-btn outline"
+          onclick="selectPayMethod('crypto'); document.querySelector('.acc-pay-cards').scrollIntoView({behavior:'smooth'})">
+          Subscribe — $50/mo
+        </button>
       </div>
-      <div class="plan-tile current" id="currentPlanTile">
-        <div class="current-tag" id="currentTag">Current Plan</div>
+
+      <div class="acc-plan-tile" id="planVip">
+        <div class="acc-plan-icon">👑</div>
         <h4>VIP Elite Signals</h4>
-        <div class="price">$150</div>
-        <div class="period">Per month · Priority</div>
-        <ul class="plan-features">
+        <div class="acc-plan-price">$150</div>
+        <div class="acc-plan-period">Per month · Priority</div>
+        <ul class="acc-plan-features">
           <li>Everything in Standard</li>
           <li>Crypto &amp; gold extended</li>
           <li>Monthly 1-on-1 session</li>
           <li>Priority signal delivery</li>
           <li>VIP-only Telegram group</li>
         </ul>
-        <button class="btn-sm btn-sm-primary" onclick="paystackPay(150)" style="width:100%;justify-content:center">Renew — $150/mo</button>
+        <button class="acc-plan-btn primary"
+          onclick="selectPayMethod('crypto'); document.querySelector('.acc-pay-cards').scrollIntoView({behavior:'smooth'})">
+          Renew — $150/mo
+        </button>
       </div>
+
     </div>
 
   </div>
-</main>
+  <!-- end page body -->
 
+</main>
 <div class="toast" id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -331,17 +417,51 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 3500);
 }
 
-// ─── SIDEBAR TOGGLE ──────────────────────────────────────────
-function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('open');
-  const ov = document.getElementById('sidebarOverlay');
-  if (ov) ov.classList.toggle('visible');
+// ── Mobile menu toggle ──────────────────────────────
+function toggleDashMenu() {
+  const menu      = document.getElementById('dashMobileMenu');
+  const hamburger = document.getElementById('dashHamburger');
+  const isOpen    = menu.classList.contains('open');
+
+  if (isOpen) {
+    closeDashMenu();
+  } else {
+    menu.classList.add('open');
+    hamburger.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
 }
-function closeSidebar() {
-  document.getElementById('sidebar').classList.remove('open');
-  const ov = document.getElementById('sidebarOverlay');
-  if (ov) ov.classList.remove('visible');
+
+function closeDashMenu() {
+  const menu      = document.getElementById('dashMobileMenu');
+  const hamburger = document.getElementById('dashHamburger');
+  menu.classList.remove('open');
+  hamburger.classList.remove('open');
+  document.body.style.overflow = '';
 }
+
+// ── Close menu on Escape key ─────────────────────────
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeDashMenu();
+});
+
+// ── Navbar scroll shadow ─────────────────────────────
+window.addEventListener('scroll', function() {
+  const nav = document.getElementById('dashNav');
+  if (nav) nav.classList.toggle('scrolled', window.scrollY > 10);
+}, { passive: true });
+
+// ── Set active link based on current page ────────────
+(function setActiveLink() {
+  const page  = window.location.pathname.split('/').pop() || 'dashboard.html';
+  const links = document.querySelectorAll('.dash-nav-link, .dash-mobile-links a');
+  links.forEach(link => {
+    const href = link.getAttribute('href') || '';
+    if (href.includes(page)) {
+      link.classList.add('active');
+    }
+  });
+})();
 
 // ─── SIGN IN ─────────────────────────────────────────────────
 async function handleLogin() {
@@ -434,7 +554,7 @@ function getPlanLabel(plan) {
 // ─── LOAD ACCOUNT PAGE ───────────────────────────────────────
 async function loadAccountPage(user, profile) {
 
-  // ── Sidebar ──────────────────────────────────────────────
+  // ── Update top navbar user info ───────────────────
   const initials = profile.name
     .split(' ')
     .map(n => n[0])
@@ -442,14 +562,19 @@ async function loadAccountPage(user, profile) {
     .toUpperCase()
     .slice(0, 2);
 
-  const avatarEl = document.getElementById('sidebarAvatar');
-  const nameEl   = document.getElementById('sidebarName');
-  const planEl   = document.getElementById('sidebarPlan');
-  if (avatarEl) avatarEl.textContent = initials;
-  if (nameEl)   nameEl.textContent   = profile.name;
-  if (planEl)   planEl.textContent   = getPlanLabel(profile.plan);
+  const navAvatar   = document.getElementById('navAvatar');
+  const navUserName = document.getElementById('navUserName');
+  const mobileAv    = document.getElementById('mobileAvatar');
+  const mobileName  = document.getElementById('mobileUserName');
+  const mobilePlan  = document.getElementById('mobileUserPlan');
 
-  // ── Fetch active subscription from Supabase ───────────────
+  if (navAvatar)   navAvatar.textContent   = initials;
+  if (navUserName) navUserName.textContent = profile.name.split(' ')[0];
+  if (mobileAv)    mobileAv.textContent    = initials;
+  if (mobileName)  mobileName.textContent  = profile.name;
+  if (mobilePlan)  mobilePlan.textContent  = getPlanLabel(profile.plan || 'academy');
+
+  // ── Fetch active subscription from Supabase ───────
   const { data: sub } = await sb
     .from('subscriptions')
     .select('*')
@@ -463,23 +588,38 @@ async function loadAccountPage(user, profile) {
   const isActive = sub && (!sub.expires_at || new Date(sub.expires_at) > now);
   const planLabel = getPlanLabel(sub?.plan || profile.plan);
 
-  // ── Subscription status card ──────────────────────────────
-  const subCardPlan   = document.getElementById('subCardPlan');
-  const subCardEmail  = document.getElementById('subCardEmail');
-  const subBadge      = document.getElementById('subBadge');
-  const detPlan       = document.getElementById('subDetailPlan');
-  const detStart      = document.getElementById('subDetailStart');
-  const detExpiry     = document.getElementById('subDetailExpiry');
+  // ── Subscription status card ──────────────────────
+  const subCardPlan  = document.getElementById('subCardPlan');
+  const subCardEmail = document.getElementById('subCardEmail');
+  const subBadge     = document.getElementById('subBadge');
+  const detPlan      = document.getElementById('subDetailPlan');
+  const detStart     = document.getElementById('subDetailStart');
+  const detExpiry    = document.getElementById('subDetailExpiry');
 
   if (subCardPlan)  subCardPlan.textContent  = planLabel;
   if (subCardEmail) subCardEmail.textContent = profile.email || user.email;
   if (detPlan)      detPlan.textContent      = planLabel;
-  if (detStart)     detStart.textContent     = sub ? formatDate(sub.started_at) : '—';
-  if (detExpiry)    detExpiry.textContent    = sub
-    ? (sub.expires_at ? formatDate(sub.expires_at) : 'Lifetime')
-    : '—';
 
-  // Update badge to active or expired
+  if (detStart) {
+    detStart.textContent = sub
+      ? new Date(sub.started_at).toLocaleDateString('en-GB', {
+          day: 'numeric', month: 'short', year: 'numeric'
+        })
+      : '—';
+  }
+
+  if (detExpiry) {
+    if (!sub) {
+      detExpiry.textContent = '—';
+    } else if (!sub.expires_at) {
+      detExpiry.textContent = 'Lifetime';
+    } else {
+      detExpiry.textContent = new Date(sub.expires_at).toLocaleDateString('en-GB', {
+        day: 'numeric', month: 'short', year: 'numeric'
+      });
+    }
+  }
+
   if (subBadge) {
     if (isActive) {
       subBadge.className = 'sub-active-badge';
@@ -487,42 +627,45 @@ async function loadAccountPage(user, profile) {
     } else {
       subBadge.className = 'sub-expired-badge';
       subBadge.innerHTML = '<span class="sub-badge-dot"></span>Expired';
+      showToast('⚠️ Your subscription has expired. Please renew.');
     }
   }
 
-  // ── Generate unique bank transfer reference ───────────────
-  const ref    = 'DFX' + String(Date.now()).slice(-6);
-  const refEl  = document.getElementById('refCode');
-  if (refEl) refEl.textContent = ref;
+  // ── Generate unique bank reference ────────────────
+  const refEl = document.getElementById('refCode');
+  if (refEl) {
+    refEl.textContent = String(Date.now()).slice(-6);
+  }
 
-  // ── Mark current plan tile ────────────────────────────────
+  // ── Mark current plan tile ────────────────────────
   const currentPlan = sub?.plan || profile.plan || '';
-  document.querySelectorAll('.plan-tile').forEach(tile => {
-    const h4 = tile.querySelector('h4');
-    if (!h4) return;
-    const tileText = h4.textContent.toLowerCase();
-    const match =
-      (currentPlan === 'vip'      && tileText.includes('vip'))      ||
-      (currentPlan === 'standard' && tileText.includes('standard')) ||
-      (currentPlan === 'academy'  && tileText.includes('academy'));
+  const planMap = {
+    academy:  'planAcademy',
+    standard: 'planStandard',
+    vip:      'planVip',
+  };
 
-    if (match) {
-      tile.classList.add('current');
-      if (!tile.querySelector('.current-tag')) {
+  const tileId = planMap[currentPlan];
+  if (tileId) {
+    const tile = document.getElementById(tileId);
+    if (tile) {
+      tile.classList.add('current-plan');
+
+      // Add current tag if not already there
+      if (!tile.querySelector('.acc-current-tag')) {
         const tag = document.createElement('div');
-        tag.className   = 'current-tag';
+        tag.className   = 'acc-current-tag';
         tag.textContent = 'Current Plan';
         tile.insertBefore(tag, tile.firstChild);
       }
     }
-  });
+  }
 
-  // ── Show/hide renewal reminder ────────────────────────────
-  if (!isActive) {
-    showToast('⚠️ Your subscription has expired. Please renew to continue accessing signals.');
+  // ── Show expiry warning toast ─────────────────────
+  if (!isActive && sub) {
+    showToast('⚠️ Your subscription has expired. Please renew to continue.');
   }
 }
-
 // ─── BOOT — runs when page loads ─────────────────────────────
 (async () => {
   const { data: { session } } = await sb.auth.getSession();

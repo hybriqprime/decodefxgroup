@@ -9,6 +9,75 @@
 <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+  <!-- ══ TOP NAVBAR ══ -->
+<nav class="dash-nav" id="dashNav">
+  <div class="dash-nav-inner">
+
+    <!-- Logo -->
+    <a href="index.html" class="dash-nav-logo">
+      <div class="dash-logo-mark">
+        <img src="Images/logo2.png" alt="Logo"
+             style="width:22px;height:22px;object-fit:contain;display:block;">
+      </div>
+      <span class="dash-logo-text">Decode<span>FX</span>Group</span>
+    </a>
+    
+
+    <!-- Desktop links -->
+    <div class="dash-nav-links">
+      <a href="dashboard.html" class="dash-nav-link">Dashboard</a>
+      <a href="academy.html"   class="dash-nav-link">Academy</a>
+      <a href="https://t.me/decodefxgroup" class="dash-nav-link" target="_blank">
+        Live Signals
+      </a>
+      <a href="account.html"   class="dash-nav-link">Subscription</a>
+      <a href="contact.html"   class="dash-nav-link">Support</a>
+    </div>
+
+    <!-- Desktop right actions -->
+    <div class="dash-nav-actions">
+      <div class="dash-user-pill" id="navUserPill">
+        <div class="dash-user-avatar" id="navAvatar">?</div>
+        <span class="dash-user-name" id="navUserName">Loading...</span>
+      </div>
+      <button class="dash-signout-btn" onclick="handleLogout()">Sign Out</button>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button class="dash-hamburger" id="dashHamburger" onclick="toggleDashMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+</nav>
+
+<!-- ══ MOBILE MENU OVERLAY ══ -->
+<div class="dash-mobile-overlay" id="dashMobileMenu">
+  <button class="dash-mobile-close" onclick="closeDashMenu()">✕</button>
+
+  <div class="dash-mobile-user">
+    <div class="dash-mobile-avatar" id="mobileAvatar">?</div>
+    <div class="dash-mobile-name" id="mobileUserName">Loading...</div>
+    <div class="dash-mobile-plan" id="mobileUserPlan">—</div>
+  </div>
+
+  <div class="dash-mobile-links">
+    <a href="dashboard.html" onclick="closeDashMenu()">Dashboard</a>
+    <a href="academy.html"   onclick="closeDashMenu()">Academy</a>
+    <a href="https://t.me/decodefxgroup" target="_blank" onclick="closeDashMenu()">
+      Live Signals
+    </a>
+    <a href="account.html"   onclick="closeDashMenu()">Subscription</a>
+    <a href="contact.html"   onclick="closeDashMenu()">Support</a>
+    <a href="index.html"     onclick="closeDashMenu()">Back to Site</a>
+  </div>
+
+  <button class="dash-mobile-signout" onclick="handleLogout()">
+    Sign Out
+  </button>
+</div>
 
 <!-- ── AUTH MODAL ── -->
 <div class="auth-modal" id="authModal">
@@ -65,99 +134,14 @@
   </div>
 </div>
 
-<!-- ── SIDEBAR ── -->
-<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
-<aside class="sidebar" id="sidebar">
 
-  <!-- Logo -->
-  <div class="sidebar-logo">
-    <div class="sidebar-logo-inner">
-      <div class="sidebar-logo-mark">D</div>
-      <span class="sidebar-logo-text">Decode<span>FX</span>Group</span>
-    </div>
-  </div>
-
-  <!-- User info -->
-  <div class="sidebar-user">
-    <div class="sidebar-avatar" id="sidebarAvatar">?</div>
-    <div class="sidebar-user-name" id="sidebarName">Loading...</div>
-    <div class="sidebar-user-plan" id="sidebarPlan">—</div>
-    <div class="sidebar-sub-status">
-      <span class="sub-dot" id="subDot"></span>
-      <span id="subStatusText">Checking...</span>
-    </div>
-  </div>
-
-  <!-- Navigation -->
-  <nav class="sidebar-nav">
-
-    <span class="sidebar-section-label">Main</span>
-
-    <a class="sidebar-link active" href="dashboard.html">
-      <svg viewBox="0 0 24 24">
-        <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
-      </svg>
-      Dashboard
-    </a>
-
-    <a class="sidebar-link" href="academy.html">
-      <svg viewBox="0 0 24 24">
-        <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/>
-      </svg>
-      Academy
-    </a>
-
-    <a class="sidebar-link" href="https://t.me/decodefxgroup" target="_blank">
-      <svg viewBox="0 0 24 24">
-        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-1.97 9.282c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.939z"/>
-      </svg>
-      Live Signals
-    </a>
-
-    <span class="sidebar-section-label" style="margin-top:8px">Account</span>
-
-    <a class="sidebar-link" href="account.html">
-      <svg viewBox="0 0 24 24">
-        <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
-      </svg>
-      Subscription
-    </a>
-
-    <a class="sidebar-link" href="contact.html">
-      <svg viewBox="0 0 24 24">
-        <path d="M11.5 2C6.81 2 3 5.81 3 10.5S6.81 19 11.5 19h.5v3c4.86-2.34 8-7 8-11.5C20 5.81 16.19 2 11.5 2zm1 14.5h-2v-2h2v2zm0-4h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2h-2c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5z"/>
-      </svg>
-      Support
-    </a>
-
-    <a class="sidebar-link" href="index.html">
-      <svg viewBox="0 0 24 24">
-        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-      </svg>
-      Back to Site
-    </a>
-
-  </nav>
-
-  <!-- Sign out -->
-  <div class="sidebar-footer">
-    <a onclick="handleLogout()">
-      <svg viewBox="0 0 24 24">
-        <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
-      </svg>
-      Sign Out
-    </a>
-  </div>
-
-</aside>
 
 <!-- ── MAIN CONTENT ── -->
 <main class="main-content">
   <div class="topbar">
     <div style="display:flex;align-items:center;gap:12px">
-      <button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="Toggle sidebar">
-        <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
-      </button>
+      
+       
       <div class="topbar-left">
         <h2>Student Dashboard</h2>
         <p id="topbarDate">Loading...</p>
@@ -239,45 +223,70 @@
     <!-- Course + Modules -->
     <div class="content-grid">
       <div class="card">
-        <div class="card-header">
-          <span class="card-title">Course Progress</span>
-          <a class="card-link" href="academy.html">View All →</a>
-        </div>
-        <div class="progress-wrap">
-          <div class="progress-label"><span>Overall completion</span><span>25%</span></div>
-          <div class="progress-bar"><div class="progress-fill" style="width:25%"></div></div>
-        </div>
-        <div class="module-list">
-          <div class="module-row">
-            <div class="module-status complete">✓</div>
-            <span class="module-name complete">Forex Fundamentals &amp; Market Structure</span>
-            <span class="module-badge complete">Done</span>
-          </div>
-          <div class="module-row">
-            <div class="module-status complete">✓</div>
-            <span class="module-name complete">Technical Analysis Mastery</span>
-            <span class="module-badge complete">Done</span>
-          </div>
-          <div class="module-row">
-            <div class="module-status in-progress">▶</div>
-            <div style="flex:1">
-              <div class="module-name">Liquidity Flux Trading (LFT)</div>
-              <div class="module-progress-mini"><div class="module-progress-mini-fill"></div></div>
-            </div>
-            <span class="module-badge active">45%</span>
-          </div>
-          <div class="module-row">
-            <div class="module-status locked">🔒</div>
-            <span class="module-name locked">Risk Management &amp; Psychology</span>
-            <span class="module-badge locked">Locked</span>
-          </div>
-          <div class="module-row">
-            <div class="module-status locked">🔒</div>
-            <span class="module-name locked">Live Trading &amp; Signal Reading</span>
-            <span class="module-badge locked">Locked</span>
-          </div>
+  <div class="card-header">
+    <span class="card-title">Course Progress</span>
+    <a class="card-link" href="academy.html">View All →</a>
+  </div>
+
+  <!-- Overall progress bar -->
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>Overall completion</span>
+      <span>25%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width:25%"></div>
+    </div>
+  </div>
+
+  <!-- Module list -->
+  <div class="module-list">
+
+    <div class="module-row">
+      <div class="module-status-icon complete">✓</div>
+      <div class="module-info">
+        <span class="module-title">Forex Fundamentals & Market Structure</span>
+      </div>
+      <span class="module-tag complete">Done</span>
+    </div>
+
+    <div class="module-row">
+      <div class="module-status-icon complete">✓</div>
+      <div class="module-info">
+        <span class="module-title">Technical Analysis Mastery</span>
+      </div>
+      <span class="module-tag complete">Done</span>
+    </div>
+
+    <div class="module-row">
+      <div class="module-status-icon progress">▶</div>
+      <div class="module-info">
+        <span class="module-title">Liquidity Flux Trading (LFT)</span>
+        <div class="module-mini-bar">
+          <div class="module-mini-fill" style="width:45%"></div>
         </div>
       </div>
+      <span class="module-tag progress">45%</span>
+    </div>
+
+    <div class="module-row">
+      <div class="module-status-icon locked">🔒</div>
+      <div class="module-info">
+        <span class="module-title locked-text">Risk Management & Psychology</span>
+      </div>
+      <span class="module-tag locked">Locked</span>
+    </div>
+
+    <div class="module-row">
+      <div class="module-status-icon locked">🔒</div>
+      <div class="module-info">
+        <span class="module-title locked-text">Live Trading & Signal Reading</span>
+      </div>
+      <span class="module-tag locked">Locked</span>
+    </div>
+
+  </div>
+</div>
 
       <div class="card">
         <div class="card-header">
@@ -329,121 +338,159 @@
       </div>
     </div>
 
-    <!-- Live signals -->
-    <div class="signals-section">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600">Live Signal Feed</h3>
-        <a href="https://t.me/decodefxgroup" target="_blank" style="font-size:12px;color:var(--gold-dark);font-weight:600;letter-spacing:.06em;text-decoration:none">Open Telegram →</a>
+  <!-- ══ LIVE SIGNAL FEED ══ -->
+<div class="signals-section">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:#1a1f35">
+      Live Signal Feed
+    </h3>
+    <span style="font-size:12px;color:#6b7280">Active subscribers only</span>
+  </div>
+
+  <!-- Signal cards — blurred -->
+  <div class="signals-grid signals-blurred">
+
+    <div class="signal-card buy">
+      <div class="signal-top">
+        <span class="signal-pair-name">XAUUSD</span>
+        <span class="signal-type-badge buy">BUY</span>
       </div>
-      <div class="signals-grid">
-        <div class="signal-card buy">
-          <div class="signal-top">
-            <span class="signal-pair-name">XAUUSD</span>
-            <span class="signal-type-badge buy">BUY</span>
-          </div>
-          <div class="signal-levels">
-            <div class="signal-level">
-              <div class="level-label">Entry</div>
-              <div class="level-value">2341.50</div>
-            </div>
-            <div class="signal-level">
-              <div class="level-label">SL</div>
-              <div class="level-value" style="color:var(--danger)">2336.00</div>
-            </div>
-            <div class="signal-level">
-              <div class="level-label">TP</div>
-              <div class="level-value" style="color:var(--success)">2362.00</div>
-            </div>
-          </div>
-          <div class="signal-pips-display">
-            <span class="signal-time">📡 Today 09:42</span>
-            <span><span class="signal-pips-num">+187</span> pips</span>
-          </div>
-          <div class="signal-status-bar"><div class="signal-status-fill buy" style="width:78%"></div></div>
+      <div class="signal-levels">
+        <div class="signal-level">
+          <div class="level-label">Entry</div>
+          <div class="level-value">2341.50</div>
         </div>
-        <div class="signal-card sell">
-          <div class="signal-top">
-            <span class="signal-pair-name">EURUSD</span>
-            <span class="signal-type-badge sell">SELL</span>
-          </div>
-          <div class="signal-levels">
-            <div class="signal-level">
-              <div class="level-label">Entry</div>
-              <div class="level-value">1.0842</div>
-            </div>
-            <div class="signal-level">
-              <div class="level-label">SL</div>
-              <div class="level-value" style="color:var(--danger)">1.0875</div>
-            </div>
-            <div class="signal-level">
-              <div class="level-label">TP</div>
-              <div class="level-value" style="color:var(--success)">1.0780</div>
-            </div>
-          </div>
-          <div class="signal-pips-display">
-            <span class="signal-time">📡 Today 11:15</span>
-            <span><span class="signal-pips-num">+94</span> pips</span>
-          </div>
-          <div class="signal-status-bar"><div class="signal-status-fill sell" style="width:60%"></div></div>
+        <div class="signal-level">
+          <div class="level-label">SL</div>
+          <div class="level-value" style="color:#e05252">2336.00</div>
         </div>
-        <div class="signal-card buy">
-          <div class="signal-top">
-            <span class="signal-pair-name">GBPJPY</span>
-            <span class="signal-type-badge buy">BUY</span>
-          </div>
-          <div class="signal-levels">
-            <div class="signal-level">
-              <div class="level-label">Entry</div>
-              <div class="level-value">193.74</div>
-            </div>
-            <div class="signal-level">
-              <div class="level-label">SL</div>
-              <div class="level-value" style="color:var(--danger)">193.10</div>
-            </div>
-            <div class="signal-level">
-              <div class="level-label">TP</div>
-              <div class="level-value" style="color:var(--success)">195.50</div>
-            </div>
-          </div>
-          <div class="signal-pips-display">
-            <span class="signal-time">📡 Today 13:30</span>
-            <span><span class="signal-pips-num">+122</span> pips</span>
-          </div>
-          <div class="signal-status-bar"><div class="signal-status-fill buy" style="width:90%"></div></div>
+        <div class="signal-level">
+          <div class="level-label">TP</div>
+          <div class="level-value" style="color:#4caf8a">2362.00</div>
         </div>
-        <div class="signal-card sell">
-          <div class="signal-top">
-            <span class="signal-pair-name">USDJPY</span>
-            <span class="signal-type-badge sell">SELL</span>
-          </div>
-          <div class="signal-levels">
-            <div class="signal-level">
-              <div class="level-label">Entry</div>
-              <div class="level-value">154.32</div>
-            </div>
-            <div class="signal-level">
-              <div class="level-label">SL</div>
-              <div class="level-value" style="color:var(--danger)">154.90</div>
-            </div>
-            <div class="signal-level">
-              <div class="level-label">TP</div>
-              <div class="level-value" style="color:var(--success)">153.40</div>
-            </div>
-          </div>
-          <div class="signal-pips-display">
-            <span class="signal-time">📡 Today 14:05</span>
-            <span><span class="signal-pips-num">+68</span> pips</span>
-          </div>
-          <div class="signal-status-bar"><div class="signal-status-fill sell" style="width:45%"></div></div>
-        </div>
+      </div>
+      <div class="signal-pips-display">
+        <span class="signal-time">📡 Today 09:42</span>
+        <span><span class="signal-pips-num">+187</span> pips</span>
+      </div>
+      <div class="signal-status-bar">
+        <div class="signal-status-fill buy" style="width:78%"></div>
       </div>
     </div>
 
+    <div class="signal-card sell">
+      <div class="signal-top">
+        <span class="signal-pair-name">EURUSD</span>
+        <span class="signal-type-badge sell">SELL</span>
+      </div>
+      <div class="signal-levels">
+        <div class="signal-level">
+          <div class="level-label">Entry</div>
+          <div class="level-value">1.0842</div>
+        </div>
+        <div class="signal-level">
+          <div class="level-label">SL</div>
+          <div class="level-value" style="color:#e05252">1.0875</div>
+        </div>
+        <div class="signal-level">
+          <div class="level-label">TP</div>
+          <div class="level-value" style="color:#4caf8a">1.0780</div>
+        </div>
+      </div>
+      <div class="signal-pips-display">
+        <span class="signal-time">📡 Today 11:15</span>
+        <span><span class="signal-pips-num">+94</span> pips</span>
+      </div>
+      <div class="signal-status-bar">
+        <div class="signal-status-fill sell" style="width:60%"></div>
+      </div>
+    </div>
+
+    <div class="signal-card buy">
+      <div class="signal-top">
+        <span class="signal-pair-name">GBPJPY</span>
+        <span class="signal-type-badge buy">BUY</span>
+      </div>
+      <div class="signal-levels">
+        <div class="signal-level">
+          <div class="level-label">Entry</div>
+          <div class="level-value">193.74</div>
+        </div>
+        <div class="signal-level">
+          <div class="level-label">SL</div>
+          <div class="level-value" style="color:#e05252">193.10</div>
+        </div>
+        <div class="signal-level">
+          <div class="level-label">TP</div>
+          <div class="level-value" style="color:#4caf8a">195.50</div>
+        </div>
+      </div>
+      <div class="signal-pips-display">
+        <span class="signal-time">📡 Today 13:30</span>
+        <span><span class="signal-pips-num">+122</span> pips</span>
+      </div>
+      <div class="signal-status-bar">
+        <div class="signal-status-fill buy" style="width:90%"></div>
+      </div>
+    </div>
+
+    <div class="signal-card sell">
+      <div class="signal-top">
+        <span class="signal-pair-name">USDJPY</span>
+        <span class="signal-type-badge sell">SELL</span>
+      </div>
+      <div class="signal-levels">
+        <div class="signal-level">
+          <div class="level-label">Entry</div>
+          <div class="level-value">154.32</div>
+        </div>
+        <div class="signal-level">
+          <div class="level-label">SL</div>
+          <div class="level-value" style="color:#e05252">154.90</div>
+        </div>
+        <div class="signal-level">
+          <div class="level-label">TP</div>
+          <div class="level-value" style="color:#4caf8a">153.40</div>
+        </div>
+      </div>
+      <div class="signal-pips-display">
+        <span class="signal-time">📡 Today 14:05</span>
+        <span><span class="signal-pips-num">+68</span> pips</span>
+      </div>
+      <div class="signal-status-bar">
+        <div class="signal-status-fill sell" style="width:45%"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Blur overlay with Telegram button -->
+  <div class="signals-gate">
+    <div class="signals-gate-inner">
+      <div class="signals-gate-icon">📡</div>
+      <h4>Live Signals Available</h4>
+      <p>
+        Full signal details including exact entry, stop loss, and take profit
+        are delivered exclusively via our private Telegram channel.
+      </p>
+      
+       <a href="https://t.me/Nathanpips_bot"
+        target="_blank"
+        class="signals-gate-btn">
+        View Signals on Telegram →
+      </a>
+      <span class="signals-gate-note">
+        🔒 Active subscribers only · Join the private channel
+      </span>
+    </div>
+  </div>
+
+</div>
     <!-- VIP upgrade prompt -->
     <div class="upgrade-card" id="upgradeCard">
       <div class="upgrade-text">
         <h3>⚡ Unlock VIP Elite Signals</h3>
-        <p>Get crypto &amp; extended gold coverage, a monthly 1-on-1 review session with Nathan, and priority signal delivery before Standard members. Upgrade to VIP Elite for $150/month.</p>
+        <p> Upgrade to VIP Elite for $150/month.</p>
       </div>
       <div class="upgrade-actions">
         <a href="enquiries.html" class="btn-sm btn-sm-primary">Go VIP — $150/mo</a>
@@ -663,19 +710,51 @@ async function handleLogout() {
   window.location.href = 'index.html';
 }
 
-// ─── SIDEBAR TOGGLE (mobile) ─────────────────────────────────
-function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('open');
-  const ov = document.getElementById('sidebarOverlay');
-  if (ov) ov.classList.toggle('visible');
+// ── Mobile menu toggle ──────────────────────────────
+function toggleDashMenu() {
+  const menu      = document.getElementById('dashMobileMenu');
+  const hamburger = document.getElementById('dashHamburger');
+  const isOpen    = menu.classList.contains('open');
+
+  if (isOpen) {
+    closeDashMenu();
+  } else {
+    menu.classList.add('open');
+    hamburger.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
 }
 
-function closeSidebar() {
-  document.getElementById('sidebar').classList.remove('open');
-  const ov = document.getElementById('sidebarOverlay');
-  if (ov) ov.classList.remove('visible');
+function closeDashMenu() {
+  const menu      = document.getElementById('dashMobileMenu');
+  const hamburger = document.getElementById('dashHamburger');
+  menu.classList.remove('open');
+  hamburger.classList.remove('open');
+  document.body.style.overflow = '';
 }
 
+// ── Close menu on Escape key ─────────────────────────
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeDashMenu();
+});
+
+// ── Navbar scroll shadow ─────────────────────────────
+window.addEventListener('scroll', function() {
+  const nav = document.getElementById('dashNav');
+  if (nav) nav.classList.toggle('scrolled', window.scrollY > 10);
+}, { passive: true });
+
+// ── Set active link based on current page ────────────
+(function setActiveLink() {
+  const page  = window.location.pathname.split('/').pop() || 'dashboard.html';
+  const links = document.querySelectorAll('.dash-nav-link, .dash-mobile-links a');
+  links.forEach(link => {
+    const href = link.getAttribute('href') || '';
+    if (href.includes(page)) {
+      link.classList.add('active');
+    }
+  });
+})();
 // ─── TOAST NOTIFICATION ──────────────────────────────────────
 function showToast(msg) {
   let t = document.getElementById('toast');
@@ -711,7 +790,7 @@ function getPlanLabel(plan) {
 // ─── LOAD DASHBOARD ──────────────────────────────────────────
 async function loadDashboard(user, profile) {
 
-  // ── Sidebar user info ─────────────────────────────────────
+  // ── Update top navbar user info ───────────────────
   const initials = profile.name
     .split(' ')
     .map(n => n[0])
@@ -719,31 +798,37 @@ async function loadDashboard(user, profile) {
     .toUpperCase()
     .slice(0, 2);
 
-  const avatarEl = document.getElementById('sidebarAvatar');
-  const nameEl   = document.getElementById('sidebarName');
-  const planEl   = document.getElementById('sidebarPlan');
-  const dotEl    = document.getElementById('subDot');
-  const statusEl = document.getElementById('subStatusText');
+  const navAvatar   = document.getElementById('navAvatar');
+  const navUserName = document.getElementById('navUserName');
+  const mobileAv    = document.getElementById('mobileAvatar');
+  const mobileName  = document.getElementById('mobileUserName');
+  const mobilePlan  = document.getElementById('mobileUserPlan');
 
-  if (avatarEl) avatarEl.textContent = initials;
-  if (nameEl)   nameEl.textContent   = profile.name;
+  if (navAvatar)   navAvatar.textContent   = initials;
+  if (navUserName) navUserName.textContent = profile.name.split(' ')[0];
+  if (mobileAv)    mobileAv.textContent    = initials;
+  if (mobileName)  mobileName.textContent  = profile.name;
+  if (mobilePlan)  mobilePlan.textContent  = getPlanLabel(profile.plan || 'academy');
 
-  // ── Topbar date ───────────────────────────────────────────
+  // ── Topbar date ───────────────────────────────────
   const dateEl = document.getElementById('topbarDate');
   if (dateEl) {
     dateEl.textContent = new Date().toLocaleDateString('en-GB', {
-      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+      weekday: 'long',
+      day:     'numeric',
+      month:   'long',
+      year:    'numeric',
     });
   }
 
-  // ── Greeting ──────────────────────────────────────────────
+  // ── Greeting ──────────────────────────────────────
   const greetEl = document.getElementById('greetName');
   if (greetEl) greetEl.textContent = profile.name.split(' ')[0];
 
   const greetSubEl = document.getElementById('greetSub');
   if (greetSubEl) greetSubEl.textContent = "Here's your trading overview for today.";
 
-  // ── Fetch subscription from Supabase ─────────────────────
+  // ── Fetch subscription from Supabase ─────────────
   const { data: sub } = await sb
     .from('subscriptions')
     .select('*')
@@ -757,33 +842,27 @@ async function loadDashboard(user, profile) {
   const isActive = sub && (!sub.expires_at || new Date(sub.expires_at) > now);
   const planLabel = getPlanLabel(sub?.plan || profile.plan);
 
-  // ── Sidebar plan + status dot ────────────────────────────
-  if (planEl)   planEl.textContent   = planLabel;
-  if (dotEl)    dotEl.className      = 'sub-dot' + (isActive ? '' : ' inactive');
-  if (statusEl) statusEl.textContent = isActive
-    ? 'Subscription active'
-    : 'Subscription expired';
-
-  // ── Subscription card ────────────────────────────────────
+  // ── Subscription card ────────────────────────────
   const subCardPlan   = document.getElementById('subCardPlan');
   const subCardExpiry = document.getElementById('subCardExpiry');
   const subBadge      = document.getElementById('subBadge');
-  const subCardActions = document.querySelector('.sub-card-actions');
 
   if (subCardPlan) subCardPlan.textContent = planLabel;
 
-  if (sub) {
-    const expFmt = sub.expires_at
-      ? formatDate(sub.expires_at)
-      : 'Lifetime';
-
-    if (subCardExpiry) {
+  if (subCardExpiry) {
+    if (sub && sub.expires_at) {
+      const exp    = new Date(sub.expires_at);
+      const expFmt = exp.toLocaleDateString('en-GB', {
+        day: 'numeric', month: 'long', year: 'numeric',
+      });
       subCardExpiry.textContent = isActive
-        ? `Active · Expires ${expFmt}`
-        : `Expired ${expFmt} — Please renew`;
+        ? 'Active · Expires ' + expFmt
+        : 'Expired ' + expFmt + ' — Please renew';
+    } else if (sub && !sub.expires_at) {
+      subCardExpiry.textContent = 'Active · Lifetime access';
+    } else {
+      subCardExpiry.textContent = 'No active subscription found';
     }
-  } else {
-    if (subCardExpiry) subCardExpiry.textContent = 'No active subscription found';
   }
 
   if (subBadge) {
@@ -793,12 +872,11 @@ async function loadDashboard(user, profile) {
     } else {
       subBadge.className = 'sub-expired-badge';
       subBadge.innerHTML = '<span class="sub-badge-dot"></span>Expired';
-      // Show renewal toast
-      showToast('⚠️ Your subscription has expired. Please renew to continue.');
+      showToast('⚠️ Your subscription has expired. Please renew.');
     }
   }
 
-  // ── Hide VIP upgrade card if already on VIP ───────────────
+  // ── Hide upgrade card if already on VIP ──────────
   const upgradeCard = document.getElementById('upgradeCard');
   if (upgradeCard && sub?.plan === 'vip') {
     upgradeCard.style.display = 'none';

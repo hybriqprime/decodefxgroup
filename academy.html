@@ -9,6 +9,74 @@
 <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+  <!-- ══ TOP NAVBAR ══ -->
+<nav class="dash-nav" id="dashNav">
+  <div class="dash-nav-inner">
+
+    <!-- Logo -->
+    <a href="index.html" class="dash-nav-logo">
+      <div class="dash-logo-mark">
+        <img src="Images/logo2.png" alt="Logo"
+             style="width:22px;height:22px;object-fit:contain;display:block;">
+      </div>
+      <span class="dash-logo-text">Decode<span>FX</span>Group</span>
+    </a>
+
+    <!-- Desktop links -->
+    <div class="dash-nav-links">
+      <a href="dashboard.html" class="dash-nav-link">Dashboard</a>
+      <a href="academy.html"   class="dash-nav-link">Academy</a>
+      <a href="https://t.me/decodefxgroup" class="dash-nav-link" target="_blank">
+        Live Signals
+      </a>
+      <a href="account.html"   class="dash-nav-link">Subscription</a>
+      <a href="contact.html"   class="dash-nav-link">Support</a>
+    </div>
+
+    <!-- Desktop right actions -->
+    <div class="dash-nav-actions">
+      <div class="dash-user-pill" id="navUserPill">
+        <div class="dash-user-avatar" id="navAvatar">?</div>
+        <span class="dash-user-name" id="navUserName">Loading...</span>
+      </div>
+      <button class="dash-signout-btn" onclick="handleLogout()">Sign Out</button>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button class="dash-hamburger" id="dashHamburger" onclick="toggleDashMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+</nav>
+
+<!-- ══ MOBILE MENU OVERLAY ══ -->
+<div class="dash-mobile-overlay" id="dashMobileMenu">
+  <button class="dash-mobile-close" onclick="closeDashMenu()">✕</button>
+
+  <div class="dash-mobile-user">
+    <div class="dash-mobile-avatar" id="mobileAvatar">?</div>
+    <div class="dash-mobile-name" id="mobileUserName">Loading...</div>
+    <div class="dash-mobile-plan" id="mobileUserPlan">—</div>
+  </div>
+
+  <div class="dash-mobile-links">
+    <a href="dashboard.html" onclick="closeDashMenu()">Dashboard</a>
+    <a href="academy.html"   onclick="closeDashMenu()">Academy</a>
+    <a href="https://t.me/decodefxgroup" target="_blank" onclick="closeDashMenu()">
+      Live Signals
+    </a>
+    <a href="account.html"   onclick="closeDashMenu()">Subscription</a>
+    <a href="contact.html"   onclick="closeDashMenu()">Support</a>
+    <a href="index.html"     onclick="closeDashMenu()">Back to Site</a>
+  </div>
+
+  <button class="dash-mobile-signout" onclick="handleLogout()">
+    Sign Out
+  </button>
+</div>
 
 <!-- Auth Modal -->
 <div class="auth-modal" id="authModal">
@@ -32,64 +100,14 @@
   </div>
 </div>
 
-<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-<!-- Sidebar -->
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-logo">
-    <div class="sidebar-logo-inner">
-      <div class="sidebar-logo-mark">D</div>
-      <span class="sidebar-logo-text">Decode<span>FX</span>Group</span>
-    </div>
-  </div>
-  <div class="sidebar-user">
-    <div class="sidebar-avatar" id="sidebarAvatar">?</div>
-    <div class="sidebar-user-name" id="sidebarName">Loading...</div>
-    <div class="sidebar-user-plan" id="sidebarPlan">—</div>
-  </div>
-  <nav class="sidebar-nav">
-    <div class="sidebar-section-label">Main</div>
-    <a class="sidebar-link" href="dashboard.html">
-      <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
-      Dashboard
-    </a>
-    <a class="sidebar-link active" href="academy.html">
-      <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
-      Academy
-    </a>
-    <a class="sidebar-link" href="#">
-      <svg viewBox="0 0 24 24"><path d="M13 2.05V4.05C17.39 4.59 20.5 8.58 19.96 12.97C19.5 16.61 16.64 19.5 13 19.93V21.93C18.5 21.38 22.5 16.5 21.95 11C21.5 6.25 17.73 2.5 13 2.05M11 2.06C9.05 2.25 7.19 3 5.67 4.26L7.1 5.74C8.22 4.84 9.57 4.26 11 4.06V2.06M4.26 5.67C3 7.19 2.25 9.04 2.05 11H4.05C4.24 9.58 4.8 8.23 5.69 7.1L4.26 5.67M2.06 13C2.26 14.96 3.03 16.81 4.27 18.33L5.69 16.9C4.81 15.77 4.24 14.42 4.06 13H2.06M7.1 18.37L5.67 19.74C7.18 21 9.04 21.79 11 22V20C9.58 19.82 8.23 19.25 7.1 18.37M12 7L8 10L12 13L16 10L12 7z"/></svg>
-      Live Signals
-    </a>
-    <div class="sidebar-section-label" style="margin-top:16px">Account</div>
-    <a class="sidebar-link" href="account.html">
-      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
-      Subscription
-    </a>
-    <a class="sidebar-link" href="index.html">
-      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-      Back to Site
-    </a>
-  </nav>
-  <div class="sidebar-footer">
-    <a onclick="handleLogout()">
-      <svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
-      Sign Out
-    </a>
-  </div>
-</aside>
+
+
 
 <main class="main-content">
   <div class="topbar">
     <div style="display:flex;align-items:center;gap:12px">
-      <button class="sidebar-toggle" onclick="toggleSidebar()">
-        <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
-      </button>
-      <div>
-        <div class="topbar-title">Academy</div>
-        <div class="topbar-sub">12-Module Forex Curriculum</div>
-      </div>
-    </div>
+      
     <a href="dashboard.html" class="btn-sm btn-sm-outline">← Dashboard</a>
   </div>
 
@@ -129,143 +147,175 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 
-// ─── SUPABASE CONFIG ─────────────────────────────────────────
-const SUPABASE_URL  = 'https://qzekcbnxgpcmiiouxknc.supabase.co';  // ← your project URL
-const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF6ZWtjYm54Z3BjbWlpb3V4a25jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwNTg0MzYsImV4cCI6MjA5MjYzNDQzNn0.4EEn2aPQInIhOoPoqERFT5vBNSApMUfS_Gvhyll9MQQ'; 
+// ── SUPABASE CONFIG ──────────────────────────────────
+const SUPABASE_URL  = 'https://qzekcbnxgpcmiiouxknc.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF6ZWtjYm54Z3BjbWlpb3V4a25jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwNTg0MzYsImV4cCI6MjA5MjYzNDQzNn0.4EEn2aPQInIhOoPoqERFT5vBNSApMUfS_Gvhyll9MQQ';
 const { createClient } = supabase;
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
 
-// ─── TOAST ───────────────────────────────────────────────────
+// ── PLAN LABEL ───────────────────────────────────────
+function getPlanLabel(plan) {
+  const labels = {
+    academy:  'Academy Enrollment',
+    standard: 'Standard Signals',
+    vip:      'VIP Elite Signals',
+  };
+  return labels[plan] || plan || 'Academy';
+}
+
+// ── TOAST ────────────────────────────────────────────
 function showToast(msg) {
   let t = document.getElementById('toast');
   if (!t) {
     t = document.createElement('div');
-    t.id = 'toast';
+    t.id        = 'toast';
     t.className = 'toast';
     document.body.appendChild(t);
   }
   t.textContent = msg;
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
+  setTimeout(() => t.classList.remove('show'), 3500);
 }
 
-// ─── SIDEBAR TOGGLE ──────────────────────────────────────────
-function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('open');
-  const ov = document.getElementById('sidebarOverlay');
-  if (ov) ov.classList.toggle('visible');
-}
-function closeSidebar() {
-  document.getElementById('sidebar').classList.remove('open');
-  const ov = document.getElementById('sidebarOverlay');
-  if (ov) ov.classList.remove('visible');
+// ── MOBILE MENU ──────────────────────────────────────
+function toggleDashMenu() {
+  const menu      = document.getElementById('dashMobileMenu');
+  const hamburger = document.getElementById('dashHamburger');
+  if (!menu || !hamburger) return;
+  const isOpen = menu.classList.contains('open');
+  if (isOpen) {
+    closeDashMenu();
+  } else {
+    menu.classList.add('open');
+    hamburger.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
 }
 
-// ─── MODULE DATA ─────────────────────────────────────────────
-// Update these to match your actual course content
+function closeDashMenu() {
+  const menu      = document.getElementById('dashMobileMenu');
+  const hamburger = document.getElementById('dashHamburger');
+  if (menu)      menu.classList.remove('open');
+  if (hamburger) hamburger.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeDashMenu();
+});
+
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('dashNav');
+  if (nav) nav.classList.toggle('scrolled', window.scrollY > 10);
+}, { passive: true });
+
+// ── ACTIVE NAV LINK ──────────────────────────────────
+(function setActiveLink() {
+  const page  = window.location.pathname.split('/').pop() || '';
+  const links = document.querySelectorAll('.dash-nav-link, .dash-mobile-links a');
+  links.forEach(link => {
+    const href = link.getAttribute('href') || '';
+    if (href && href !== '#' && href.includes(page) && page !== '') {
+      link.classList.add('active');
+    }
+  });
+})();
+
+// ── SIGN IN ──────────────────────────────────────────
+async function handleLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pw    = document.getElementById('loginPassword').value;
+
+  if (!email || !pw) {
+    showToast('Please enter your email and password.');
+    return;
+  }
+
+  const btn = document.querySelector('#authModal .auth-submit');
+  if (btn) { btn.textContent = 'Signing in…'; btn.disabled = true; }
+
+  const { data, error } = await sb.auth.signInWithPassword({
+    email,
+    password: pw,
+  });
+
+  if (btn) { btn.textContent = 'Access Academy →'; btn.disabled = false; }
+
+  if (error) {
+    showToast(
+      error.message === 'Invalid login credentials'
+        ? 'Incorrect email or password.'
+        : error.message
+    );
+    return;
+  }
+
+  const { data: profile, error: profErr } = await sb
+    .from('profiles')
+    .select('*')
+    .eq('id', data.user.id)
+    .single();
+
+  if (profErr || !profile) {
+    await sb.auth.signOut();
+    showToast('Profile not found. Please contact support on WhatsApp.');
+    return;
+  }
+
+  if (!profile.is_enrolled) {
+    await sb.auth.signOut();
+    showToast('Please complete your enrollment payment first.');
+    setTimeout(() => window.location.href = 'enquiries.html', 2500);
+    return;
+  }
+
+  const modal = document.getElementById('authModal');
+  if (modal) modal.classList.add('hidden');
+
+  revealPage();
+  initAcademyPage(data.user, profile);
+}
+
+// ── LOGOUT ───────────────────────────────────────────
+async function handleLogout() {
+  await sb.auth.signOut();
+  window.location.href = 'index.html';
+}
+
+// ── OPEN MODULE ──────────────────────────────────────
+function openModule(num, status) {
+  if (status === 'locked') {
+    showToast('🔒 Complete the previous module to unlock this one.');
+    return;
+  }
+  showToast('Opening Module ' + num + '… Lesson player coming soon.');
+}
+
+// ── MODULE DATA ──────────────────────────────────────
 const MODULES = [
-  {
-    num: '01',
-    title: 'Forex Fundamentals & Market Structure',
-    desc: 'Currency pairs, pip values, session times, and how institutional order flow drives price action.',
-    lessons: 6,
-    status: 'complete',
-    progress: 100
-  },
-  {
-    num: '02',
-    title: 'Technical Analysis Mastery',
-    desc: 'Chart reading, timeframe confluences, support/resistance, and the patterns professionals actually trade.',
-    lessons: 8,
-    status: 'complete',
-    progress: 100
-  },
-  {
-    num: '03',
-    title: 'Liquidity Flux Trading (LFT)',
-    desc: 'Order blocks, fair value gaps, liquidity sweeps, and how to read the market from an institutional perspective.',
-    lessons: 10,
-    status: 'in-progress',
-    progress: 45
-  },
-  {
-    num: '04',
-    title: 'Risk Management & Psychology',
-    desc: 'Position sizing models, drawdown management, trading psychology, and building a professional mindset.',
-    lessons: 7,
-    status: 'locked',
-    progress: 0
-  },
-  {
-    num: '05',
-    title: 'Live Trading & Signal Reading',
-    desc: 'Real-time trade execution, interpreting live signals, managing open trades, and journaling for improvement.',
-    lessons: 8,
-    status: 'locked',
-    progress: 0
-  },
-  {
-    num: '06',
-    title: 'Advanced Order Flow Analysis',
-    desc: 'Depth of market, volume profiling, institutional order flow interpretation, and reading the tape professionally.',
-    lessons: 6,
-    status: 'locked',
-    progress: 0
-  },
-  {
-    num: '07',
-    title: 'Multi-Timeframe Analysis',
-    desc: 'Top-down analysis: how to align HTF bias with LTF entries for maximum probability confluences.',
-    lessons: 5,
-    status: 'locked',
-    progress: 0
-  },
-  {
-    num: '08',
-    title: 'News Trading & Fundamentals',
-    desc: 'High-impact news events, central bank policy, and integrating macro fundamentals with technical setups.',
-    lessons: 5,
-    status: 'locked',
-    progress: 0
-  },
-  {
-    num: '09',
-    title: 'Gold (XAUUSD) Specialisation',
-    desc: 'Gold-specific market dynamics, correlations, seasonal patterns, and why gold is the most signal-friendly asset.',
-    lessons: 6,
-    status: 'locked',
-    progress: 0
-  },
-  {
-    num: '10',
-    title: 'Prop Firm Challenge Strategy',
-    desc: 'How to structure your trading to pass FTMO, My Forex Funds, The5ers — systematically.',
-    lessons: 7,
-    status: 'locked',
-    progress: 0
-  },
-  {
-    num: '11',
-    title: 'Portfolio & Account Management',
-    desc: 'Managing multiple positions, correlation risk, compounding strategy, and building your trading business.',
-    lessons: 5,
-    status: 'locked',
-    progress: 0
-  },
-  {
-    num: '12',
-    title: 'Building Your Trading Plan',
-    desc: 'Constructing your complete personal trading plan: rules, routine, risk parameters, and long-term goals.',
-    lessons: 4,
-    status: 'locked',
-    progress: 0
-  },
+  { num:'01', title:'Forex Fundamentals & Market Structure',  desc:'Currency pairs, pip values, session times, and how institutional order flow drives price action.',                lessons:6,  status:'complete',    progress:100 },
+  { num:'02', title:'Technical Analysis Mastery',             desc:'Chart reading, timeframe confluences, support/resistance, and the patterns professionals actually trade.',         lessons:8,  status:'complete',    progress:100 },
+  { num:'03', title:'Liquidity Flux Trading (LFT)',           desc:'Order blocks, fair value gaps, liquidity sweeps, and how to read the market from an institutional perspective.',   lessons:10, status:'in-progress', progress:45  },
+  { num:'04', title:'Risk Management & Psychology',           desc:'Position sizing models, drawdown management, trading psychology, and building a professional mindset.',            lessons:7,  status:'locked',      progress:0   },
+  { num:'05', title:'Live Trading & Signal Reading',          desc:'Real-time trade execution, interpreting live signals, managing open trades, and journaling for improvement.',      lessons:8,  status:'locked',      progress:0   },
+  { num:'06', title:'Advanced Order Flow Analysis',           desc:'Depth of market, volume profiling, institutional order flow, and reading the tape professionally.',               lessons:6,  status:'locked',      progress:0   },
+  { num:'07', title:'Multi-Timeframe Analysis',               desc:'Top-down analysis: aligning HTF bias with LTF entries for maximum probability confluences.',                      lessons:5,  status:'locked',      progress:0   },
+  { num:'08', title:'News Trading & Fundamentals',            desc:'High-impact news events, central bank policy, and integrating macro fundamentals with technical setups.',         lessons:5,  status:'locked',      progress:0   },
+  { num:'09', title:'Gold (XAUUSD) Specialisation',          desc:'Gold-specific dynamics, correlations, seasonal patterns, and why gold is the most signal-friendly asset.',        lessons:6,  status:'locked',      progress:0   },
+  { num:'10', title:'Prop Firm Challenge Strategy',           desc:'How to structure your trading to pass FTMO, My Forex Funds, The5ers — systematically.',                          lessons:7,  status:'locked',      progress:0   },
+  { num:'11', title:'Portfolio & Account Management',         desc:'Managing multiple positions, correlation risk, compounding strategy, and building your trading business.',        lessons:5,  status:'locked',      progress:0   },
+  { num:'12', title:'Building Your Trading Plan',             desc:'Constructing your complete personal trading plan: rules, routine, risk parameters, and long-term goals.',         lessons:4,  status:'locked',      progress:0   },
 ];
 
-// ─── RENDER MODULES ──────────────────────────────────────────
+// ── RENDER MODULES ───────────────────────────────────
 function renderModules() {
   const grid = document.getElementById('modulesGrid');
-  if (!grid) return;
+
+  if (!grid) {
+    console.error('ERROR: modulesGrid div not found in HTML');
+    return;
+  }
+
   grid.innerHTML = '';
 
   MODULES.forEach(mod => {
@@ -292,7 +342,7 @@ function renderModules() {
       : mod.status;
 
     const card = document.createElement('div');
-    card.className = `module-card ${mod.status}`;
+    card.className = 'module-card ' + mod.status;
     card.innerHTML = `
       <div class="module-progress-bar">
         <div class="module-progress-fill" style="width:${mod.progress}%"></div>
@@ -316,85 +366,26 @@ function renderModules() {
   });
 }
 
-// ─── OPEN MODULE ─────────────────────────────────────────────
-function openModule(num, status) {
-  if (status === 'locked') {
-    showToast('🔒 Complete the previous module to unlock this one.');
-    return;
+// ── HIDE / REVEAL PAGE ───────────────────────────────
+function hidePage() {
+  const main = document.querySelector('.main-content');
+  if (main) {
+    main.style.opacity    = '0';
+    main.style.transition = 'none';
   }
-  // When you have actual lesson pages, redirect here:
-  // window.location.href = `lesson.html?module=${num}`;
-  showToast(`Opening Module ${num}… Lesson player coming soon.`);
 }
 
-// ─── SIGN IN ─────────────────────────────────────────────────
-async function handleLogin() {
-  const email = document.getElementById('loginEmail').value.trim();
-  const pw    = document.getElementById('loginPassword').value;
-
-  if (!email || !pw) {
-    showToast('Please fill in your email and password.');
-    return;
+function revealPage() {
+  const main = document.querySelector('.main-content');
+  if (main) {
+    main.style.transition = 'opacity 0.3s ease';
+    main.style.opacity    = '1';
   }
-
-  // Show loading state
-  const btn = document.querySelector('#authModal .auth-submit');
-  if (btn) { btn.textContent = 'Signing in…'; btn.disabled = true; }
-
-  const { data, error } = await sb.auth.signInWithPassword({
-    email,
-    password: pw,
-  });
-
-  if (btn) { btn.textContent = 'Access Academy →'; btn.disabled = false; }
-
-  if (error) {
-    showToast(
-      error.message === 'Invalid login credentials'
-        ? 'Incorrect email or password. Please try again.'
-        : error.message
-    );
-    return;
-  }
-
-  // Check enrollment status
-  const { data: profile, error: profileErr } = await sb
-    .from('profiles')
-    .select('*')
-    .eq('id', data.user.id)
-    .single();
-
-  if (profileErr || !profile) {
-    await sb.auth.signOut();
-    showToast('Profile not found. Please contact support on WhatsApp.');
-    return;
-  }
-
-  if (!profile.is_enrolled) {
-    await sb.auth.signOut();
-    showToast('You need to complete enrollment before accessing the Academy.');
-    setTimeout(() => {
-      window.location.href = 'enquiries.html';
-    }, 2500);
-    return;
-  }
-
-  // All good — hide modal and load academy
-  const modal = document.getElementById('authModal');
-  if (modal) modal.classList.add('hidden');
-
-  initAcademyPage(data.user, profile);
 }
-
-// ─── LOGOUT ──────────────────────────────────────────────────
-async function handleLogout() {
-  await sb.auth.signOut();
-  window.location.href = 'index.html';
-}
-
-// ─── INIT ACADEMY PAGE ───────────────────────────────────────
+// ── INIT ACADEMY PAGE ────────────────────────────────
 function initAcademyPage(user, profile) {
-  // Sidebar user info
+
+  // Navbar user info
   const initials = profile.name
     .split(' ')
     .map(n => n[0])
@@ -402,39 +393,48 @@ function initAcademyPage(user, profile) {
     .toUpperCase()
     .slice(0, 2);
 
-  const avatarEl = document.getElementById('sidebarAvatar');
-  const nameEl   = document.getElementById('sidebarName');
-  const planEl   = document.getElementById('sidebarPlan');
+  const navAvatar   = document.getElementById('navAvatar');
+  const navUserName = document.getElementById('navUserName');
+  const mobileAv    = document.getElementById('mobileAvatar');
+  const mobileName  = document.getElementById('mobileUserName');
+  const mobilePlan  = document.getElementById('mobileUserPlan');
 
-  if (avatarEl) avatarEl.textContent = initials;
-  if (nameEl)   nameEl.textContent   = profile.name;
-  if (planEl)   planEl.textContent   = profile.plan || 'Academy';
+  if (navAvatar)   navAvatar.textContent   = initials;
+  if (navUserName) navUserName.textContent = profile.name.split(' ')[0];
+  if (mobileAv)    mobileAv.textContent    = initials;
+  if (mobileName)  mobileName.textContent  = profile.name;
+  if (mobilePlan)  mobilePlan.textContent  = getPlanLabel(profile.plan || 'academy');
 
-  // Render the course modules
-  renderModules();
-
-  // Update progress bar
+  // Progress bar
   const completed = MODULES.filter(m => m.status === 'complete').length;
   const pct       = Math.round((completed / MODULES.length) * 100);
-  const fillEl    = document.getElementById('progressFill');
-  const pctEl     = document.getElementById('progressPct');
-  const numEl     = document.getElementById('progressNum');
+
+  const fillEl = document.getElementById('progressFill');
+  const pctEl  = document.getElementById('progressPct');
+  const numEl  = document.getElementById('progressNum');
+
   if (fillEl) fillEl.style.width = pct + '%';
   if (pctEl)  pctEl.textContent  = pct + '%';
   if (numEl)  numEl.textContent  = pct + '%';
+
+  // Render all module cards
+  renderModules();
 }
 
-// ─── BOOT — runs when page loads ─────────────────────────────
+// ── BOOT ─────────────────────────────────────────────
 (async () => {
-  // Check if user already has an active session
+
+  hidePage();
+
   const { data: { session } } = await sb.auth.getSession();
 
   if (!session) {
-    // No session — show the login modal (it's already visible by default)
+    revealPage();
+    const modal = document.getElementById('authModal');
+    if (modal) modal.classList.remove('hidden');
     return;
   }
 
-  // Session exists — check their profile
   const { data: profile, error } = await sb
     .from('profiles')
     .select('*')
@@ -442,26 +442,27 @@ function initAcademyPage(user, profile) {
     .single();
 
   if (error || !profile) {
-    // Profile missing — sign them out and show login
     await sb.auth.signOut();
+    revealPage();
+    const modal = document.getElementById('authModal');
+    if (modal) modal.classList.remove('hidden');
     return;
   }
 
   if (!profile.is_enrolled) {
-    // Has account but hasn't paid — sign out and redirect
     await sb.auth.signOut();
+    revealPage();
     showToast('Please complete your enrollment payment to access the Academy.');
-    setTimeout(() => {
-      window.location.href = 'enquiries.html';
-    }, 2500);
+    setTimeout(() => window.location.href = 'enquiries.html', 2500);
     return;
   }
 
-  // Valid enrolled user — hide modal and load the page
+  revealPage();
   const modal = document.getElementById('authModal');
   if (modal) modal.classList.add('hidden');
 
   initAcademyPage(session.user, profile);
+
 })();
 
 </script>
